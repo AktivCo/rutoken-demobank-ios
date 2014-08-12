@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550871C0199A4FAC00D2652A /* Pkcs11.m in Sources */ = {isa = PBXBuildFile; fileRef = 550871BF199A4FAC00D2652A /* Pkcs11.m */; };
+		550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C5199A50A800D2652A /* RtPcsc.framework */; };
+		550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C6199A50A800D2652A /* RtPKCS11ECP.framework */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
 		55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89654199A02DA0082A015 /* CoreGraphics.framework */; };
 		55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
@@ -37,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		550871BE199A4FAC00D2652A /* Pkcs11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pkcs11.h; sourceTree = "<group>"; };
+		550871BF199A4FAC00D2652A /* Pkcs11.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pkcs11.m; sourceTree = "<group>"; };
+		550871C5199A50A800D2652A /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = external/pkcs11bin/RtPcsc.framework; sourceTree = "<group>"; };
+		550871C6199A50A800D2652A /* RtPKCS11ECP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPKCS11ECP.framework; path = external/pkcs11bin/RtPKCS11ECP.framework; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89652199A02DA0082A015 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55E89654199A02DA0082A015 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */,
+				550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */,
 				55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */,
 				55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */,
 				55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */,
@@ -109,6 +118,8 @@
 		55E89651199A02DA0082A015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				550871C5199A50A800D2652A /* RtPcsc.framework */,
+				550871C6199A50A800D2652A /* RtPKCS11ECP.framework */,
 				55E89692199A0D1A0082A015 /* CoreBluetooth.framework */,
 				55E89690199A0D0C0082A015 /* ExternalAccessory.framework */,
 				55E89652199A02DA0082A015 /* Foundation.framework */,
@@ -122,6 +133,8 @@
 		55E89658199A02DA0082A015 /* demobank */ = {
 			isa = PBXGroup;
 			children = (
+				550871BE199A4FAC00D2652A /* Pkcs11.h */,
+				550871BF199A4FAC00D2652A /* Pkcs11.m */,
 				55E89661199A02DA0082A015 /* AppDelegate.h */,
 				55E89662199A02DA0082A015 /* AppDelegate.m */,
 				55E89664199A02DA0082A015 /* Main_iPhone.storyboard */,
@@ -263,6 +276,7 @@
 			files = (
 				55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */,
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
+				550871C0199A4FAC00D2652A /* Pkcs11.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +412,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/external/pkcs11bin",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
 				INFOPLIST_FILE = "demobank/demobank-Info.plist";
@@ -413,6 +431,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/external/pkcs11bin",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
 				INFOPLIST_FILE = "demobank/demobank-Info.plist";
