@@ -25,5 +25,6 @@ typedef NS_ENUM(NSInteger, EventType) {
 -(Token*)tokenForSerial:(NSString*)serial;
 -(void)proccessEventTokenAddedAtSlot:(CK_SLOT_ID)id;
 -(void)proccessEventTokenRemovedAtSlot:(CK_SLOT_ID)id;
-
+-(void)proccessEventTokenInfoLoadedAtSlot:(CK_SLOT_ID)id withToken:(Token*)token;
+-(void)proccessEventTokenInfoLoadingFailedAtSlot:(CK_SLOT_ID)id;
 @end

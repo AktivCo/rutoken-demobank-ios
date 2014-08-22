@@ -57,14 +57,22 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 	
 	if (CKF_TOKEN_PRESENT & slotInfo.flags) {
 		if (TA == [lastEvent integerValue]){
-			[tokenManager proccessEventTokenRemovedAtSlot:id];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[tokenManager proccessEventTokenRemovedAtSlot:id];
+			});
 		}
-		[tokenManager proccessEventTokenAddedAtSlot:id];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[tokenManager proccessEventTokenAddedAtSlot:id];
+		});
 	} else {
 		if (TR == [lastEvent integerValue]){
-			[tokenManager proccessEventTokenAddedAtSlot:id];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[tokenManager proccessEventTokenAddedAtSlot:id];
+			});
 		}
-		[tokenManager proccessEventTokenRemovedAtSlot:id];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[tokenManager proccessEventTokenRemovedAtSlot:id];
+		});
 	}
 }
 
@@ -113,6 +121,46 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 
 @end
 
+@interface TokenInfoLoader : NSThread {
+	CK_FUNCTION_LIST_PTR _functions;
+	CK_FUNCTION_LIST_EXTENDED_PTR _extendedFunctions;
+	CK_SLOT_ID _slotId;
+}
+@end
+
+@implementation TokenInfoLoader
+
+- (id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
+      extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions
+				 slotId:(CK_SLOT_ID)slotId{
+	self = [super init];
+	if (self) {
+		_functions = functions;
+		_extendedFunctions = extendedFunctions;
+		_slotId = slotId;
+	}
+	return self;
+}
+
+- (void)main {
+	@autoreleasepool {
+		TokenManager* tokenManager = [TokenManager sharedInstance];
+		@try {
+			Token* token = [[Token alloc] initWithFunctions:_functions extendedFunctions:_extendedFunctions slotId:_slotId];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[tokenManager proccessEventTokenInfoLoadedAtSlot:_slotId withToken:token];
+			});
+			
+		} @catch (NSError* e) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[tokenManager proccessEventTokenInfoLoadingFailedAtSlot:_slotId];
+			});
+		}
+	}
+}
+
+@end
+
 @implementation TokenManager
 
 +(TokenManager*)sharedInstance{
@@ -147,6 +195,13 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 }
 -(void)proccessEventTokenRemovedAtSlot:(CK_SLOT_ID)id{
 	//Proccess token removing here
+}
+
+-(void)proccessEventTokenInfoLoadedAtSlot:(CK_SLOT_ID)id withToken:(Token*)token{
+	//Proccess successful token information loading
+}
+-(void)proccessEventTokenInfoLoadingFailedAtSlot:(CK_SLOT_ID)id{
+	//Proccess failing of token information loading
 }
 
 @end
