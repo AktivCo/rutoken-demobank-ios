@@ -2,6 +2,117 @@
 
 #import "TokenManager.h"
 
+#import <RtPcsc/winscard.h>
+
+static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
+
+@interface Pkcs11Error : NSError
+
++ (Pkcs11Error*)errorWithCode:(NSUInteger)code;
+
+@end
+
+@implementation Pkcs11Error
+
+- (NSString*)localizedDescription {
+	switch ([self code]) {
+			//Put errors' decription here
+		default:
+			return @"Unknown error";
+	}
+}
+
++ (Pkcs11Error*)errorWithCode:(NSUInteger)code {
+	return [[Pkcs11Error alloc] initWithDomain:gPkcs11ErrorDomain code:code userInfo:nil];
+}
+
+@end
+
+@interface Pkcs11EventHandler : NSThread {
+	CK_FUNCTION_LIST_PTR _functions;
+	CK_FUNCTION_LIST_EXTENDED_PTR _extendedFunctions;
+	NSMutableDictionary* _lastSlotEvent;
+}
+@end
+
+@implementation Pkcs11EventHandler
+
+- (id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
+      extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions {
+	self = [super init];
+	if (self) {
+		_functions = functions;
+		_extendedFunctions = extendedFunctions;
+	}
+	return self;
+}
+
+- (void)handleEventWithSlotId:(CK_SLOT_ID)id {
+	CK_SLOT_INFO slotInfo;
+	CK_RV rv = _functions->C_GetSlotInfo(id, &slotInfo);
+	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+	
+	NSNumber* lastEvent = [_lastSlotEvent objectForKey:[NSNumber numberWithUnsignedLong:id]];
+	TokenManager* tokenManager = [TokenManager sharedInstance];
+	
+	if (CKF_TOKEN_PRESENT & slotInfo.flags) {
+		if (TA == [lastEvent integerValue]){
+			[tokenManager proccessEventTokenRemovedAtSlot:id];
+		}
+		[tokenManager proccessEventTokenAddedAtSlot:id];
+	} else {
+		if (TR == [lastEvent integerValue]){
+			[tokenManager proccessEventTokenAddedAtSlot:id];
+		}
+		[tokenManager proccessEventTokenRemovedAtSlot:id];
+	}
+}
+
+- (void)main {
+	@autoreleasepool {
+		@try {
+			CK_RV rv = _functions->C_Initialize(NULL_PTR);
+			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+			
+			CK_ULONG slotCount;
+			rv = _functions->C_GetSlotList(CK_FALSE, NULL_PTR, &slotCount);
+			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+			
+			NSMutableData* slotIdData = [NSMutableData dataWithLength:slotCount * sizeof(CK_SLOT_ID)];
+			const CK_SLOT_ID* slotIds = [slotIdData bytes];
+			rv = _functions->C_GetSlotList(CK_TRUE, [slotIdData mutableBytes], &slotCount);
+			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+			
+			_lastSlotEvent = [NSMutableDictionary dictionaryWithCapacity:slotCount];
+			
+			for (size_t i = 0; i != slotCount; ++i) {
+				[_lastSlotEvent setObject:[NSNumber numberWithInteger:TR] forKey:[NSNumber numberWithUnsignedLong:slotIds[i]]];
+				[self handleEventWithSlotId:slotIds[i]];
+			}
+			
+		} @catch (NSError* e) {
+			//handle error
+		}
+	}
+	
+	while (TRUE) {
+		CK_SLOT_ID id;
+		CK_ULONG rv = _functions->C_WaitForSlotEvent(0, &id, NULL_PTR);
+		if (CKR_CRYPTOKI_NOT_INITIALIZED == rv) return;
+		@autoreleasepool {
+			@try {
+				if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+				[self handleEventWithSlotId:id];
+			} @catch (NSError* e) {
+				//handle error
+				return;
+			}
+		}
+	}
+}
+
+@end
+
 @implementation TokenManager
 
 +(TokenManager*)sharedInstance{
