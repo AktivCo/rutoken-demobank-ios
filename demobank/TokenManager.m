@@ -47,31 +47,31 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 	return self;
 }
 
-- (void)handleEventWithSlotId:(CK_SLOT_ID)id {
+- (void)handleEventWithSlotId:(CK_SLOT_ID)slotId {
 	CK_SLOT_INFO slotInfo;
-	CK_RV rv = _functions->C_GetSlotInfo(id, &slotInfo);
+	CK_RV rv = _functions->C_GetSlotInfo(slotId, &slotInfo);
 	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
-	NSNumber* lastEvent = [_lastSlotEvent objectForKey:[NSNumber numberWithUnsignedLong:id]];
+	NSNumber* lastEvent = [_lastSlotEvent objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
 	TokenManager* tokenManager = [TokenManager sharedInstance];
 	
 	if (CKF_TOKEN_PRESENT & slotInfo.flags) {
 		if (TA == [lastEvent integerValue]){
 			dispatch_async(dispatch_get_main_queue(), ^{
-				[tokenManager proccessEventTokenRemovedAtSlot:id];
+				[tokenManager proccessEventTokenRemovedAtSlot:slotId];
 			});
 		}
 		dispatch_async(dispatch_get_main_queue(), ^{
-			[tokenManager proccessEventTokenAddedAtSlot:id];
+			[tokenManager proccessEventTokenAddedAtSlot:slotId];
 		});
 	} else {
 		if (TR == [lastEvent integerValue]){
 			dispatch_async(dispatch_get_main_queue(), ^{
-				[tokenManager proccessEventTokenAddedAtSlot:id];
+				[tokenManager proccessEventTokenAddedAtSlot:slotId];
 			});
 		}
 		dispatch_async(dispatch_get_main_queue(), ^{
-			[tokenManager proccessEventTokenRemovedAtSlot:id];
+			[tokenManager proccessEventTokenRemovedAtSlot:slotId];
 		});
 	}
 }
@@ -104,13 +104,13 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 	}
 	
 	while (TRUE) {
-		CK_SLOT_ID id;
-		CK_ULONG rv = _functions->C_WaitForSlotEvent(0, &id, NULL_PTR);
+		CK_SLOT_ID slotId;
+		CK_ULONG rv = _functions->C_WaitForSlotEvent(0, &slotId, NULL_PTR);
 		if (CKR_CRYPTOKI_NOT_INITIALIZED == rv) return;
 		@autoreleasepool {
 			@try {
 				if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-				[self handleEventWithSlotId:id];
+				[self handleEventWithSlotId:slotId];
 			} @catch (NSError* e) {
 				//handle error
 				return;
@@ -190,17 +190,17 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 	return nil;
 }
 
--(void)proccessEventTokenAddedAtSlot:(CK_SLOT_ID)id{
+-(void)proccessEventTokenAddedAtSlot:(CK_SLOT_ID)slotId{
 	//Proccess token adding here
 }
--(void)proccessEventTokenRemovedAtSlot:(CK_SLOT_ID)id{
+-(void)proccessEventTokenRemovedAtSlot:(CK_SLOT_ID)slotId{
 	//Proccess token removing here
 }
 
--(void)proccessEventTokenInfoLoadedAtSlot:(CK_SLOT_ID)id withToken:(Token*)token{
+-(void)proccessEventTokenInfoLoadedAtSlot:(CK_SLOT_ID)slotId withToken:(Token*)token{
 	//Proccess successful token information loading
 }
--(void)proccessEventTokenInfoLoadingFailedAtSlot:(CK_SLOT_ID)id{
+-(void)proccessEventTokenInfoLoadingFailedAtSlot:(CK_SLOT_ID)slotId{
 	//Proccess failing of token information loading
 }
 
