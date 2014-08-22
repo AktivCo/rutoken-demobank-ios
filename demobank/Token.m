@@ -4,4 +4,16 @@
 
 @implementation Token
 
+- (id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
+      extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions
+				 slotId:(CK_SLOT_ID)slotId{
+	self = [super init];
+	if (self) {
+		_functions = functions;
+		_extendedFunctions = extendedFunctions;
+		_slotId = slotId;
+	}
+	return self;
+}
+
 @end
