@@ -10,6 +10,12 @@
 	CK_SLOT_ID _slotId;
 }
 
+@property(nonatomic, readonly) NSString* label;
+@property(nonatomic, readonly) NSString* serialNumber;
+@property(nonatomic, readonly) NSUInteger totalMemory;
+@property(nonatomic, readonly) NSUInteger freeMemory;
+@property(nonatomic, readonly) NSUInteger charge;
+
 -(id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
 	 extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions
 				slotId:(CK_SLOT_ID)slotId;
