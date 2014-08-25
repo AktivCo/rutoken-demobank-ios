@@ -56,7 +56,7 @@
 	
 	_delegate = [[BluetoothDelegate alloc] init];
 	_manager = [[CBCentralManager alloc] initWithDelegate:_delegate queue:nil];
-	_tokenManager = [[TokenManager alloc] init];
+	_tokenManager = [TokenManager sharedInstance];
 	[_tokenManager start];
 }
 
@@ -74,7 +74,10 @@
 	//handle token adding here
 	NSDictionary* userInfo = [notification userInfo];
 	NSNumber* slotId = [userInfo objectForKey:@"slotId"];
-	[_textLogs setText:[NSString stringWithFormat:@"Token info was loaded for slot %d\n%@", [slotId intValue],[_textLogs text]]];
+	Token* token = [_tokenManager tokenForId:slotId];
+	[_textLogs setText:[NSString stringWithFormat:@"Token info was loaded for slot %d:\n%@", [slotId intValue],[_textLogs text]]];
+	[_textLogs setText:[NSString stringWithFormat:@"Serial: %s\n%@", [[token serialNumber] UTF8String],[_textLogs text]]];
+	[_textLogs setText:[NSString stringWithFormat:@"Label: %s\n%@", [[token label] UTF8String],[_textLogs text]]];
 }
 
 - (void)tokenWasRemoved:(NSNotification*)notification {
