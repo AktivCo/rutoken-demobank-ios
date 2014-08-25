@@ -13,6 +13,7 @@
 		_extendedFunctions = extendedFunctions;
 		_slotId = slotId;
 	}
+	sleep(10);
 	return self;
 }
 
