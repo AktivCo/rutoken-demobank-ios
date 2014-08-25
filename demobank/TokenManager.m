@@ -238,12 +238,24 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self userInfo:notificationInfo];
 			break;
 		case kState4:
+		{
 			nextState = kState2;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self userInfo:notificationInfo];
+			TokenInfoLoader* loader = [[TokenInfoLoader alloc] initWithFunctions:_functions
+															   extendedFunctions:_extendedFunctions slotId:slotId];
+			[loader start];
+			[_slotWorkers setObject:loader forKey:[NSNumber numberWithUnsignedLong:slotId]];
+		}
 			break;
 		case kState5:
+		{
 			nextState = kState2;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self userInfo:notificationInfo];
+			TokenInfoLoader* loader = [[TokenInfoLoader alloc] initWithFunctions:_functions
+															   extendedFunctions:_extendedFunctions slotId:slotId];
+			[loader start];
+			[_slotWorkers setObject:loader forKey:[NSNumber numberWithUnsignedLong:slotId]];
+		}
 			break;
 			
 		default:
