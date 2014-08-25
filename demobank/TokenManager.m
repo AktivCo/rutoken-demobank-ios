@@ -53,6 +53,9 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
 	NSNumber* lastEvent = [_lastSlotEvent objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+	if(nil == lastEvent){
+		lastEvent = [NSNumber numberWithInteger:TR];
+	}
 	TokenManager* tokenManager = [TokenManager sharedInstance];
 	
 	if (CKF_TOKEN_PRESENT & slotInfo.flags) {
@@ -64,15 +67,12 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[tokenManager proccessEventTokenAddedAtSlot:slotId];
 		});
-	} else {
-		if (TR == [lastEvent integerValue]){
-			dispatch_async(dispatch_get_main_queue(), ^{
-				[tokenManager proccessEventTokenAddedAtSlot:slotId];
-			});
-		}
+		[_lastSlotEvent setObject:[NSNumber numberWithInteger:TA] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+	} else  if (TA == [lastEvent integerValue]){
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[tokenManager proccessEventTokenRemovedAtSlot:slotId];
 		});
+		[_lastSlotEvent setObject:[NSNumber numberWithInteger:TR] forKey:[NSNumber numberWithUnsignedLong:slotId]];
 	}
 }
 
@@ -91,10 +91,9 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 			rv = _functions->C_GetSlotList(CK_TRUE, [slotIdData mutableBytes], &slotCount);
 			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 			
-			_lastSlotEvent = [NSMutableDictionary dictionaryWithCapacity:slotCount];
+			_lastSlotEvent = [NSMutableDictionary dictionary];
 			
 			for (size_t i = 0; i != slotCount; ++i) {
-				[_lastSlotEvent setObject:[NSNumber numberWithInteger:TR] forKey:[NSNumber numberWithUnsignedLong:slotIds[i]]];
 				[self handleEventWithSlotId:slotIds[i]];
 			}
 			
