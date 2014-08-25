@@ -15,7 +15,23 @@ typedef NS_ENUM(NSInteger, EventType) {
 	TILF //Token's information loading failed
 };
 
-@interface TokenManager : NSObject
+typedef NS_ENUM(NSInteger, InnerState) {
+	kState1,
+	kState2,
+	kState3,
+	kState4,
+	kState5,
+	kState6
+} ;
+
+@interface TokenManager : NSObject {
+	CK_FUNCTION_LIST_PTR _functions;
+	CK_FUNCTION_LIST_EXTENDED_PTR _extendedFunctions;
+	Pkcs11EventHandler* _pkcs11EventHandler;
+	NSMutableDictionary* _tokens;
+	NSMutableDictionary* _slotStates;
+	NSMutableDictionary* _slotWorkers;
+}
 
 +(TokenManager*)sharedInstance;
 
