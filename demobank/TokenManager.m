@@ -200,13 +200,12 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 	//Stop all activities for monitoring tokens' events
 }
 
--(NSArray*)serials{
-	//Return serials for all know tokens
-	return nil;
+-(NSArray*)tokenIds{
+	return[_tokens allKeys];
 }
--(Token*)tokenForSerial:(NSString*)serial{
-	//Return token for given serial
-	return nil;
+
+-(Token*)tokenForId:(NSNumber*)tokenId{
+	return [_tokens objectForKey:tokenId];
 }
 
 -(void)proccessEventTokenAddedAtSlot:(CK_SLOT_ID)slotId{
@@ -314,8 +313,11 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 	
 	switch (currentState) {
 		case kState2:
+		{
 			nextState = kState4;
+			[_tokens setObject:token forKey:[NSNumber numberWithUnsignedLong:slotId]];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWasAdded" object:self userInfo:notificationInfo];
+		}
 			break;
 		case kState3:
 			nextState = kState4;

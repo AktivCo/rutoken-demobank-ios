@@ -37,8 +37,8 @@ typedef NS_ENUM(NSInteger, InnerState) {
 
 -(void)start;
 -(void)stop;
--(NSArray*)serials;
--(Token*)tokenForSerial:(NSString*)serial;
+-(NSArray*)tokenIds;
+-(Token*)tokenForId:(NSNumber*)tokenId;
 -(void)proccessEventTokenAddedAtSlot:(CK_SLOT_ID)slotId;
 -(void)proccessEventTokenRemovedAtSlot:(CK_SLOT_ID)slotId;
 -(void)proccessEventTokenInfoLoadedAtSlot:(CK_SLOT_ID)slotId withToken:(Token*)token;
