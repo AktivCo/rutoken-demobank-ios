@@ -5,10 +5,12 @@
 @class CBCentralManager;
 
 @class BluetoothDelegate;
+@class TokenManager;
 
 @interface FirstScreenViewController : UIViewController{
 	BluetoothDelegate* _delegate;
 	CBCentralManager* _manager;
-	__weak IBOutlet UILabel* _blueToothState;
+	TokenManager* _tokenManager;
+	__weak IBOutlet UITextView *_textLogs;
 }
 @end
