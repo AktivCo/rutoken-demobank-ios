@@ -2,31 +2,9 @@
 
 #import "TokenManager.h"
 
+#import "Pkcs11Error.h"
+
 #import <RtPcsc/winscard.h>
-
-static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
-
-@interface Pkcs11Error : NSError
-
-+ (Pkcs11Error*)errorWithCode:(NSUInteger)code;
-
-@end
-
-@implementation Pkcs11Error
-
-- (NSString*)localizedDescription {
-	switch ([self code]) {
-			//Put errors' decription here
-		default:
-			return @"Unknown error";
-	}
-}
-
-+ (Pkcs11Error*)errorWithCode:(NSUInteger)code {
-	return [[Pkcs11Error alloc] initWithDomain:gPkcs11ErrorDomain code:code userInfo:nil];
-}
-
-@end
 
 @interface Pkcs11EventHandler : NSThread {
 	CK_FUNCTION_LIST_PTR _functions;

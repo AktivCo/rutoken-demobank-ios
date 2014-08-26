@@ -2,6 +2,8 @@
 
 #import "Token.h"
 
+#import "Pkcs11Error.h"
+
 static NSString* removeTrailingSpaces(const char* string, size_t length) {
 	size_t i;
 	for (i = length; i != 0; --i) {
@@ -31,14 +33,14 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
 	tokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
 	info = [tokenInfo mutableBytes];
 	CK_RV rv = _functions->C_GetTokenInfo(slotId, info);
-	if (CKR_OK != rv) @throw @"ololo";
+	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
 	extendedTokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
 	extendedInfo = [extendedTokenInfo mutableBytes];
 	extendedInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
 	
 	rv = _extendedFunctions->C_EX_GetTokenInfoExtended(slotId, extendedInfo);
-	if (CKR_OK != rv) @throw @"ololo";
+	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
 	_label = removeTrailingSpaces((const char*) info->label, sizeof(info->label));
 	_serialNumber = removeTrailingSpaces((const char*) info->serialNumber, sizeof(info->serialNumber));

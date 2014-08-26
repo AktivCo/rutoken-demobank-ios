@@ -10,6 +10,7 @@
 		550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C5199A50A800D2652A /* RtPcsc.framework */; };
 		550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C6199A50A800D2652A /* RtPKCS11ECP.framework */; };
 		550F55A619ACC17700EF41E4 /* Certificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F55A519ACC17700EF41E4 /* Certificate.m */; };
+		550F55A919ACC1F900EF41E4 /* Pkcs11Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */; };
 		55243FBB19A71DA80097642D /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBA19A71DA80097642D /* TokenManager.m */; };
 		55243FBE19A71DB60097642D /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBD19A71DB60097642D /* Token.m */; };
 		55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */; };
@@ -47,6 +48,8 @@
 		550871C6199A50A800D2652A /* RtPKCS11ECP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPKCS11ECP.framework; path = external/pkcs11bin/RtPKCS11ECP.framework; sourceTree = "<group>"; };
 		550F55A419ACC17700EF41E4 /* Certificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Certificate.h; sourceTree = "<group>"; };
 		550F55A519ACC17700EF41E4 /* Certificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Certificate.m; sourceTree = "<group>"; };
+		550F55A719ACC1F900EF41E4 /* Pkcs11Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pkcs11Error.h; sourceTree = "<group>"; };
+		550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pkcs11Error.m; sourceTree = "<group>"; };
 		55243FB919A71DA80097642D /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
 		55243FBA19A71DA80097642D /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenManager.m; sourceTree = "<group>"; };
 		55243FBC19A71DB60097642D /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				55243FBD19A71DB60097642D /* Token.m */,
 				550F55A419ACC17700EF41E4 /* Certificate.h */,
 				550F55A519ACC17700EF41E4 /* Certificate.m */,
+				550F55A719ACC1F900EF41E4 /* Pkcs11Error.h */,
+				550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */,
 			);
 			path = demobank;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				55243FBB19A71DA80097642D /* TokenManager.m in Sources */,
 				550F55A619ACC17700EF41E4 /* Certificate.m in Sources */,
 				55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */,
+				550F55A919ACC1F900EF41E4 /* Pkcs11Error.m in Sources */,
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
 				55243FBE19A71DB60097642D /* Token.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
