@@ -15,6 +15,7 @@
 		55243FBE19A71DB60097642D /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBD19A71DB60097642D /* Token.m */; };
 		55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */; };
 		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
+		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
 		55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89654199A02DA0082A015 /* CoreGraphics.framework */; };
 		55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
@@ -57,6 +58,7 @@
 		55243FBD19A71DB60097642D /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
+		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89652199A02DA0082A015 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55E89654199A02DA0082A015 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,6 +115,7 @@
 		557DFE9119ADD0B600CC7488 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				55BC87CB19ADF32E008ABF1E /* logo.png */,
 				557DFE9219ADD0B600CC7488 /* BT_Black.png */,
 			);
 			name = resources;
@@ -285,6 +288,7 @@
 			files = (
 				55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */,
 				55E8966E199A02DA0082A015 /* Images.xcassets in Resources */,
+				55BC87CC19ADF32E008ABF1E /* logo.png in Resources */,
 				557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */,
 				55E89666199A02DA0082A015 /* Main_iPhone.storyboard in Resources */,
 				55E8965D199A02DA0082A015 /* InfoPlist.strings in Resources */,
