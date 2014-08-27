@@ -75,9 +75,7 @@
 	NSDictionary* userInfo = [notification userInfo];
 	NSNumber* handle = [userInfo objectForKey:@"handle"];
 	Token* token = [_tokenManager tokenForId:handle];
-	[_textLogs setText:[NSString stringWithFormat:@"Token info was loaded for token with handle %d:\n%@", [handle intValue],[_textLogs text]]];
-	[_textLogs setText:[NSString stringWithFormat:@"Serial: %s\n%@", [[token serialNumber] UTF8String],[_textLogs text]]];
-	[_textLogs setText:[NSString stringWithFormat:@"Label: %s\n%@", [[token label] UTF8String],[_textLogs text]]];
+	[_textLogs setText:[NSString stringWithFormat:@"Info for token with handle %d was loaded: \"Model: %@, Serial: %@, Label: %@\" \n%@", [handle intValue], [token model], [token serialNumber], [token label], [_textLogs text]]];
 }
 
 - (void)tokenWasRemoved:(NSNotification*)notification {

@@ -43,6 +43,7 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         
         _label = removeTrailingSpaces((const char*) info->label, sizeof(info->label));
         _serialNumber = removeTrailingSpaces((const char*) info->serialNumber, sizeof(info->serialNumber));
+        _model = removeTrailingSpaces((const char*) info->model, sizeof(info->model));
         _totalMemory = info->ulTotalPublicMemory;
         _freeMemory = info->ulFreePublicMemory;
         _charge = extendedInfo->ulBatteryVoltage;

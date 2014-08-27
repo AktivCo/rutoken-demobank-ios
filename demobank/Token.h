@@ -12,6 +12,7 @@
 
 @property(nonatomic, readonly) NSString* label;
 @property(nonatomic, readonly) NSString* serialNumber;
+@property(nonatomic, readonly) NSString* model;
 @property(nonatomic, readonly) NSUInteger totalMemory;
 @property(nonatomic, readonly) NSUInteger freeMemory;
 @property(nonatomic, readonly) NSUInteger charge;
