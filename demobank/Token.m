@@ -23,30 +23,30 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
 		_functions = functions;
 		_extendedFunctions = extendedFunctions;
 		_slotId = slotId;
+        
+        NSMutableData* tokenInfo = nil;
+        NSMutableData* extendedTokenInfo = nil;
+        CK_TOKEN_INFO_EXTENDED_PTR extendedInfo = nil;
+        CK_TOKEN_INFO_PTR info = nil;
+        
+        tokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
+        info = [tokenInfo mutableBytes];
+        CK_RV rv = _functions->C_GetTokenInfo(slotId, info);
+        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+        
+        extendedTokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
+        extendedInfo = [extendedTokenInfo mutableBytes];
+        extendedInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
+        
+        rv = _extendedFunctions->C_EX_GetTokenInfoExtended(slotId, extendedInfo);
+        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+        
+        _label = removeTrailingSpaces((const char*) info->label, sizeof(info->label));
+        _serialNumber = removeTrailingSpaces((const char*) info->serialNumber, sizeof(info->serialNumber));
+        _totalMemory = info->ulTotalPublicMemory;
+        _freeMemory = info->ulFreePublicMemory;
+        _charge = extendedInfo->ulBatteryVoltage;
 	}
-	
-	NSMutableData* tokenInfo = nil;
-	NSMutableData* extendedTokenInfo = nil;
-	CK_TOKEN_INFO_EXTENDED_PTR extendedInfo = nil;
-	CK_TOKEN_INFO_PTR info = nil;
-	
-	tokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
-	info = [tokenInfo mutableBytes];
-	CK_RV rv = _functions->C_GetTokenInfo(slotId, info);
-	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-	
-	extendedTokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
-	extendedInfo = [extendedTokenInfo mutableBytes];
-	extendedInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
-	
-	rv = _extendedFunctions->C_EX_GetTokenInfoExtended(slotId, extendedInfo);
-	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-	
-	_label = removeTrailingSpaces((const char*) info->label, sizeof(info->label));
-	_serialNumber = removeTrailingSpaces((const char*) info->serialNumber, sizeof(info->serialNumber));
-	_totalMemory = info->ulTotalPublicMemory;
-	_freeMemory = info->ulFreePublicMemory;
-	_charge = extendedInfo->ulBatteryVoltage;
 	
 	return self;
 }
