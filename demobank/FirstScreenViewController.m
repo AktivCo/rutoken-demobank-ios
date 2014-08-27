@@ -62,12 +62,12 @@
 
 - (void)bluetoothWasPoweredOn:(NSNotification*)notification {
 	//handle bluetooth powering ON here
-	[_textLogs setText:[NSString stringWithFormat:@"Bluetooth was powered on\n%@",[_textLogs text]]];
+	NSLog(@"Bluetooth was powered on");
 }
 
 - (void)bluetoothWasPoweredOff:(NSNotification*)notification {
 	//handle bluetooth powering OFF here
-	[_textLogs setText:[NSString stringWithFormat:@"Bluetooth was powered off\n%@",[_textLogs text]]];
+    NSLog(@"Bluetooth was powered off");
 }
 
 - (void)tokenWasAdded:(NSNotification*)notification {
@@ -75,24 +75,26 @@
 	NSDictionary* userInfo = [notification userInfo];
 	NSNumber* handle = [userInfo objectForKey:@"handle"];
 	Token* token = [_tokenManager tokenForId:handle];
-	[_textLogs setText:[NSString stringWithFormat:@"Info for token with handle %d was loaded: \"Model: %@, Serial: %@, Label: %@\" \n%@", [handle intValue], [token model], [token serialNumber], [token label], [_textLogs text]]];
+    
+    NSLog(@"Info for token with handle %d was loaded: \"Model: %@, Serial: %@, Label: %@\"", [handle intValue], [token model], [token serialNumber], [token label]);
 }
 
 - (void)tokenWasRemoved:(NSNotification*)notification {
 	//handle token removing here
 	NSDictionary* userInfo = [notification userInfo];
 	NSNumber* handle = [userInfo objectForKey:@"handle"];
-	[_textLogs setText:[NSString stringWithFormat:@"Token with handle %d was removed\n%@", [handle intValue],[_textLogs text]]];
+    
+    NSLog(@"Token with handle %d was removed", [handle intValue]);
 }
 
 - (void)tokenWillBeAdded:(NSNotification*)notification {
 	//be ready to adding new token here
-	[_textLogs setText:[NSString stringWithFormat:@"New token detected\n%@",[_textLogs text]]];
+    NSLog(@"New token detected");
 }
 
 - (void)tokenAddingFailed:(NSNotification*)notification {
 	//handle slot error here
-	[_textLogs setText:[NSString stringWithFormat:@"Something went wrong\n%@",[_textLogs text]]];
+    NSLog(@"Error while loading token info");
 }
 
 @end

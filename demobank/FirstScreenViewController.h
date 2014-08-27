@@ -11,7 +11,6 @@
 	BluetoothDelegate* _delegate;
 	CBCentralManager* _manager;
 	TokenManager* _tokenManager;
-	__weak IBOutlet UITextView *_textLogs;
     __weak IBOutlet UIImageView *_headerImage;
     __weak IBOutlet UIImageView *_tokenImage;
 }
