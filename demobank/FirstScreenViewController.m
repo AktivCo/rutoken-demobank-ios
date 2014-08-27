@@ -73,9 +73,9 @@
 - (void)tokenWasAdded:(NSNotification*)notification {
 	//handle token adding here
 	NSDictionary* userInfo = [notification userInfo];
-	NSNumber* slotId = [userInfo objectForKey:@"slotId"];
-	Token* token = [_tokenManager tokenForId:slotId];
-	[_textLogs setText:[NSString stringWithFormat:@"Token info was loaded for slot %d:\n%@", [slotId intValue],[_textLogs text]]];
+	NSNumber* handle = [userInfo objectForKey:@"handle"];
+	Token* token = [_tokenManager tokenForId:handle];
+	[_textLogs setText:[NSString stringWithFormat:@"Token info was loaded for token with handle %d:\n%@", [handle intValue],[_textLogs text]]];
 	[_textLogs setText:[NSString stringWithFormat:@"Serial: %s\n%@", [[token serialNumber] UTF8String],[_textLogs text]]];
 	[_textLogs setText:[NSString stringWithFormat:@"Label: %s\n%@", [[token label] UTF8String],[_textLogs text]]];
 }
@@ -83,22 +83,18 @@
 - (void)tokenWasRemoved:(NSNotification*)notification {
 	//handle token removing here
 	NSDictionary* userInfo = [notification userInfo];
-	NSNumber* slotId = [userInfo objectForKey:@"slotId"];
-	[_textLogs setText:[NSString stringWithFormat:@"Token was removed from slot %d\n%@", [slotId intValue],[_textLogs text]]];
+	NSNumber* handle = [userInfo objectForKey:@"handle"];
+	[_textLogs setText:[NSString stringWithFormat:@"Token with handle %d was removed\n%@", [handle intValue],[_textLogs text]]];
 }
 
 - (void)tokenWillBeAdded:(NSNotification*)notification {
 	//be ready to adding new token here
-	NSDictionary* userInfo = [notification userInfo];
-	NSNumber* slotId = [userInfo objectForKey:@"slotId"];
-	[_textLogs setText:[NSString stringWithFormat:@"New token detected on slot %d\n%@", [slotId intValue],[_textLogs text]]];
+	[_textLogs setText:[NSString stringWithFormat:@"New token detected\n%@",[_textLogs text]]];
 }
 
 - (void)tokenAddingFailed:(NSNotification*)notification {
-	//handle slot error here
-	NSDictionary* userInfo = [notification userInfo];
-	NSNumber* slotId = [userInfo objectForKey:@"slotId"];
-	[_textLogs setText:[NSString stringWithFormat:@"Something went wrong on slot %d\n%@", [slotId intValue],[_textLogs text]]];
+	//handle slot error here
+	[_textLogs setText:[NSString stringWithFormat:@"Something went wrong\n%@",[_textLogs text]]];
 }
 
 @end

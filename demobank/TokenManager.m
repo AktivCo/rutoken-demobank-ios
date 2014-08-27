@@ -165,7 +165,9 @@
 	}
 	_slotStates = [NSMutableDictionary dictionary];
 	_tokens = [NSMutableDictionary dictionary];
+    _handles = [NSMutableDictionary dictionary];
 	_slotWorkers = [NSMutableDictionary dictionary];
+    _currentHandle = 0;
 	
 	return self;
 }
@@ -187,9 +189,6 @@
 }
 
 -(void)proccessEventTokenAddedAtSlot:(CK_SLOT_ID)slotId{
-	NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-	[notificationInfo setObject:[NSNumber numberWithUnsignedLong:slotId] forKey:@"slotId"];
-	
 	NSNumber* state = [_slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
 	InnerState currentState = kState1;
 	if(nil == state) {
@@ -203,7 +202,7 @@
 		case kState1:
 		{
 			nextState = kState2;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self userInfo:notificationInfo];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
 			TokenInfoLoader* loader = [[TokenInfoLoader alloc] initWithFunctions:_functions
 															   extendedFunctions:_extendedFunctions slotId:slotId];
 			[loader start];
@@ -212,12 +211,12 @@
 			break;
 		case kState3:
 			nextState = kState6;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self userInfo:notificationInfo];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
 			break;
 		case kState4:
 		{
 			nextState = kState2;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self userInfo:notificationInfo];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
 			TokenInfoLoader* loader = [[TokenInfoLoader alloc] initWithFunctions:_functions
 															   extendedFunctions:_extendedFunctions slotId:slotId];
 			[loader start];
@@ -227,7 +226,7 @@
 		case kState5:
 		{
 			nextState = kState2;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self userInfo:notificationInfo];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
 			TokenInfoLoader* loader = [[TokenInfoLoader alloc] initWithFunctions:_functions
 															   extendedFunctions:_extendedFunctions slotId:slotId];
 			[loader start];
@@ -242,9 +241,6 @@
 	[_slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
 }
 -(void)proccessEventTokenRemovedAtSlot:(CK_SLOT_ID)slotId{
-	NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-	[notificationInfo setObject:[NSNumber numberWithUnsignedLong:slotId] forKey:@"slotId"];
-	
 	NSNumber* state = [_slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
 	if(nil == state) {
 		return; //Dont handle this situation
@@ -256,18 +252,29 @@
 	switch (currentState) {
 		case kState2:
 			nextState = kState3;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self userInfo:notificationInfo];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self];
 			break;
 		case kState4:
-			nextState = kState1;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWasRemoved" object:self userInfo:notificationInfo];
+        {
+            NSNumber* handleToRemove = [_handles objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+            if(handleToRemove) {
+                [_tokens removeObjectForKey:handleToRemove];
+                [_handles removeObjectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+                
+                NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
+                [notificationInfo setObject:handleToRemove forKey:@"handle"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWasRemoved" object:self userInfo:notificationInfo];
+                nextState = kState1;
+            }
+        }
 			break;
 		case kState5:
 			nextState = kState1;
 			break;
 		case kState6:
 			nextState = kState3;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self userInfo:notificationInfo];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self];
 			break;
 			
 		default:
@@ -278,9 +285,6 @@
 }
 
 -(void)proccessEventTokenInfoLoadedAtSlot:(CK_SLOT_ID)slotId withToken:(Token*)token{
-	NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-	[notificationInfo setObject:[NSNumber numberWithUnsignedLong:slotId] forKey:@"slotId"];
-	
 	NSNumber* state = [_slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
 	if(nil == state) {
 		return; //Dont handle this situation
@@ -293,7 +297,12 @@
 		case kState2:
 		{
 			nextState = kState4;
-			[_tokens setObject:token forKey:[NSNumber numberWithUnsignedLong:slotId]];
+            [_handles setObject:[NSNumber numberWithInteger:_currentHandle] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+			[_tokens setObject:token forKey:[NSNumber numberWithInteger:_currentHandle]];
+            NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
+            [notificationInfo setObject:[NSNumber numberWithInteger:_currentHandle] forKey:@"handle"];
+            _currentHandle++;
+            
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWasAdded" object:self userInfo:notificationInfo];
 		}
 			break;
@@ -317,9 +326,6 @@
 	[_slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
 }
 -(void)proccessEventTokenInfoLoadingFailedAtSlot:(CK_SLOT_ID)slotId{
-	NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-	[notificationInfo setObject:[NSNumber numberWithUnsignedLong:slotId] forKey:@"slotId"];
-	
 	NSNumber* state = [_slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
 	if(nil == state) {
 		return; //Dont handle this situation
@@ -331,7 +337,7 @@
 	switch (currentState) {
 		case kState2:
 			nextState = kState5;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self userInfo:notificationInfo];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self];
 			break;
 		case kState3:
 			nextState = kState5;

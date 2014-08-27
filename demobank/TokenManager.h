@@ -28,7 +28,9 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	CK_FUNCTION_LIST_PTR _functions;
 	CK_FUNCTION_LIST_EXTENDED_PTR _extendedFunctions;
 	Pkcs11EventHandler* _pkcs11EventHandler;
+    NSInteger _currentHandle;
 	NSMutableDictionary* _tokens;
+    NSMutableDictionary* _handles;
 	NSMutableDictionary* _slotStates;
 	NSMutableDictionary* _slotWorkers;
 }
