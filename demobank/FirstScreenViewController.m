@@ -55,69 +55,99 @@
 												 name:@"TokenAddingFailed" object:_tokenManager];
 	
     _activeTokenHandle = nil;
-    [_tokenModelLabel setText:@""];
-    [_tokenSerialNumberLabel setText:@""];
-    [_statusInfoLabel setText:@""];
+    _tokenState = kTokenDisconnected;
+    _connectingTokens = 0;
+    [self wipeAllLabels];
     
-	_delegate = [[BluetoothDelegate alloc] init];
+    _delegate = [[BluetoothDelegate alloc] init];
 	_manager = [[CBCentralManager alloc] initWithDelegate:_delegate queue:nil];
 	_tokenManager = [TokenManager sharedInstance];
+    
+    [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:_tokenState];
 
 	[_tokenManager start];
 }
 
+-(void)setStatewithBluetooth:(bool)bluetoothPoweredOn tokenState:(TokenState)tokenState{
+    [self wipeAllLabels];
+    if(false == bluetoothPoweredOn){
+        [_statusInfoLabel setText:@"Для работы с демобанком включите bluetooth"];
+    } else if (kTokenDisconnected == tokenState){
+        [_statusInfoLabel setText:@"Для работы с демобанком подключите токен"];
+    } else if (kTokenConnecting == tokenState) {
+        [_statusInfoLabel setText:@"Токен подключается..."];
+    } else if (kTokenConnected == tokenState) {
+        Token* token = [_tokenManager tokenForId:_activeTokenHandle];
+        [_tokenModelLabel setText:[token model]];
+        NSUInteger decSerial;
+        [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
+        NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
+        [_tokenSerialNumberLabel setText:[decSerialString substringFromIndex:[decSerialString length]-5]];
+    }
+}
+
+-(void)wipeAllLabels{
+    [_tokenModelLabel setText:@""];
+    [_tokenSerialNumberLabel setText:@""];
+    [_statusInfoLabel setText:@""];
+}
+
 - (void)bluetoothWasPoweredOn:(NSNotification*)notification {
-	//handle bluetooth powering ON here
-    [_statusInfoLabel setText:@"Для работы с демобанком подключите токен"];
+    [self setStatewithBluetooth:YES  tokenState:_tokenState];
 	NSLog(@"Bluetooth was powered on");
 }
 
 - (void)bluetoothWasPoweredOff:(NSNotification*)notification {
-	//handle bluetooth powering OFF here
-    [_statusInfoLabel setText:@"Для работы с демобанком включите bluetooth"];
+    [self setStatewithBluetooth:NO  tokenState:_tokenState];
     NSLog(@"Bluetooth was powered off");
 }
 
 - (void)tokenWasAdded:(NSNotification*)notification {
-	//handle token adding here
+    _connectingTokens--;
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* handle = [userInfo objectForKey:@"handle"];
     Token* token = [_tokenManager tokenForId:handle];
     
     if(nil == _activeTokenHandle) {
         _activeTokenHandle = handle;
-        [_tokenModelLabel setText:[token model]];
-        NSUInteger decSerial;
-        [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
-        NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
-        [_tokenSerialNumberLabel setText:[decSerialString substringFromIndex:[decSerialString length]-5]];
-        [_statusInfoLabel setText:@""];
+        [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnected];
     }
     
     NSLog(@"Info for token with handle %d was loaded: \"Model: %@, Serial: %@, Label: %@\"", [handle intValue], [token model], [token serialNumber], [token label]);
 }
 
 - (void)tokenWasRemoved:(NSNotification*)notification {
-	//handle token removing here
 	NSDictionary* userInfo = [notification userInfo];
 	NSNumber* handle = [userInfo objectForKey:@"handle"];
+    
     if(handle == _activeTokenHandle){
-        _activeTokenHandle = nil;
-        [_statusInfoLabel setText:@"Для работы с демобанком подключите токен"];
-        [_tokenModelLabel setText:@""];
-        [_tokenSerialNumberLabel setText:@""];
+        NSArray* ids = [_tokenManager tokenIds];
+        if(0 != [ids count]){
+            _activeTokenHandle = [ids objectAtIndex:0];
+            [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnected];
+        } else {
+            _activeTokenHandle = nil;
+            if(0 == _connectingTokens) [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenDisconnected];
+            else [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnecting];
+        }
     }
     
     NSLog(@"Token with handle %d was removed", [handle intValue]);
 }
 
 - (void)tokenWillBeAdded:(NSNotification*)notification {
-	//be ready to adding new token here
+    _connectingTokens++;
+    if(nil == _activeTokenHandle) {
+        [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnecting];
+    }
     NSLog(@"New token detected");
 }
 
 - (void)tokenAddingFailed:(NSNotification*)notification {
-	//handle slot error here
+    _connectingTokens--;
+    if(nil == _activeTokenHandle && 0 == _connectingTokens){
+        [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenDisconnected];
+    }
     NSLog(@"Error while loading token info");
 }
 

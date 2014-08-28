@@ -7,11 +7,20 @@
 @class BluetoothDelegate;
 @class TokenManager;
 
+typedef NS_ENUM(NSInteger, TokenState) {
+	kTokenDisconnected,
+	kTokenConnecting,
+	kTokenConnected
+};
+
 @interface FirstScreenViewController : UIViewController{
 	BluetoothDelegate* _delegate;
 	CBCentralManager* _manager;
 	TokenManager* _tokenManager;
     NSNumber* _activeTokenHandle;
+    TokenState _tokenState;
+    NSUInteger _connectingTokens;
+    
     __weak IBOutlet UIImageView *_headerImage;
     __weak IBOutlet UIImageView *_tokenImage;
     __weak IBOutlet UILabel *_tokenModelLabel;
