@@ -26,5 +26,8 @@ typedef NS_ENUM(NSInteger, TokenState) {
     __weak IBOutlet UILabel *_tokenModelLabel;
     __weak IBOutlet UILabel *_tokenSerialNumberLabel;
     __weak IBOutlet UILabel *_statusInfoLabel;
+    __weak IBOutlet UILabel *_commonNameLabel;
+    __weak IBOutlet UIButton *_loginButton;
+    __weak IBOutlet UIImageView *_batteryChargeImage;
 }
 @end

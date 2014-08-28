@@ -83,6 +83,17 @@
         [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
         NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
         [_tokenSerialNumberLabel setText:[decSerialString substringFromIndex:[decSerialString length]-5]];
+        [_commonNameLabel setText:@"Иванов Иван Иванович"];
+        [_loginButton setEnabled:YES];
+        [_loginButton setTitle:@"Войти" forState:UIControlStateNormal];
+        
+        if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];
+        else if ([token charge] > 80) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_4_sec.png"]];
+        else if ([token charge] <= 80 && [token charge] > 60 ) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_3_sec.png"]];
+        else if ([token charge] <= 60 && [token charge] > 40) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_2_sec.png"]];
+        else if ([token charge] <= 40 && [token charge] > 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_1_sec.png"]];
+        else if ([token charge] <= 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_empty.png"]];
+
     }
 }
 
@@ -90,6 +101,10 @@
     [_tokenModelLabel setText:@""];
     [_tokenSerialNumberLabel setText:@""];
     [_statusInfoLabel setText:@""];
+    [_commonNameLabel setText:@""];
+    [_batteryChargeImage setImage:nil];
+    [_loginButton setEnabled:NO];
+    [_loginButton setTitle:@"" forState:UIControlStateNormal];
 }
 
 - (void)bluetoothWasPoweredOn:(NSNotification*)notification {
