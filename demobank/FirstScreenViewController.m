@@ -84,8 +84,10 @@
         NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
         [_tokenSerialNumberLabel setText:[decSerialString substringFromIndex:[decSerialString length]-5]];
         [_commonNameLabel setText:@"Иванов Иван Иванович"];
-        [_loginButton setEnabled:YES];
+        [_loginButton setHidden:NO];
         [_loginButton setTitle:@"Войти" forState:UIControlStateNormal];
+        [_pinTextInputLabel setText:@"Введите ПИН:"];
+        [_pinTextInput setHidden:NO];
         
         if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];
         else if ([token charge] > 80) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_4_sec.png"]];
@@ -103,8 +105,10 @@
     [_statusInfoLabel setText:@""];
     [_commonNameLabel setText:@""];
     [_batteryChargeImage setImage:nil];
-    [_loginButton setEnabled:NO];
+    [_loginButton setHidden:YES];
     [_loginButton setTitle:@"" forState:UIControlStateNormal];
+    [_pinTextInputLabel setText:@""];
+    [_pinTextInput setHidden:YES];
 }
 
 - (void)bluetoothWasPoweredOn:(NSNotification*)notification {

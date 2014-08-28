@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnj-E8-HQz">
-                                <rect key="frame" x="178" y="352" width="400" height="56"/>
+                                <rect key="frame" x="483" y="356" width="100" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Войти">
@@ -66,6 +66,12 @@
                                 <rect key="frame" x="60" y="245" width="32" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите ПИН" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pSb-DI-2eZ">
+                                <rect key="frame" x="186" y="352" width="300" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.94509803921568625" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -75,6 +81,7 @@
                         <outlet property="_commonNameLabel" destination="2zc-LQ-T0J" id="lZp-uC-dT8"/>
                         <outlet property="_headerImage" destination="1to-Av-gr3" id="4sA-8T-82k"/>
                         <outlet property="_loginButton" destination="dnj-E8-HQz" id="Pae-EW-rk9"/>
+                        <outlet property="_pinTextInput" destination="pSb-DI-2eZ" id="dKT-BC-Uiw"/>
                         <outlet property="_statusInfoLabel" destination="Gtt-Zb-pyM" id="QUi-Zy-EpG"/>
                         <outlet property="_tokenImage" destination="olY-FC-H0t" id="b4E-ip-GdU"/>
                         <outlet property="_tokenModelLabel" destination="Xhh-ZF-u6r" id="3aM-1K-A0L"/>
