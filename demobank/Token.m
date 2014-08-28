@@ -4,6 +4,9 @@
 
 #import "Pkcs11Error.h"
 
+static const double kVoltageMin = 3500;
+static const double kVoltageMax = 4800;
+
 static NSString* removeTrailingSpaces(const char* string, size_t length) {
 	size_t i;
 	for (i = length; i != 0; --i) {
@@ -46,7 +49,15 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         _model = removeTrailingSpaces((const char*) info->model, sizeof(info->model));
         _totalMemory = info->ulTotalPublicMemory;
         _freeMemory = info->ulFreePublicMemory;
-        _charge = extendedInfo->ulBatteryVoltage;
+        
+        double batteryVoltage = extendedInfo->ulBatteryVoltage;
+        _charge = ((batteryVoltage - kVoltageMin) / (kVoltageMax - kVoltageMin)) * 100;
+        _charging = NO;
+        if(_charge > 100) {
+            _charging = YES;
+            _charge = 100;
+        }
+        if(_charge < 1) _charge = 1;
 	}
 	
 	return self;

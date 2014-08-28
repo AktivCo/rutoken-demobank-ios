@@ -14,6 +14,12 @@
 		55243FBB19A71DA80097642D /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBA19A71DA80097642D /* TokenManager.m */; };
 		55243FBE19A71DB60097642D /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBD19A71DB60097642D /* Token.m */; };
 		55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */; };
+		556B854519AF56A700DF95FB /* battery_1_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B853F19AF56A700DF95FB /* battery_1_sec.png */; };
+		556B854619AF56A700DF95FB /* battery_2_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854019AF56A700DF95FB /* battery_2_sec.png */; };
+		556B854719AF56A700DF95FB /* battery_3_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854119AF56A700DF95FB /* battery_3_sec.png */; };
+		556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854219AF56A700DF95FB /* battery_4_sec.png */; };
+		556B854919AF56A700DF95FB /* battery_charge.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854319AF56A700DF95FB /* battery_charge.png */; };
+		556B854A19AF56A700DF95FB /* battery_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854419AF56A700DF95FB /* battery_empty.png */; };
 		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
 		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
@@ -57,6 +63,12 @@
 		55243FBC19A71DB60097642D /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		55243FBD19A71DB60097642D /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		556B853F19AF56A700DF95FB /* battery_1_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_1_sec.png; sourceTree = "<group>"; };
+		556B854019AF56A700DF95FB /* battery_2_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_2_sec.png; sourceTree = "<group>"; };
+		556B854119AF56A700DF95FB /* battery_3_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_3_sec.png; sourceTree = "<group>"; };
+		556B854219AF56A700DF95FB /* battery_4_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_4_sec.png; sourceTree = "<group>"; };
+		556B854319AF56A700DF95FB /* battery_charge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_charge.png; sourceTree = "<group>"; };
+		556B854419AF56A700DF95FB /* battery_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_empty.png; sourceTree = "<group>"; };
 		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
 		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,9 +124,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		556B853E19AF56A700DF95FB /* battery */ = {
+			isa = PBXGroup;
+			children = (
+				556B853F19AF56A700DF95FB /* battery_1_sec.png */,
+				556B854019AF56A700DF95FB /* battery_2_sec.png */,
+				556B854119AF56A700DF95FB /* battery_3_sec.png */,
+				556B854219AF56A700DF95FB /* battery_4_sec.png */,
+				556B854319AF56A700DF95FB /* battery_charge.png */,
+				556B854419AF56A700DF95FB /* battery_empty.png */,
+			);
+			path = battery;
+			sourceTree = "<group>";
+		};
 		557DFE9119ADD0B600CC7488 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				556B853E19AF56A700DF95FB /* battery */,
 				55BC87CB19ADF32E008ABF1E /* logo.png */,
 				557DFE9219ADD0B600CC7488 /* BT_Black.png */,
 			);
@@ -288,10 +314,16 @@
 			files = (
 				55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */,
 				55E8966E199A02DA0082A015 /* Images.xcassets in Resources */,
+				556B854619AF56A700DF95FB /* battery_2_sec.png in Resources */,
+				556B854919AF56A700DF95FB /* battery_charge.png in Resources */,
 				55BC87CC19ADF32E008ABF1E /* logo.png in Resources */,
+				556B854A19AF56A700DF95FB /* battery_empty.png in Resources */,
+				556B854719AF56A700DF95FB /* battery_3_sec.png in Resources */,
 				557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */,
 				55E89666199A02DA0082A015 /* Main_iPhone.storyboard in Resources */,
 				55E8965D199A02DA0082A015 /* InfoPlist.strings in Resources */,
+				556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */,
+				556B854519AF56A700DF95FB /* battery_1_sec.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +495,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8C60D517-1E07-4C05-A228-8FB6B5154BA6";
+				PROVISIONING_PROFILE = "fe4b6117-09aa-4720-8755-8c0707a1ab09";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -487,7 +519,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8C60D517-1E07-4C05-A228-8FB6B5154BA6";
+				PROVISIONING_PROFILE = "fe4b6117-09aa-4720-8755-8c0707a1ab09";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
