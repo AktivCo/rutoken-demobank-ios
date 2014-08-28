@@ -39,6 +39,7 @@
 		55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8968E199A0C040082A015 /* FirstScreenViewController.m */; };
 		55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89690199A0D0C0082A015 /* ExternalAccessory.framework */; };
 		55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89692199A0D1A0082A015 /* CoreBluetooth.framework */; };
+		A10E590239465D0317C016BE /* ApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = A10E54D3F48E0187229C160B /* ApplicationError.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,9 @@
 		55E8968E199A0C040082A015 /* FirstScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstScreenViewController.m; sourceTree = "<group>"; };
 		55E89690199A0D0C0082A015 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		55E89692199A0D1A0082A015 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		A10E51F08C86AE015D6113AA /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		A10E54D3F48E0187229C160B /* ApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationError.m; sourceTree = "<group>"; };
+		A10E5C6B3B044040C7628600 /* ApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationError.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +207,9 @@
 				550F55A519ACC17700EF41E4 /* Certificate.m */,
 				550F55A719ACC1F900EF41E4 /* Pkcs11Error.h */,
 				550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */,
+				A10E54D3F48E0187229C160B /* ApplicationError.m */,
+				A10E5C6B3B044040C7628600 /* ApplicationError.h */,
+				A10E51F08C86AE015D6113AA /* Util.h */,
 			);
 			path = demobank;
 			sourceTree = "<group>";
@@ -283,6 +290,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Aktiv Co";
 				TargetAttributes = {
+					55E8964E199A02DA0082A015 = {
+						DevelopmentTeam = TRCKC8GFT7;
+					};
 					55E89672199A02DA0082A015 = {
 						TestTargetID = 55E8964E199A02DA0082A015;
 					};
@@ -349,6 +359,7 @@
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
 				55243FBE19A71DB60097642D /* Token.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
+				A10E590239465D0317C016BE /* ApplicationError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +496,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/external/pkcs11bin",
@@ -495,7 +507,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fe4b6117-09aa-4720-8755-8c0707a1ab09";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -509,6 +521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/external/pkcs11bin",
@@ -519,7 +532,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fe4b6117-09aa-4720-8755-8c0707a1ab09";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
