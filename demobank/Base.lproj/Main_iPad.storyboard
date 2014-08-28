@@ -73,7 +73,7 @@
     </scenes>
     <resources>
         <image name="BT_Black.png" width="500" height="500"/>
-        <image name="logo.png" width="170" height="28"/>
+        <image name="logo.png" width="226" height="37"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
