@@ -77,7 +77,7 @@
     } else if (kTokenConnecting == tokenState) {
         [_statusInfoLabel setText:@"Токен подключается..."];
     } else if (kTokenConnected == tokenState) {
-        Token* token = [_tokenManager tokenForId:_activeTokenHandle];
+        Token* token = [_tokenManager tokenForHandle:_activeTokenHandle];
         [_tokenModelLabel setText:[token model]];
         NSUInteger decSerial;
         [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
@@ -121,7 +121,7 @@
     _connectingTokens--;
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* handle = [userInfo objectForKey:@"handle"];
-    Token* token = [_tokenManager tokenForId:handle];
+    Token* token = [_tokenManager tokenForHandle:handle];
     
     if(nil == _activeTokenHandle) {
         _activeTokenHandle = handle;
@@ -136,7 +136,7 @@
 	NSNumber* handle = [userInfo objectForKey:@"handle"];
     
     if(handle == _activeTokenHandle){
-        NSArray* ids = [_tokenManager tokenIds];
+        NSArray* ids = [_tokenManager tokenHandles];
         if(0 != [ids count]){
             _activeTokenHandle = [ids objectAtIndex:0];
             [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnected];

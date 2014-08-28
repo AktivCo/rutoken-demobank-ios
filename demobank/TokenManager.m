@@ -180,11 +180,11 @@
 	//Stop all activities for monitoring tokens' events
 }
 
--(NSArray*)tokenIds{
+-(NSArray*)tokenHandles{
 	return[_tokens allKeys];
 }
 
--(Token*)tokenForId:(NSNumber*)tokenId{
+-(Token*)tokenForHandle:(NSNumber*)tokenId{
 	return [_tokens objectForKey:tokenId];
 }
 
