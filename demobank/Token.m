@@ -99,6 +99,8 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         rv = _functions->C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
         if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 
+        _certificates = [NSMutableArray array];
+        
         @try {
             [self readCertificates];
         } @catch (NSError* e) {
