@@ -78,15 +78,18 @@
         [_statusInfoLabel setText:@"Токен подключается..."];
     } else if (kTokenConnected == tokenState) {
         Token* token = [_tokenManager tokenForHandle:_activeTokenHandle];
-        [_tokenModelLabel setText:[token model]];
+        NSString* tokenLabel;
+        if([[token model] isEqualToString:@"Rutoken ECP BT"]) tokenLabel = @"Рутокен ЭЦП Bluetooth";
+        else tokenLabel = @"Рутокен";
+        
         NSUInteger decSerial;
         [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
         NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
-        [_tokenSerialNumberLabel setText:[decSerialString substringFromIndex:[decSerialString length]-5]];
+        tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
+        [_tokenModelLabel setText:tokenLabel];
         [_commonNameLabel setText:@"Иванов Иван Иванович"];
         [_loginButton setHidden:NO];
         [_loginButton setTitle:@"Войти" forState:UIControlStateNormal];
-        [_pinTextInputLabel setText:@"Введите ПИН:"];
         [_pinTextInput setHidden:NO];
         
         if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];
@@ -99,16 +102,44 @@
     }
 }
 
+- (IBAction)loginToken:(id)sender {
+    [_loginButton setEnabled:NO];
+    Token* token =[_tokenManager tokenForHandle:_activeTokenHandle];
+    Certificate* cert = [[token certificates] objectAtIndex:0];
+    
+    NSString* authString = @"Auth Me";
+    NSData* authData = [NSData dataWithBytes:[authString UTF8String] length:[authString length]];
+    
+    if(nil != token && nil != cert){
+        [token login:[_pinTextInput text] successCallback:^(void){
+            [token sign:cert data:authData successCallback:^(NSData * result) {
+                [_loginButton setEnabled:YES];
+                [_pinIncorrectLabel setHidden:YES];
+                [_pinTextInput setText:@""];
+            } errorCallback:^(NSError * e) {
+                [_pinTextInput setText:@""];
+                [_pinIncorrectLabel setHidden:NO];
+                [_pinIncorrectLabel setText:@"Что-то не так с сертификатом"];
+                [_loginButton setEnabled:YES];
+            }];
+        } errorCallback:^(NSError * e) {
+            [_pinTextInput setText:@""];
+            [_pinIncorrectLabel setHidden:NO];
+            [_pinIncorrectLabel setText:@"ПИН введен неверно"];
+            [_loginButton setEnabled:YES];
+        }];
+    }
+}
+
 -(void)wipeAllLabels{
     [_tokenModelLabel setText:@""];
-    [_tokenSerialNumberLabel setText:@""];
     [_statusInfoLabel setText:@""];
     [_commonNameLabel setText:@""];
     [_batteryChargeImage setImage:nil];
     [_loginButton setHidden:YES];
     [_loginButton setTitle:@"" forState:UIControlStateNormal];
-    [_pinTextInputLabel setText:@""];
     [_pinTextInput setHidden:YES];
+    [_pinIncorrectLabel setHidden:YES];
 }
 
 - (void)bluetoothWasPoweredOn:(NSNotification*)notification {

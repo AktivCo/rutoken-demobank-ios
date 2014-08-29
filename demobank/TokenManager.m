@@ -29,7 +29,7 @@
 	CK_SLOT_INFO slotInfo;
 	CK_RV rv = _functions->C_GetSlotInfo(slotId, &slotInfo);
 	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-	
+	 
 	NSNumber* lastEvent = [_lastSlotEvent objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
 	if(nil == lastEvent){
 		lastEvent = [NSNumber numberWithInteger:TR];

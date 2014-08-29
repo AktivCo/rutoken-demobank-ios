@@ -24,12 +24,11 @@ typedef NS_ENUM(NSInteger, TokenState) {
     __weak IBOutlet UIImageView *_headerImage;
     __weak IBOutlet UIImageView *_tokenImage;
     __weak IBOutlet UILabel *_tokenModelLabel;
-    __weak IBOutlet UILabel *_tokenSerialNumberLabel;
     __weak IBOutlet UILabel *_statusInfoLabel;
     __weak IBOutlet UILabel *_commonNameLabel;
     __weak IBOutlet UIButton *_loginButton;
     __weak IBOutlet UIImageView *_batteryChargeImage;
-    __weak IBOutlet UILabel *_pinTextInputLabel;
     __weak IBOutlet UITextField *_pinTextInput;
+    __weak IBOutlet UILabel *_pinIncorrectLabel;
 }
 @end
