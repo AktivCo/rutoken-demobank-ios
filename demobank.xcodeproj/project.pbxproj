@@ -22,6 +22,7 @@
 		556B854A19AF56A700DF95FB /* battery_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854419AF56A700DF95FB /* battery_empty.png */; };
 		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
 		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
+		55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C244FB19B092A100DF5964 /* DemobankNavigationController.m */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
 		55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89654199A02DA0082A015 /* CoreGraphics.framework */; };
 		55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
@@ -72,6 +73,8 @@
 		556B854419AF56A700DF95FB /* battery_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_empty.png; sourceTree = "<group>"; };
 		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
 		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		55C244FA19B092A100DF5964 /* DemobankNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemobankNavigationController.h; sourceTree = "<group>"; };
+		55C244FB19B092A100DF5964 /* DemobankNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemobankNavigationController.m; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89652199A02DA0082A015 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55E89654199A02DA0082A015 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -199,6 +202,8 @@
 				55E89659199A02DA0082A015 /* Supporting Files */,
 				55E8968D199A0C040082A015 /* FirstScreenViewController.h */,
 				55E8968E199A0C040082A015 /* FirstScreenViewController.m */,
+				55C244FA19B092A100DF5964 /* DemobankNavigationController.h */,
+				55C244FB19B092A100DF5964 /* DemobankNavigationController.m */,
 				55243FB919A71DA80097642D /* TokenManager.h */,
 				55243FBA19A71DA80097642D /* TokenManager.m */,
 				55243FBC19A71DB60097642D /* Token.h */,
@@ -356,6 +361,7 @@
 				550F55A619ACC17700EF41E4 /* Certificate.m in Sources */,
 				55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */,
 				550F55A919ACC1F900EF41E4 /* Pkcs11Error.m in Sources */,
+				55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */,
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
 				55243FBE19A71DB60097642D /* Token.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,

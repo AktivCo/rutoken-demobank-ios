@@ -2,24 +2,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class CBCentralManager;
-
-@class BluetoothDelegate;
 @class TokenManager;
 
-typedef NS_ENUM(NSInteger, TokenState) {
-	kTokenDisconnected,
-	kTokenConnecting,
-	kTokenConnected
-};
-
 @interface FirstScreenViewController : UIViewController{
-	BluetoothDelegate* _delegate;
-	CBCentralManager* _manager;
-	TokenManager* _tokenManager;
     NSNumber* _activeTokenHandle;
-    TokenState _tokenState;
-    NSUInteger _connectingTokens;
+    TokenManager* _tokenManager;
     
     __weak IBOutlet UIImageView *_headerImage;
     __weak IBOutlet UIImageView *_tokenImage;
@@ -31,4 +18,10 @@ typedef NS_ENUM(NSInteger, TokenState) {
     __weak IBOutlet UITextField *_pinTextInput;
     __weak IBOutlet UILabel *_pinIncorrectLabel;
 }
+
+-(void)setActiveTokenWithHandle:(NSNumber*) handle;
+-(void)removeActiveToken;
+-(void)prepareForSettingAktiveToken;
+-(void)bluetoothWasPoweredOff;
+
 @end
