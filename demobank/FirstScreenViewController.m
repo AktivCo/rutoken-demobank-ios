@@ -39,6 +39,8 @@
     else if ([token charge] <= 60 && [token charge] > 40) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_2_sec.png"]];
     else if ([token charge] <= 40 && [token charge] > 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_1_sec.png"]];
     else if ([token charge] <= 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_empty.png"]];
+    
+    [_batteryPercentageLabel setText:[NSString stringWithFormat:@"%u%%" ,(NSUInteger)[token charge]]];
 }
 
 -(void)removeActiveToken{
@@ -95,6 +97,7 @@
     [_loginButton setTitle:@"" forState:UIControlStateNormal];
     [_pinTextInput setHidden:YES];
     [_pinIncorrectLabel setHidden:YES];
+    [_batteryPercentageLabel setText:@""];
 }
 
 @end

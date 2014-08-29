@@ -75,6 +75,13 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lf7-93-7bR">
+                                <rect key="frame" x="624" y="221" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.94509803921568625" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -82,6 +89,7 @@
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
                         <outlet property="_batteryChargeImage" destination="9NC-23-B6F" id="FvE-PZ-Xev"/>
+                        <outlet property="_batteryPercentageLabel" destination="lf7-93-7bR" id="Ndq-XR-OAM"/>
                         <outlet property="_commonNameLabel" destination="2zc-LQ-T0J" id="lZp-uC-dT8"/>
                         <outlet property="_headerImage" destination="1to-Av-gr3" id="4sA-8T-82k"/>
                         <outlet property="_loginButton" destination="dnj-E8-HQz" id="Pae-EW-rk9"/>
@@ -99,7 +107,8 @@
         <!--Demobank Navigation Controller-->
         <scene sceneID="ORv-eQ-QHK">
             <objects>
-                <navigationController definesPresentationContext="YES" id="JLr-aG-RMu" customClass="DemobankNavigationController" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="JLr-aG-RMu" customClass="DemobankNavigationController" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="50n-yd-ahU">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

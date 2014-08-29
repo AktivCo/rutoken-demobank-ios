@@ -17,6 +17,7 @@
     __weak IBOutlet UIImageView *_batteryChargeImage;
     __weak IBOutlet UITextField *_pinTextInput;
     __weak IBOutlet UILabel *_pinIncorrectLabel;
+    __weak IBOutlet UILabel *_batteryPercentageLabel;
 }
 
 -(void)setActiveTokenWithHandle:(NSNumber*) handle;
