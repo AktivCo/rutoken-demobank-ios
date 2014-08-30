@@ -3,6 +3,7 @@
 #import "FirstScreenViewController.h"
 
 #import "TokenManager.h"
+#import "PinEnterViewController.h"
 
 @implementation FirstScreenViewController
 
@@ -28,10 +29,8 @@
     NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
     tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
     [_tokenModelLabel setText:tokenLabel];
-    [_commonNameLabel setText:@"Иванов Иван Иванович"];
-    [_loginButton setHidden:NO];
-    [_loginButton setTitle:@"Войти" forState:UIControlStateNormal];
-    [_pinTextInput setHidden:NO];
+    [_chooseCertButton setTitle:@"Иванов Иван Иванович" forState:UIControlStateNormal];
+    [_chooseCertButton setHidden:NO];
     
     if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];
     else if ([token charge] > 80) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_4_sec.png"]];
@@ -59,45 +58,21 @@
     [_statusInfoLabel setText:@"Для работы с демобанком включите bluetooth"];
 }
 
-- (IBAction)loginToken:(id)sender {
-    [_loginButton setEnabled:NO];
-    Token* token =[_tokenManager tokenForHandle:_activeTokenHandle];
-    Certificate* cert = [[token certificates] objectAtIndex:0];
-    
-    NSString* authString = @"Auth Me";
-    NSData* authData = [NSData dataWithBytes:[authString UTF8String] length:[authString length]];
-    
-    if(nil != token && nil != cert){
-        [token login:[_pinTextInput text] successCallback:^(void){
-            [token sign:cert data:authData successCallback:^(NSData * result) {
-                [_loginButton setEnabled:YES];
-                [_pinIncorrectLabel setHidden:YES];
-                [_pinTextInput setText:@""];
-            } errorCallback:^(NSError * e) {
-                [_pinTextInput setText:@""];
-                [_pinIncorrectLabel setHidden:NO];
-                [_pinIncorrectLabel setText:@"Что-то не так с сертификатом"];
-                [_loginButton setEnabled:YES];
-            }];
-        } errorCallback:^(NSError * e) {
-            [_pinTextInput setText:@""];
-            [_pinIncorrectLabel setHidden:NO];
-            [_pinIncorrectLabel setText:@"ПИН введен неверно"];
-            [_loginButton setEnabled:YES];
-        }];
-    }
-}
+//- (IBAction)loginToken:(id)sender {
+//}
 
 -(void)resetView{
     [_tokenModelLabel setText:@""];
     [_statusInfoLabel setText:@""];
-    [_commonNameLabel setText:@""];
     [_batteryChargeImage setImage:nil];
-    [_loginButton setHidden:YES];
-    [_loginButton setTitle:@"" forState:UIControlStateNormal];
-    [_pinTextInput setHidden:YES];
-    [_pinIncorrectLabel setHidden:YES];
+    [_chooseCertButton setHidden:YES];
     [_batteryPercentageLabel setText:@""];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    PinEnterViewController* vc = [segue destinationViewController];
+    [vc setActiveTokenHandle:_activeTokenHandle];
 }
 
 @end

@@ -8,16 +8,12 @@
     NSNumber* _activeTokenHandle;
     TokenManager* _tokenManager;
     
-    __weak IBOutlet UIImageView *_headerImage;
     __weak IBOutlet UIImageView *_tokenImage;
     __weak IBOutlet UILabel *_tokenModelLabel;
     __weak IBOutlet UILabel *_statusInfoLabel;
-    __weak IBOutlet UILabel *_commonNameLabel;
-    __weak IBOutlet UIButton *_loginButton;
     __weak IBOutlet UIImageView *_batteryChargeImage;
-    __weak IBOutlet UITextField *_pinTextInput;
-    __weak IBOutlet UILabel *_pinIncorrectLabel;
     __weak IBOutlet UILabel *_batteryPercentageLabel;
+    __weak IBOutlet UIButton *_chooseCertButton;
 }
 
 -(void)setActiveTokenWithHandle:(NSNumber*) handle;
