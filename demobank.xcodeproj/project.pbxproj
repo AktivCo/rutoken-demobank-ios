@@ -158,6 +158,19 @@
 			path = demobank/resources;
 			sourceTree = "<group>";
 		};
+		55828C6419B1D431007CAEA7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				55C244FA19B092A100DF5964 /* DemobankNavigationController.h */,
+				55C244FB19B092A100DF5964 /* DemobankNavigationController.m */,
+				55E8968D199A0C040082A015 /* FirstScreenViewController.h */,
+				55E8968E199A0C040082A015 /* FirstScreenViewController.m */,
+				55911BA419B1A9BD005E38ED /* PinEnterViewController.h */,
+				55911BA519B1A9BD005E38ED /* PinEnterViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		55E89646199A02DA0082A015 = {
 			isa = PBXGroup;
 			children = (
@@ -203,12 +216,7 @@
 				55E89667199A02DA0082A015 /* Main_iPad.storyboard */,
 				55E8966D199A02DA0082A015 /* Images.xcassets */,
 				55E89659199A02DA0082A015 /* Supporting Files */,
-				55C244FA19B092A100DF5964 /* DemobankNavigationController.h */,
-				55C244FB19B092A100DF5964 /* DemobankNavigationController.m */,
-				55E8968D199A0C040082A015 /* FirstScreenViewController.h */,
-				55E8968E199A0C040082A015 /* FirstScreenViewController.m */,
-				55911BA419B1A9BD005E38ED /* PinEnterViewController.h */,
-				55911BA519B1A9BD005E38ED /* PinEnterViewController.m */,
+				55828C6419B1D431007CAEA7 /* ViewControllers */,
 				55243FB919A71DA80097642D /* TokenManager.h */,
 				55243FBA19A71DA80097642D /* TokenManager.m */,
 				55243FBC19A71DB60097642D /* Token.h */,
