@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--First Screen View Controller-->
+        <!--First Screen View Controller - Выбор сертификата-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="FirstScreenViewController" sceneMemberID="viewController">
@@ -20,11 +20,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BT_Black.png" translatesAutoresizingMaskIntoConstraints="NO" id="olY-FC-H0t">
                                 <rect key="frame" x="128" y="492" width="512" height="512"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="1to-Av-gr3">
-                                <rect key="frame" x="20" y="20" width="728" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.8666666666666667" green="0.13333333333333333" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Модель токена" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhh-ZF-u6r">
                                 <rect key="frame" x="60" y="214" width="556" height="28"/>
@@ -85,13 +80,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.94509803921568625" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gd3-JU-Tpo"/>
+                    <navigationItem key="navigationItem" title="Выбор сертификата" id="gd3-JU-Tpo"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
                         <outlet property="_batteryChargeImage" destination="9NC-23-B6F" id="FvE-PZ-Xev"/>
                         <outlet property="_batteryPercentageLabel" destination="lf7-93-7bR" id="Ndq-XR-OAM"/>
                         <outlet property="_commonNameLabel" destination="2zc-LQ-T0J" id="lZp-uC-dT8"/>
-                        <outlet property="_headerImage" destination="1to-Av-gr3" id="4sA-8T-82k"/>
                         <outlet property="_loginButton" destination="dnj-E8-HQz" id="Pae-EW-rk9"/>
                         <outlet property="_pinIncorrectLabel" destination="Dhr-hi-w8G" id="wVt-6E-1a7"/>
                         <outlet property="_pinTextInput" destination="pSb-DI-2eZ" id="dKT-BC-Uiw"/>
@@ -107,9 +101,9 @@
         <!--Demobank Navigation Controller-->
         <scene sceneID="ORv-eQ-QHK">
             <objects>
-                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="JLr-aG-RMu" customClass="DemobankNavigationController" sceneMemberID="viewController">
-                    <nil key="simulatedTopBarMetrics"/>
+                <navigationController definesPresentationContext="YES" id="JLr-aG-RMu" customClass="DemobankNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="50n-yd-ahU">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -123,7 +117,6 @@
     </scenes>
     <resources>
         <image name="BT_Black.png" width="500" height="500"/>
-        <image name="logo.png" width="226" height="37"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

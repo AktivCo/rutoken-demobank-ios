@@ -51,6 +51,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSDictionary* navBarTitleTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         [UIColor whiteColor],UITextAttributeTextColor,
+                                         [UIColor blackColor], UITextAttributeTextShadowColor,
+                                         [NSValue valueWithUIOffset:UIOffsetMake(-1, 0)], UITextAttributeTextShadowOffset, nil];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:navBarTitleTextAttr];
+    
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bluetoothWasPoweredOff:)
 												 name:@"BluetoothWasPoweredOff" object:_delegate];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bluetoothWasPoweredOn:)
