@@ -137,6 +137,7 @@
             if(0 == _connectingTokens) [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenDisconnected];
             else [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnecting];
         }
+        [self popToRootViewControllerAnimated:YES];
     }
     
     NSLog(@"Token with handle %d was removed", [handle intValue]);
