@@ -3,6 +3,7 @@
 #import "PinEnterViewController.h"
 
 #import "TokenManager.h"
+#import "PaymentsViewController.h"
 
 @interface PinEnterViewController ()
 
@@ -41,6 +42,15 @@
                 [_loginButton setEnabled:YES];
                 [_pinErrorLabel setHidden:YES];
                 [_pinErrorLabel setText:@""];
+                [_pinTextInput setText:@""];
+                PaymentsViewController* vc =[[UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"PaymentsVC"];
+                NSMutableArray *vcs = [[self.navigationController viewControllers] mutableCopy];
+                NSUInteger lastVcIndex = [vcs count] - 1;
+                if (lastVcIndex > 0) {
+                    [vcs replaceObjectAtIndex:lastVcIndex withObject:vc];
+                    [self.navigationController setViewControllers:vcs animated:YES];
+                }
+                //[self performSegueWithIdentifier:@"segueToPayments" sender:self];
             } errorCallback:^(NSError * e) {
                 [_pinTextInput setText:@""];
                 [_pinErrorLabel setHidden:NO];

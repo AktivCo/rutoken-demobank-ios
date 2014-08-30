@@ -73,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121" y="-645"/>
+            <point key="canvasLocation" x="-67" y="-645"/>
         </scene>
         <!--Pin Enter View Controller - Ввод ПИНа-->
         <scene sceneID="Gt2-k1-rF3">
@@ -124,11 +124,31 @@
                         <outlet property="_loginButton" destination="uT0-Hg-X0V" id="dVd-UD-j40"/>
                         <outlet property="_pinErrorLabel" destination="gQw-7x-wIL" id="Dpu-35-A5A"/>
                         <outlet property="_pinTextInput" destination="anf-vt-0uF" id="aZ5-B6-Apw"/>
+                        <segue destination="h00-uf-VDg" kind="push" identifier="segueToPayments" id="1ZQ-8Y-MCI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hl-l1-uNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="-645"/>
+            <point key="canvasLocation" x="854" y="-645"/>
+        </scene>
+        <!--Payments View Controller - Платежи-->
+        <scene sceneID="cy6-tu-AgN">
+            <objects>
+                <viewController storyboardIdentifier="PaymentsVC" id="h00-uf-VDg" customClass="PaymentsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jMU-Ih-cQR"/>
+                        <viewControllerLayoutGuide type="bottom" id="KkD-bm-wbb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b1H-44-sW6">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.94509803920000002" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Платежи" id="yIG-QK-3Oz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G6B-oi-6LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1768" y="-645"/>
         </scene>
         <!--Demobank Navigation Controller-->
         <scene sceneID="ORv-eQ-QHK">
