@@ -27,7 +27,6 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	NSMutableDictionary* _tokens;
     NSMutableDictionary* _handles;
 	NSMutableDictionary* _slotStates;
-	NSMutableDictionary* _slotWorkers;
 }
 
 +(TokenManager*)sharedInstance;

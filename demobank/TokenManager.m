@@ -237,7 +237,6 @@ tokenInfoLoadingFailedCallback:(void(^)(CK_SLOT_ID)) tokenInfoLoadingFailedCallb
 	_slotStates = [NSMutableDictionary dictionary];
 	_tokens = [NSMutableDictionary dictionary];
     _handles = [NSMutableDictionary dictionary];
-	_slotWorkers = [NSMutableDictionary dictionary];
     _currentHandle = 0;
 	
 	return self;
