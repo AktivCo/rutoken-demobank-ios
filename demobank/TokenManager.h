@@ -8,13 +8,6 @@
 
 @class Pkcs11EventHandler;
 
-typedef NS_ENUM(NSInteger, EventType) {
-	TA, //Token added
-	TR, //Token removed
-	TIL, //Token's information loaded
-	TILF //Token's information loading failed
-};
-
 typedef NS_ENUM(NSInteger, InnerState) {
 	kState1,
 	kState2,

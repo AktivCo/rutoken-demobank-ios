@@ -20,6 +20,7 @@
 		556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854219AF56A700DF95FB /* battery_4_sec.png */; };
 		556B854919AF56A700DF95FB /* battery_charge.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854319AF56A700DF95FB /* battery_charge.png */; };
 		556B854A19AF56A700DF95FB /* battery_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854419AF56A700DF95FB /* battery_empty.png */; };
+		5573372719B3418000CF0202 /* Pkcs11EventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5573372619B3418000CF0202 /* Pkcs11EventHandler.m */; };
 		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
 		55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */; };
 		55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911BA519B1A9BD005E38ED /* PinEnterViewController.m */; };
@@ -73,6 +74,8 @@
 		556B854219AF56A700DF95FB /* battery_4_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_4_sec.png; sourceTree = "<group>"; };
 		556B854319AF56A700DF95FB /* battery_charge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_charge.png; sourceTree = "<group>"; };
 		556B854419AF56A700DF95FB /* battery_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_empty.png; sourceTree = "<group>"; };
+		5573372519B3418000CF0202 /* Pkcs11EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pkcs11EventHandler.h; sourceTree = "<group>"; };
+		5573372619B3418000CF0202 /* Pkcs11EventHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pkcs11EventHandler.m; sourceTree = "<group>"; };
 		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
 		55828C6519B1EA00007CAEA7 /* PaymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsViewController.h; sourceTree = "<group>"; };
 		55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsViewController.m; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				55828C6419B1D431007CAEA7 /* ViewControllers */,
 				55243FB919A71DA80097642D /* TokenManager.h */,
 				55243FBA19A71DA80097642D /* TokenManager.m */,
+				5573372519B3418000CF0202 /* Pkcs11EventHandler.h */,
+				5573372619B3418000CF0202 /* Pkcs11EventHandler.m */,
 				55243FBC19A71DB60097642D /* Token.h */,
 				55243FBD19A71DB60097642D /* Token.m */,
 				550F55A419ACC17700EF41E4 /* Certificate.h */,
@@ -377,6 +382,7 @@
 			files = (
 				55243FBB19A71DA80097642D /* TokenManager.m in Sources */,
 				55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */,
+				5573372719B3418000CF0202 /* Pkcs11EventHandler.m in Sources */,
 				550F55A619ACC17700EF41E4 /* Certificate.m in Sources */,
 				55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */,
 				55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */,
