@@ -7,6 +7,7 @@
 #import "Token.h"
 
 @class Pkcs11EventHandler;
+@class TokenInfoLoader;
 
 typedef NS_ENUM(NSInteger, InnerState) {
 	kState1,
@@ -21,6 +22,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	CK_FUNCTION_LIST_PTR _functions;
 	CK_FUNCTION_LIST_EXTENDED_PTR _extendedFunctions;
 	Pkcs11EventHandler* _pkcs11EventHandler;
+    TokenInfoLoader* _tokenInfoLoader;
     NSInteger _currentHandle;
 	NSMutableDictionary* _tokens;
     NSMutableDictionary* _handles;
@@ -34,7 +36,4 @@ typedef NS_ENUM(NSInteger, InnerState) {
 -(void)stop;
 -(NSArray*)tokenHandles;
 -(Token*)tokenForHandle:(NSNumber*)tokenId;
-
--(void)proccessEventTokenInfoLoadedAtSlot:(CK_SLOT_ID)slotId withToken:(Token*)token;
--(void)proccessEventTokenInfoLoadingFailedAtSlot:(CK_SLOT_ID)slotId;
 @end
