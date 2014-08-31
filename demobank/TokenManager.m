@@ -2,59 +2,11 @@
 
 #import "TokenManager.h"
 
+#import "TokenInfoLoader.h"
 #import "Pkcs11Error.h"
 #import "Pkcs11EventHandler.h"
 
 #import <RtPcsc/winscard.h>
-
-@interface TokenInfoLoader : NSObject {
-	CK_FUNCTION_LIST_PTR _functions;
-	CK_FUNCTION_LIST_EXTENDED_PTR _extendedFunctions;
-    void (^ _tokenInfoLoaded)(CK_SLOT_ID, Token*);
-    void (^ _tokenInfoLoadingFailed)(CK_SLOT_ID);
-}
-
--(void)loadTokenInfoFromSlot:(CK_SLOT_ID)slotId;
-
-@end
-
-@implementation TokenInfoLoader
-
-- (id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
-      extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions
-tokenInfoLoadedCallback:(void(^)(CK_SLOT_ID, Token*)) tokenInfoLoadedCallback
-tokenInfoLoadingFailedCallback:(void(^)(CK_SLOT_ID)) tokenInfoLoadingFailedCallback{
-	self = [super init];
-	if (self) {
-		_functions = functions;
-		_extendedFunctions = extendedFunctions;
-        _tokenInfoLoadingFailed = tokenInfoLoadingFailedCallback;
-        _tokenInfoLoaded = tokenInfoLoadedCallback;
-	}
-	return self;
-}
-
--(void)loadTokenInfoFromSlot:(CK_SLOT_ID)slotId{
-    @autoreleasepool {
-        NSString* queueName = @"ru.rutoken.demobank.tokenLoading";
-        dispatch_queue_t queue = dispatch_queue_create([[queueName stringByAppendingString:[NSString stringWithFormat:@"_%lu", slotId]] UTF8String], nil);
-         dispatch_async(queue, ^() {
-            @try {
-                Token* token = [[Token alloc] initWithFunctions:_functions extendedFunctions:_extendedFunctions slotId:slotId];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    _tokenInfoLoaded(slotId, token);
-                });
-                
-            } @catch (NSError* e) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    _tokenInfoLoadingFailed(slotId);
-                });
-            }
-         });
-	}
-}
-
-@end
 
 @implementation TokenManager
 
