@@ -29,7 +29,7 @@
     
     Token* token =[tokenManager tokenForHandle:_activeTokenHandle];
     NSArray* certs = [token certificates];
-    if(nil != certs){
+    if(0 == [certs count]){
         [_pinErrorLabel setHidden:NO];
         [_pinErrorLabel setText:@"На токене нет сертификатов"];
         [_loginButton setHidden:YES];
@@ -40,6 +40,7 @@
 
 - (IBAction)_loginToken:(id)sender {
     [_loginButton setEnabled:NO];
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     TokenManager* tokenManager = [TokenManager sharedInstance];
     
     Token* token =[tokenManager tokenForHandle:_activeTokenHandle];
@@ -55,6 +56,7 @@
                 [_pinErrorLabel setHidden:YES];
                 [_pinErrorLabel setText:@""];
                 [_pinTextInput setText:@""];
+                [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                 PaymentsViewController* vc =[[UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"PaymentsVC"];
                 [vc setActiveTokenHandle:_activeTokenHandle];
                 NSMutableArray *vcs = [[self.navigationController viewControllers] mutableCopy];
@@ -69,12 +71,14 @@
                 [_pinErrorLabel setHidden:NO];
                 [_pinErrorLabel setText:@"Что-то не так с сертификатом"];
                 [_loginButton setEnabled:YES];
+                [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             }];
         } errorCallback:^(NSError * e) {
             [_pinTextInput setText:@""];
             [_pinErrorLabel setHidden:NO];
             [_pinErrorLabel setText:@"ПИН введен неверно"];
             [_loginButton setEnabled:YES];
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         }];
     }    
 }
