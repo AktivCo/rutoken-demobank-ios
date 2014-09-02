@@ -8,7 +8,7 @@
 #import "Util.h"
 
 static const double kVoltageMin = 3500;
-static const double kVoltageMax = 4800;
+static const double kVoltageMax = 4200;
 
 static NSString* removeTrailingSpaces(const char* string, size_t length) {
 	size_t i;
