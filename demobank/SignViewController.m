@@ -66,6 +66,7 @@
         [_loginButton setHidden:YES];
         [_pinIncorrect setHidden:YES];
         [_progressLabel setHidden:NO];
+        [_welcomeLabel setHidden:YES];
         _loggedOff = NO;
         [self sign];
         } errorCallback:^(NSError * e) {
@@ -85,10 +86,12 @@
     [_progressIndicator stopAnimating];
     [_progressLabel setHidden:YES];
     [_errorLabel setHidden:YES];
+    [_welcomeLabel setHidden:NO];
     if(NO == _askPin){
         [_pinTextInput setHidden:YES];
         [_loginButton setHidden:YES];
         [_progressLabel setHidden:NO];
+        [_welcomeLabel setHidden:YES];
         [self sign];
     }
 }

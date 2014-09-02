@@ -75,7 +75,7 @@
             </objects>
             <point key="canvasLocation" x="-2955" y="-589"/>
         </scene>
-        <!--Pin Enter View Controller - Ввод ПИНа-->
+        <!--Pin Enter View Controller - Ввод PIN-кода-->
         <scene sceneID="Gt2-k1-rF3">
             <objects>
                 <viewController id="LQv-2e-0Mb" customClass="PinEnterViewController" sceneMemberID="viewController">
@@ -103,7 +103,7 @@
                                     <action selector="loginToken:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NIa-JE-Fav"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345678" borderStyle="roundedRect" placeholder="Введите ПИН" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="anf-vt-0uF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите PIN" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="anf-vt-0uF">
                                 <rect key="frame" x="186" y="249" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -119,7 +119,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.94509803920000002" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Ввод ПИНа" id="Jl7-ke-bXn"/>
+                    <navigationItem key="navigationItem" title="Ввод PIN-кода" id="Jl7-ke-bXn"/>
                     <connections>
                         <outlet property="_loginButton" destination="uT0-Hg-X0V" id="dVd-UD-j40"/>
                         <outlet property="_pinErrorLabel" destination="gQw-7x-wIL" id="Dpu-35-A5A"/>
@@ -405,14 +405,14 @@
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите ПИН" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oke-AA-MzP">
-                                <rect key="frame" x="150" y="144" width="282" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите PIN" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oke-AA-MzP">
+                                <rect key="frame" x="143" y="228" width="282" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mow-eh-cHZ">
-                                <rect key="frame" x="440" y="144" width="46" height="30"/>
+                                <rect key="frame" x="433" y="228" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Войти">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -422,7 +422,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ПИН введен неверно" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FL-ay-EYz">
-                                <rect key="frame" x="150" y="177" width="300" height="21"/>
+                                <rect key="frame" x="143" y="261" width="300" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -446,6 +446,13 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Требуется ввод PIN-кода" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKB-Ig-jba">
+                                <rect key="frame" x="138" y="98" width="324" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -459,6 +466,7 @@
                         <outlet property="_progressIndicator" destination="LGc-nd-AbV" id="EFT-MO-u7z"/>
                         <outlet property="_progressLabel" destination="aq6-lA-6Tj" id="pVb-mp-XeK"/>
                         <outlet property="_successLabel" destination="xlz-3V-gYz" id="nSV-t4-zYp"/>
+                        <outlet property="_welcomeLabel" destination="UKB-Ig-jba" id="Xun-dZ-02B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9x-Eh-GuX" userLabel="First Responder" sceneMemberID="firstResponder"/>

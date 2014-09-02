@@ -10,6 +10,7 @@
 
 @interface SignViewController : UIViewController {
     
+    __weak IBOutlet UILabel *_welcomeLabel;
     __weak IBOutlet UIButton *_loginButton;
     __weak IBOutlet UITextField *_pinTextInput;
     __weak IBOutlet UILabel *_successLabel;
