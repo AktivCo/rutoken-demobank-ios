@@ -15,6 +15,7 @@
 		55243FBE19A71DB60097642D /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBD19A71DB60097642D /* Token.m */; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
+		55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8F19B5D8EF00FC1C6A /* SignViewController.m */; };
 		55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */; };
 		556B854519AF56A700DF95FB /* battery_1_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B853F19AF56A700DF95FB /* battery_1_sec.png */; };
 		556B854619AF56A700DF95FB /* battery_2_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854019AF56A700DF95FB /* battery_2_sec.png */; };
@@ -74,6 +75,8 @@
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
 		55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoTableViewController.h; sourceTree = "<group>"; };
 		55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoTableViewController.m; sourceTree = "<group>"; };
+		55295B8E19B5D8EF00FC1C6A /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
+		55295B8F19B5D8EF00FC1C6A /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
 		55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		556B853F19AF56A700DF95FB /* battery_1_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_1_sec.png; sourceTree = "<group>"; };
 		556B854019AF56A700DF95FB /* battery_2_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_2_sec.png; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */,
 				55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */,
 				55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */,
+				55295B8E19B5D8EF00FC1C6A /* SignViewController.h */,
+				55295B8F19B5D8EF00FC1C6A /* SignViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -418,6 +423,7 @@
 				A10E590239465D0317C016BE /* ApplicationError.m in Sources */,
 				55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */,
 				5573372A19B375EF00CF0202 /* TokenInfoLoader.m in Sources */,
+				55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

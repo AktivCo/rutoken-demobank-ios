@@ -149,7 +149,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
 
 - (void)sign:(Certificate*)certificate data:(NSData*)data successCallback:(void (^)(NSData*))successCallback
         errorCallback:(void (^)(NSError*))errorCallback {
-    dispatch_queue_t queue = dispatch_queue_create("Logout queue", nil);
+    dispatch_queue_t queue = dispatch_queue_create("Sign queue", nil);
     dispatch_async(queue, ^() {
         CK_OBJECT_CLASS keyClass = CKO_PRIVATE_KEY;
         CK_ATTRIBUTE template[] = {
@@ -158,29 +158,48 @@ errorCallback:(void (^)(NSError*))errorCallback {
         };
 
         CK_RV rv = _functions->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
-        if (CKR_OK != rv) [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+        if (CKR_OK != rv) {
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
 
         CK_OBJECT_HANDLE objects[2];
         CK_ULONG count;
         rv = _functions->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
 
         CK_RV rv2 = _functions->C_FindObjectsFinal(_session);
-        if (CKR_OK != rv) [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
-        else if (CKR_OK != rv2) [self onError:[Pkcs11Error errorWithCode:rv2] callback:errorCallback];
-        else if (count != 1) [self onError:[ApplicationError errorWithCode:CertNotFoundError] callback:errorCallback];
+        if (CKR_OK != rv){
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }else if (CKR_OK != rv2) {
+            [self onError:[Pkcs11Error errorWithCode:rv2] callback:errorCallback];
+            return;
+        }else if (count != 1) {
+            [self onError:[ApplicationError errorWithCode:CertNotFoundError] callback:errorCallback];
+            return;
+        }
 
         unsigned char oid[] = {0x06, 0x07, 0x2a, 0x85, 0x03, 0x02, 0x02, 0x1e, 0x01};
         CK_MECHANISM mechanism = {CKM_GOSTR3410_WITH_GOSTR3411, oid, ARRAY_LENGTH(oid)};
         rv = _functions->C_SignInit(_session, &mechanism, objects[0]);
-        if (CKR_OK != rv) [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+        if (CKR_OK != rv){
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
 
         rv = _functions->C_Sign(_session, (unsigned char*)[data bytes], [data length], nil, &count);
-        if (CKR_OK != rv) [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+        if (CKR_OK != rv){
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
 
         NSMutableData* signature = [NSMutableData dataWithLength:count];
         rv = _functions->C_Sign(_session, (unsigned char*)[data bytes], [data length],
                 [signature mutableBytes], &count);
-        if (CKR_OK != rv) [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+        if (CKR_OK != rv){
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
 
         dispatch_async(dispatch_get_main_queue(), ^() {
             successCallback(signature);
