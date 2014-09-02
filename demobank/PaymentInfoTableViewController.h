@@ -1,5 +1,5 @@
 //
-//  PaymentsTableViewController.h
+//  PaymentInfoTableViewController.h
 //  demobank
 //
 //  Created by Андрей Трифонов on 02.09.14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PaymentsTableViewController : UITableViewController
+@interface PaymentInfoTableViewController : UITableViewController
 
 @property(nonatomic) NSNumber* activeTokenHandle;
 

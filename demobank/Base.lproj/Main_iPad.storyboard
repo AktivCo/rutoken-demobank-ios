@@ -256,7 +256,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="aAj-oh-B5W" kind="push" id="13f-pF-kGB"/>
+                                            <segue destination="aAj-oh-B5W" kind="push" identifier="paymentInfo" id="13f-pF-kGB"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="yqC-42-VOV">
@@ -288,7 +288,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="SIv-v2-fHt" kind="push" id="gM7-2Z-9SA"/>
+                                            <segue destination="SIv-v2-fHt" kind="push" identifier="paymentInfo" id="gM7-2Z-9SA"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="oDO-dG-XLN">
@@ -320,7 +320,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="2UJ-fg-pvx" kind="push" id="n5O-cH-zsc"/>
+                                            <segue destination="2UJ-fg-pvx" kind="push" identifier="paymentInfo" id="n5O-cH-zsc"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="NVS-gc-0JW">
@@ -352,7 +352,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="aAj-oh-B5W" kind="push" id="D13-3v-GYI"/>
+                                            <segue destination="aAj-oh-B5W" kind="push" identifier="paymentInfo" id="D13-3v-GYI"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="V08-Z6-r6z">
@@ -384,7 +384,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="2UJ-fg-pvx" kind="push" id="hB7-T0-Nv9"/>
+                                            <segue destination="2UJ-fg-pvx" kind="push" identifier="paymentInfo" id="hB7-T0-Nv9"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -401,10 +401,10 @@
             </objects>
             <point key="canvasLocation" x="2838" y="-573"/>
         </scene>
-        <!--Table View Controller - Информация о платеже-->
+        <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="AN0-ni-Qo7">
             <objects>
-                <tableViewController id="aAj-oh-B5W" sceneMemberID="viewController">
+                <tableViewController id="aAj-oh-B5W" customClass="PaymentInfoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hsg-Hs-AW7">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -416,6 +416,9 @@
                             <state key="normal" title="Подписать и отправить">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="signAndSend:" destination="aAj-oh-B5W" eventType="touchUpInside" id="VkS-ku-kAQ"/>
+                            </connections>
                         </button>
                         <sections>
                             <tableViewSection id="9H4-qW-NtJ">
@@ -822,10 +825,10 @@
             </objects>
             <point key="canvasLocation" x="4385" y="-1917"/>
         </scene>
-        <!--Table View Controller - Информация о платеже-->
+        <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="75X-48-CXq">
             <objects>
-                <tableViewController id="2UJ-fg-pvx" sceneMemberID="viewController">
+                <tableViewController id="2UJ-fg-pvx" customClass="PaymentInfoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NTv-0T-Dwf">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -837,6 +840,9 @@
                             <state key="normal" title="Подписать и отправить">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="signAndSend:" destination="2UJ-fg-pvx" eventType="touchUpInside" id="gFs-Rz-bbN"/>
+                            </connections>
                         </button>
                         <sections>
                             <tableViewSection id="oi8-qC-Mv8">
@@ -1243,10 +1249,10 @@
             </objects>
             <point key="canvasLocation" x="4385" y="387"/>
         </scene>
-        <!--Table View Controller - Информация о платеже-->
+        <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="7Hy-wS-0iM">
             <objects>
-                <tableViewController id="SIv-v2-fHt" sceneMemberID="viewController">
+                <tableViewController id="SIv-v2-fHt" customClass="PaymentInfoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="H0w-2Y-XWZ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1258,6 +1264,9 @@
                             <state key="normal" title="Подписать и отправить">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="signAndSend:" destination="SIv-v2-fHt" eventType="touchUpInside" id="5M1-Em-koq"/>
+                            </connections>
                         </button>
                         <sections>
                             <tableViewSection id="nPi-oa-vbD">
@@ -1674,7 +1683,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="n5O-cH-zsc"/>
+        <segue reference="hB7-T0-Nv9"/>
         <segue reference="D13-3v-GYI"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1,20 +1,22 @@
 //
-//  PaymentsTableViewController.m
+//  PaymentInfoTableViewController.m
 //  demobank
 //
 //  Created by Андрей Трифонов on 02.09.14.
 //  Copyright (c) 2014 Aktiv Co. All rights reserved.
 //
 
-#import "PaymentsTableViewController.h"
-
 #import "PaymentInfoTableViewController.h"
 
-@interface PaymentsTableViewController ()
+#include "Token.h"
+#include "TokenManager.h"
+#include "Certificate.h"
+
+@interface PaymentInfoTableViewController ()
 
 @end
 
-@implementation PaymentsTableViewController
+@implementation PaymentInfoTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -24,11 +26,27 @@
     }
     return self;
 }
+- (IBAction)signAndSend:(id)sender {
+    if(nil != _activeTokenHandle){
+        TokenManager* tokenManager = [TokenManager sharedInstance];
+        Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
+        Certificate* cert = [[token certificates] objectAtIndex:0];
+        
+        NSString* paymentString = @"Payment";
+        NSData* paymentData = [NSData dataWithBytes:[paymentString UTF8String] length:[paymentString length]];
+        
+        [token sign:cert data:paymentData successCallback:^(NSData* result){
+            
+        }errorCallback:^(NSError* e){
+            
+        }];
+    }
+        
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,22 +60,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}*/
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,14 +110,15 @@
 }
 */
 
+/*
+#pragma mark - Navigation
 
+// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([[segue identifier] isEqualToString:@"paymentInfo"]){
-        PaymentInfoTableViewController* vc = [segue destinationViewController];
-        [vc setActiveTokenHandle:_activeTokenHandle];
-    }
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
-
+*/
 
 @end
