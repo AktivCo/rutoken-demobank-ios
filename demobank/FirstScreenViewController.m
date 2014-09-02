@@ -42,6 +42,16 @@
     [_batteryPercentageLabel setText:[NSString stringWithFormat:@"%u%%" ,(NSUInteger)[token charge]]];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if(nil != _activeTokenHandle){
+        Token* token = [_tokenManager tokenForHandle:_activeTokenHandle];
+        if(nil != token){
+            [token logoutWithSuccessCallback:^(void){} errorCallback:^(NSError * e){}];
+        }
+    }
+}
+
 -(void)removeActiveToken{
     _activeTokenHandle = nil;
     [self resetView];
