@@ -11,7 +11,6 @@
 @interface SignViewController : UIViewController {
     
     __weak IBOutlet UIButton *_loginButton;
-    __weak IBOutlet UILabel *_pinLabel;
     __weak IBOutlet UITextField *_pinTextInput;
     __weak IBOutlet UILabel *_successLabel;
     __weak IBOutlet UILabel *_pinIncorrect;
@@ -22,5 +21,6 @@
 
 @property(nonatomic) NSNumber* activeTokenHandle;
 @property(nonatomic) BOOL askPin;
+@property(nonatomic,readonly) BOOL loggedOff;
 
 @end

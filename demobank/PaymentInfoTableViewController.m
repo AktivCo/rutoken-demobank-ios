@@ -19,21 +19,6 @@
 }
 - (IBAction)signAndSend:(id)sender {
     if(nil != _activeTokenHandle){
-//        TokenManager* tokenManager = [TokenManager sharedInstance];
-//        Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
-//        Certificate* cert = [[token certificates] objectAtIndex:0];
-//        
-//        NSString* paymentString = @"Payment";
-//        NSData* paymentData = [NSData dataWithBytes:[paymentString UTF8String] length:[paymentString length]];
-//        
-//        [token sign:cert data:paymentData successCallback:^(NSData* result){
-//            [self performSegueWithIdentifier:@"SignOK" sender:self];
-//            [[self navigationController] popViewControllerAnimated:NO];
-//            
-//        }errorCallback:^(NSError* e){
-//            
-//        }];
-        
         [self performSegueWithIdentifier:@"SignOK" sender:self];
         [[self navigationController] popViewControllerAnimated:NO];
     }
@@ -50,7 +35,8 @@
     if([[segue identifier] isEqualToString:@"SignOK"]){
         SignViewController* vc = [segue destinationViewController];
         [vc setActiveTokenHandle:_activeTokenHandle];
-        [vc setAskPin:NO];
+        if([[_costLabel text] integerValue] < 50000)[vc setAskPin:NO];
+        else [vc setAskPin:YES];
     }
 }
 

@@ -54,12 +54,31 @@
 }
 
 - (IBAction)_loginToken:(id)sender {
+    [_loginButton setEnabled:NO];
+    TokenManager* tokenManager = [TokenManager sharedInstance];
+    Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
+    [token logoutWithSuccessCallback:^(void){}
+                       errorCallback:^(NSError* e){}];
     
-    
+    [token login:[_pinTextInput text] successCallback:^(void){
+        [_loginButton setEnabled:YES];
+        [_pinTextInput setHidden:YES];
+        [_loginButton setHidden:YES];
+        [_pinIncorrect setHidden:YES];
+        [_progressLabel setHidden:NO];
+        _loggedOff = NO;
+        [self sign];
+        } errorCallback:^(NSError * e) {
+            [_pinTextInput setText:@""];
+            [_pinIncorrect setHidden:NO];
+            [_loginButton setEnabled:YES];
+            _loggedOff = YES;
+        }];
 }
 
 - (void)viewDidLoad
 {
+    _loggedOff = NO;
     [super viewDidLoad];
     [_pinIncorrect setHidden:YES];
     [_successLabel setHidden:YES];
@@ -67,7 +86,6 @@
     [_progressLabel setHidden:YES];
     [_errorLabel setHidden:YES];
     if(NO == _askPin){
-        [_pinLabel setHidden:YES];
         [_pinTextInput setHidden:YES];
         [_loginButton setHidden:YES];
         [_progressLabel setHidden:NO];
@@ -80,16 +98,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
