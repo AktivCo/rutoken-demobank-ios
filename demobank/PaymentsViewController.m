@@ -25,16 +25,15 @@
         TokenManager* tokenManager = [TokenManager sharedInstance];
         Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
         
-        NSString* tokenLabel = @"Рутоке";
-        
+        NSString* tokenLabel;
         if([[token model] isEqualToString:@"Rutoken ECP BT"]) tokenLabel = @"Рутокен ЭЦП Bluetooth";
-        
-        [_tokenModelLabel setText:tokenLabel];
+        else tokenLabel = @"Рутокен";
         
         NSUInteger decSerial;
         [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
         NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
-        [_tokenSerial setText:[decSerialString substringFromIndex:[decSerialString length] -5]];
+        tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
+        [_tokenModelLabel setText:tokenLabel];
         
         if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];
         else if ([token charge] > 80) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_4_sec.png"]];
