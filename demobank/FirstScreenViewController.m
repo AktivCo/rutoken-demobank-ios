@@ -29,7 +29,7 @@
     NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
     tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
     [_tokenModelLabel setText:tokenLabel];
-    [_chooseCertButton setTitle:@"Иванов Иван Иванович" forState:UIControlStateNormal];
+    [_chooseCertButton setTitle:@"Коснитесь, чтобы войти" forState:UIControlStateNormal];
     [_chooseCertButton setHidden:NO];
     
     if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];

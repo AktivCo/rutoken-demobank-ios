@@ -35,6 +35,7 @@
     if([[segue identifier] isEqualToString:@"SignOK"]){
         SignViewController* vc = [segue destinationViewController];
         [vc setActiveTokenHandle:_activeTokenHandle];
+        [vc setNavigation:[self navigationController]];
         if([[_costLabel text] integerValue] < 50000)[vc setAskPin:NO];
         else [vc setAskPin:YES];
     }

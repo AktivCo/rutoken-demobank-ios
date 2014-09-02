@@ -24,6 +24,18 @@
 {
     [super viewDidLoad];
     [_pinErrorLabel setHidden:YES];
+    
+    TokenManager* tokenManager = [TokenManager sharedInstance];
+    
+    Token* token =[tokenManager tokenForHandle:_activeTokenHandle];
+    NSArray* certs = [token certificates];
+    if(nil != certs){
+        [_pinErrorLabel setHidden:NO];
+        [_pinErrorLabel setText:@"На токене нет сертификатов"];
+        [_loginButton setHidden:YES];
+        [_pinTextInput setHidden:YES];
+    }
+    
 }
 
 - (IBAction)_loginToken:(id)sender {

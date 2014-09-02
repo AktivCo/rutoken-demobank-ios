@@ -50,7 +50,7 @@
                                 <rect key="frame" x="164" y="296" width="440" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Фамилия Имя Отчество">
+                                <state key="normal" title="Коснитесь, чтобы войти">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -73,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-67" y="-645"/>
+            <point key="canvasLocation" x="-2955" y="-589"/>
         </scene>
         <!--Pin Enter View Controller - Ввод ПИНа-->
         <scene sceneID="Gt2-k1-rF3">
@@ -129,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hl-l1-uNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="854" y="-645"/>
+            <point key="canvasLocation" x="-2034" y="-589"/>
         </scene>
         <!--Payments View Controller - Платежи-->
         <scene sceneID="cy6-tu-AgN">
@@ -179,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G6B-oi-6LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1817" y="-645"/>
+            <point key="canvasLocation" x="-1071" y="-589"/>
         </scene>
         <!--Demobank Navigation Controller-->
         <scene sceneID="ORv-eQ-QHK">
@@ -196,7 +196,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcj-vH-RpT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-947" y="-645"/>
+            <point key="canvasLocation" x="-3835" y="-589"/>
         </scene>
         <!--Payments Table View Controller-->
         <scene sceneID="83Z-Os-bee">
@@ -384,7 +384,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xq6-fa-J4n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2842" y="-645"/>
+            <point key="canvasLocation" x="-46" y="-589"/>
         </scene>
         <!--Sign View Controller-->
         <scene sceneID="LTn-GW-mUk">
@@ -405,7 +405,7 @@
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345678" borderStyle="roundedRect" placeholder="Введите ПИН" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oke-AA-MzP">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите ПИН" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oke-AA-MzP">
                                 <rect key="frame" x="150" y="144" width="282" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -463,7 +463,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9x-Eh-GuX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5670" y="-773"/>
+            <point key="canvasLocation" x="2782" y="-717"/>
         </scene>
         <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="AN0-ni-Qo7">
@@ -893,7 +893,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYn-lt-SpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4377" y="-1967"/>
+            <point key="canvasLocation" x="1489" y="-1911"/>
         </scene>
         <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="75X-48-CXq">
@@ -1323,7 +1323,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOU-KI-bea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4385" y="387"/>
+            <point key="canvasLocation" x="1497" y="443"/>
         </scene>
         <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="7Hy-wS-0iM">
@@ -1753,7 +1753,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXg-Bp-hWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4361" y="-805"/>
+            <point key="canvasLocation" x="1473" y="-749"/>
         </scene>
         <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="y7b-m1-Qmz">
@@ -2183,7 +2183,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jrp-bc-G61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4369" y="-3127"/>
+            <point key="canvasLocation" x="1481" y="-3071"/>
         </scene>
         <!--Payment Info Table View Controller - Информация о платеже-->
         <scene sceneID="wuy-fk-3VA">
@@ -2613,7 +2613,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2R2-SP-30f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4385" y="1587"/>
+            <point key="canvasLocation" x="1497" y="1643"/>
         </scene>
     </scenes>
     <resources>

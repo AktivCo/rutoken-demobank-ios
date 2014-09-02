@@ -17,10 +17,12 @@
     __weak IBOutlet UIActivityIndicatorView *_progressIndicator;
     __weak IBOutlet UILabel *_progressLabel;
     __weak IBOutlet UILabel *_errorLabel;
+    BOOL _loggedOff;
+
 }
 
 @property(nonatomic) NSNumber* activeTokenHandle;
 @property(nonatomic) BOOL askPin;
-@property(nonatomic,readonly) BOOL loggedOff;
+@property(nonatomic) UINavigationController* navigation;
 
 @end

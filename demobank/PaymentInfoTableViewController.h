@@ -2,7 +2,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PaymentInfoTableViewController : UITableViewController {
+@interface PaymentInfoTableViewController : UITableViewController{
     
     __weak IBOutlet UILabel *_costLabel;
 }
