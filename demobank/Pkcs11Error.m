@@ -7,6 +7,8 @@
 - (NSString*)localizedDescription {
 	switch ([self code]) {
 			//Put errors' decription here
+		case 0x30:
+			return @"Device error";
 		default:
 			return @"Unknown error";
 	}
