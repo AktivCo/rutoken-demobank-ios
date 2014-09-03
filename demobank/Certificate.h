@@ -6,6 +6,7 @@
 
 @interface Certificate : NSObject
 
+@property(nonatomic, readonly) NSString* cn;
 @property(nonatomic, readonly) NSData* id;
 
 -(id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions

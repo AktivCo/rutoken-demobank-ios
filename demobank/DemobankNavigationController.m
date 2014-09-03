@@ -5,6 +5,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #import "TokenManager.h"
+#import "Token.h"
 #import "FirstScreenViewController.h"
 
 @interface BluetoothDelegate : NSObject <CBCentralManagerDelegate> {

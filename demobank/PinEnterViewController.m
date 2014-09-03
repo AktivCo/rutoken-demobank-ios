@@ -3,6 +3,7 @@
 #import "PinEnterViewController.h"
 
 #import "TokenManager.h"
+#import "Token.h"
 #import "PaymentsViewController.h"
 
 @interface PinEnterViewController ()

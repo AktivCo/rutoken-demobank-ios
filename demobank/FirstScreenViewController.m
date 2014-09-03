@@ -3,7 +3,9 @@
 #import "FirstScreenViewController.h"
 
 #import "TokenManager.h"
+#import "Token.h"
 #import "PinEnterViewController.h"
+#import "Certificate.h"
 
 @implementation FirstScreenViewController
 
@@ -29,8 +31,15 @@
     NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
     tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
     [_tokenModelLabel setText:tokenLabel];
-    [_chooseCertButton setTitle:@"Коснитесь, чтобы войти" forState:UIControlStateNormal];
-    [_chooseCertButton setHidden:NO];
+	
+	NSArray* certs = [token certificates];
+	if(0 != [certs count]){
+		Certificate* cert = [certs objectAtIndex:0];
+		[_chooseCertButton setTitle:cert.cn forState:UIControlStateNormal];
+		[_chooseCertButton setHidden:NO];
+	} else {
+		[_statusInfoLabel setText:@"На токене отсутствуют сертификаты"];
+	}
     
     if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];
     else if ([token charge] > 80) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_4_sec.png"]];

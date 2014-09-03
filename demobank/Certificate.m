@@ -13,24 +13,41 @@
     self = [super init];
     if (nil == self) return self;
 
-    CK_ATTRIBUTE attributes[] = {
-            {CKA_SUBJECT, nil, 0},
-            {CKA_ID, nil, 0}
-    };
-
-    CK_RV rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
+    unsigned long length = 0;
+    unsigned char* data;
+    CK_RV rv = extendedFunctions->C_EX_GetCertificateInfoText(session, object, &data, &length);
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-
-    NSMutableData* subjectData = [NSMutableData dataWithLength:attributes[0].ulValueLen];
-    attributes[0].pValue = [subjectData mutableBytes];
-    NSMutableData* idData = [NSMutableData dataWithLength:attributes[1].ulValueLen];
-    attributes[1].pValue = [idData mutableBytes];
-
+    
+    NSString *cert=[[NSString alloc]initWithBytes:data length:length encoding:NSUTF8StringEncoding];
+    
+    rv = extendedFunctions->C_EX_FreeBuffer(data);
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"Subject: CN=([^\n]*)\n" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSTextCheckingResult *match = [regex firstMatchInString:cert options:0 range:NSMakeRange(0, [cert length])];
+    
+    if (match != nil) {
+        _cn = [cert substringWithRange:[match rangeAtIndex:1]];
+    } else {
+        _cn = @"";
+        NSLog(@"Failed to find CN");
+    }
+	
+	CK_ATTRIBUTE attributes[] = {
+		{CKA_ID, nil, 0}
+    };
+	
     rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-
+	
+    NSMutableData* idData = [NSMutableData dataWithLength:attributes[1].ulValueLen];
+    attributes[0].pValue = [idData mutableBytes];
+	
+    rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
+    if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+	
     _id = [NSData dataWithData:idData];
-
+    
     return self;
 }
 
