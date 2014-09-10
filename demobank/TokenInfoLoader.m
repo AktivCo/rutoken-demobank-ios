@@ -37,7 +37,7 @@ tokenInfoLoadingFailedCallback:(void(^)(CK_SLOT_ID)) tokenInfoLoadingFailedCallb
         dispatch_queue_t queue = dispatch_queue_create([[queueName stringByAppendingString:[NSString stringWithFormat:@"_%lu", slotId]] UTF8String], nil);
         dispatch_async(queue, ^() {
             @try {
-                Token* token = [[Token alloc] initWithFunctions:self.functions extendedFunctions:self.extendedFunctions slotId:slotId];
+                Token* token = [[Token alloc] initWithSlotId:slotId];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.tokenInfoLoaded(slotId, token);
                 });

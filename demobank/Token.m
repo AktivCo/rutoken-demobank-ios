@@ -31,13 +31,13 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
             {CKA_CERTIFICATE_CATEGORY, &certCategory, sizeof(certCategory)}
     };
 
-    CK_RV rv = _functions->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+    CK_RV rv = C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 
     while (TRUE) {
         CK_OBJECT_HANDLE objects[30];
         CK_ULONG count;
-        rv = _functions->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
+        rv = C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
         if (CKR_OK != rv) break;
 
         for (int i = 0; i < count; ++i) {
@@ -47,18 +47,14 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         if (count < ARRAY_LENGTH(objects)) break;
     }
 
-    CK_RV rv2 = _functions->C_FindObjectsFinal(_session);
+    CK_RV rv2 = C_FindObjectsFinal(_session);
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
     if (CKR_OK != rv2) @throw [Pkcs11Error errorWithCode:rv2];
 }
 
-- (id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
-      extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions
-				 slotId:(CK_SLOT_ID)slotId{
+- (id)initWithSlotId:(CK_SLOT_ID)slotId{
 	self = [super init];
 	if (self) {
-		_functions = functions;
-		_extendedFunctions = extendedFunctions;
 		_slotId = slotId;
         
         NSMutableData* tokenInfo = nil;
@@ -68,14 +64,14 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         
         tokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
         info = [tokenInfo mutableBytes];
-        CK_RV rv = _functions->C_GetTokenInfo(slotId, info);
+        CK_RV rv = C_GetTokenInfo(slotId, info);
         if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
         
         extendedTokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
         extendedInfo = [extendedTokenInfo mutableBytes];
         extendedInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
         
-        rv = _extendedFunctions->C_EX_GetTokenInfoExtended(slotId, extendedInfo);
+        rv = C_EX_GetTokenInfoExtended(slotId, extendedInfo);
         if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
         
         _label = removeTrailingSpaces((const char*) info->label, sizeof(info->label));
@@ -95,7 +91,7 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
 	}
         _charge = extendedInfo->ulBatteryVoltage;
 
-        rv = _functions->C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
+        rv = C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
         if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 
         _certificates = [NSMutableArray array];
@@ -103,7 +99,7 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         @try {
             [self readCertificates];
         } @catch (NSError* e) {
-            _functions->C_CloseSession(_session);
+            C_CloseSession(_session);
             @throw e;
         }
     }
@@ -112,7 +108,7 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
 }
 
 - (void)dealloc {
-    _functions->C_CloseSession(_session);
+    C_CloseSession(_session);
 }
 
 - (void)onError:(NSError*)error callback:(void (^)(NSError*))callback {
@@ -127,7 +123,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(queue, ^() {
         NSData* pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
 
-        CK_RV rv = _functions->C_Login(_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
+        CK_RV rv = C_Login(_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (CKR_OK != rv) errorCallback([Pkcs11Error errorWithCode:rv]);
             else successCallback();
@@ -138,7 +134,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
 - (void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_queue_t queue = dispatch_queue_create("Logout queue", nil);
     dispatch_async(queue, ^() {
-        CK_RV rv = _functions->C_Logout(_session);
+        CK_RV rv = C_Logout(_session);
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (CKR_OK != rv) errorCallback([Pkcs11Error errorWithCode:rv]);
             else successCallback();
@@ -156,7 +152,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
                 {CKA_ID, (void*)[[certificate id] bytes], [[certificate id] length]}
         };
 
-        CK_RV rv = _functions->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+        CK_RV rv = C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -164,9 +160,9 @@ errorCallback:(void (^)(NSError*))errorCallback {
 
         CK_OBJECT_HANDLE objects[2];
         CK_ULONG count;
-        rv = _functions->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
+        rv = C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
 
-        CK_RV rv2 = _functions->C_FindObjectsFinal(_session);
+        CK_RV rv2 = C_FindObjectsFinal(_session);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -180,20 +176,20 @@ errorCallback:(void (^)(NSError*))errorCallback {
 
         unsigned char oid[] = {0x06, 0x07, 0x2a, 0x85, 0x03, 0x02, 0x02, 0x1e, 0x01};
         CK_MECHANISM mechanism = {CKM_GOSTR3410_WITH_GOSTR3411, oid, ARRAY_LENGTH(oid)};
-        rv = _functions->C_SignInit(_session, &mechanism, objects[0]);
+        rv = C_SignInit(_session, &mechanism, objects[0]);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
-        rv = _functions->C_Sign(_session, (unsigned char*)[data bytes], [data length], nil, &count);
+        rv = C_Sign(_session, (unsigned char*)[data bytes], [data length], nil, &count);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
         NSMutableData* signature = [NSMutableData dataWithLength:count];
-        rv = _functions->C_Sign(_session, (unsigned char*)[data bytes], [data length],
+        rv = C_Sign(_session, (unsigned char*)[data bytes], [data length],
                 [signature mutableBytes], &count);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
