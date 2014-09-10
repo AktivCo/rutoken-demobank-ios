@@ -10,8 +10,8 @@
 
 +(TokenManager*)sharedInstance;
 
--(void)start;
--(void)stop;
+-(void)startMonitoring;
+-(void)stopMonitoring;
 
 -(NSArray*)tokenHandles;
 -(Token*)tokenForHandle:(NSNumber*)tokenId;

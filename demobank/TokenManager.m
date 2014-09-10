@@ -10,12 +10,13 @@
 
 @interface TokenManager ()
 
-@property (nonatomic, readwrite) Pkcs11EventHandler* pkcs11EventHandler;
-@property (nonatomic, readwrite) TokenInfoLoader* tokenInfoLoader;
-@property (nonatomic, readwrite) NSInteger currentHandle;
-@property (nonatomic, readwrite) NSMutableDictionary* tokens;
-@property (nonatomic, readwrite) NSMutableDictionary* handles;
-@property (nonatomic, readwrite) NSMutableDictionary* slotStates;
+@property (nonatomic) Pkcs11EventHandler* pkcs11EventHandler;
+@property (nonatomic) TokenInfoLoader* tokenInfoLoader;
+
+@property (nonatomic) NSInteger currentHandle;
+@property (nonatomic) NSMutableDictionary* tokens;
+@property (nonatomic) NSMutableDictionary* handles;
+@property (nonatomic) NSMutableDictionary* slotStates;
 
 typedef NS_ENUM(NSInteger, InnerState) {
 	InnerStateReadyAfterRemoved,
@@ -45,7 +46,6 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	
 	if (self) {
 		_pkcs11EventHandler = [[Pkcs11EventHandler alloc] init];
-		
         _tokenInfoLoader = [[TokenInfoLoader alloc] init];
 		
 		_slotStates = [NSMutableDictionary dictionary];
@@ -56,16 +56,21 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	return self;
 }
 
--(void)start{
-	[_pkcs11EventHandler startMonitoringWithTokenAddedCallback: ^(CK_SLOT_ID slotId){
+-(void)startMonitoring{
+	[self.pkcs11EventHandler startMonitoringWithTokenAddedCallback: ^(CK_SLOT_ID slotId){
 		[self processTokenWasAddedAtSlotId:slotId];
 	} tokenRemovedCallback:^(CK_SLOT_ID slotId){
 		[self processTokenWasRemovedAtSlotId:slotId];
 	}];
 }
 
--(void)stop{
-	//Stop all activities for monitoring tokens' events
+-(void)stopMonitoring{
+	[self.pkcs11EventHandler stopMonitoring];
+	
+	self.currentHandle = 0;
+	[self.slotStates removeAllObjects];
+	[self.tokens removeAllObjects];
+	[self.handles removeAllObjects];
 }
 
 -(NSArray*)tokenHandles{

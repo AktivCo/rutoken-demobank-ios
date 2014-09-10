@@ -93,7 +93,14 @@ typedef NS_ENUM(NSInteger, EventType) {
 }
 
 - (void)stopMonitoring{
-	
+	@try {
+		[self.lastSlotEvent removeAllObjects];
+		
+		CK_RV rv = C_Finalize(NULL_PTR);
+		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+	} @catch (NSError* e) {
+		//handle error
+	}
 }
 
 @end

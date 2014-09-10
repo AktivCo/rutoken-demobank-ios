@@ -87,7 +87,7 @@
     
     [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:_tokenState];
     
-	[_tokenManager start];
+	[_tokenManager startMonitoring];
 }
 
 -(void)setStatewithBluetooth:(bool)bluetoothPoweredOn tokenState:(TokenState)tokenState{
