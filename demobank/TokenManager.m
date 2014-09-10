@@ -53,90 +53,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		rv = C_EX_GetFunctionListExtended(&extendedFunctions);
 		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 		
-		self.pkcs11EventHandler = [[Pkcs11EventHandler alloc] initWithFunctions:functions extendedFunctions:extendedFunctions
-								   tokenAddedCallback:^(CK_SLOT_ID slotId){
-									   NSNumber* state = [self.slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
-									   InnerState currentState = InnerStateReadyAfterRemoved;
-									   if(nil == state) {
-										   [self.slotStates setObject:[NSNumber numberWithInteger:InnerStateReadyAfterRemoved] forKey:[NSNumber numberWithUnsignedLong:slotId]];
-									   } else {
-										   currentState = [state integerValue];
-									   }
-
-									   InnerState nextState;
-									   switch (currentState) {
-										   case InnerStateReadyAfterRemoved:{
-											   nextState = InnerStateWaitingAfterAdded;
-											   [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
-											   [self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
-										   }
-											   break;
-										   case InnerStateCancelingAfterRemoved:
-											   nextState = InnerStateCancelingAfterAdded;
-											   [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
-											   break;
-										   case InnerStateReadyAfterLoaded:{
-											   nextState = InnerStateWaitingAfterAdded;
-											   [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
-											   [self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
-										   }
-											   break;
-										   case InnerStateReadyAfterFailed:{
-											   nextState = InnerStateWaitingAfterAdded;
-											   [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
-											   [self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
-										   }
-											   break;
-										 
-										   default:
-											   nextState = currentState;
-											   break;
-									   }
-									   [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
-								   }tokenRemovedCallback:^(CK_SLOT_ID slotId){
-
-									   NSNumber* state = [self.slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
-									   if(nil == state) {
-									  	   return; //Dont handle this situation
-									   }
-									 
-									   InnerState currentState = [state integerValue];
-									   InnerState nextState;
-									 
-									   switch (currentState) {
-										   case InnerStateWaitingAfterAdded:
-											   nextState = InnerStateCancelingAfterRemoved;
-											   [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self];
-											   break;
-										   case InnerStateReadyAfterLoaded:
-										   {
-											   NSNumber* handleToRemove = [self.handles objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
-											   if(handleToRemove) {
-												   [self.tokens removeObjectForKey:handleToRemove];
-												   [self.handles removeObjectForKey:[NSNumber numberWithUnsignedLong:slotId]];
-												 
-												   NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-												   [notificationInfo setObject:handleToRemove forKey:@"handle"];
-												 
-												   [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWasRemoved" object:self userInfo:notificationInfo];
-												   nextState = InnerStateReadyAfterRemoved;
-											   }
-										   }
-											   break;
-										   case InnerStateReadyAfterFailed:
-											   nextState = InnerStateReadyAfterRemoved;
-											   break;
-										   case InnerStateCancelingAfterAdded:
-											   nextState = InnerStateCancelingAfterRemoved;
-											   [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self];
-											   break;
-											 
-										   default:
-											   nextState = currentState;
-											   break;
-									   }
-									   [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
-								   }];
+		self.pkcs11EventHandler = [[Pkcs11EventHandler alloc] init];
 		
         self.tokenInfoLoader = [[TokenInfoLoader alloc] initWithFunctions:functions extendedFunctions:extendedFunctions tokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
             NSNumber* state = [self.slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
@@ -216,7 +133,89 @@ typedef NS_ENUM(NSInteger, InnerState) {
 }
 
 -(void)start{
-	[self.pkcs11EventHandler start];
+	[_pkcs11EventHandler startMonitoringWithTokenAddedCallback:	^(CK_SLOT_ID slotId){
+		
+		 NSNumber* state = [self.slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+		 InnerState currentState = InnerStateReadyAfterRemoved;
+		 if(nil == state) {
+			 [self.slotStates setObject:[NSNumber numberWithInteger:InnerStateReadyAfterRemoved] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+		 } else {
+			 currentState = [state integerValue];
+		 }
+		 
+		 InnerState nextState;
+		 switch (currentState) {
+			 case InnerStateReadyAfterRemoved:{
+				 nextState = InnerStateWaitingAfterAdded;
+				 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
+				 [self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			 }
+				 break;
+			 case InnerStateCancelingAfterRemoved:
+				 nextState = InnerStateCancelingAfterAdded;
+				 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
+				 break;
+			 case InnerStateReadyAfterLoaded:{
+				 nextState = InnerStateWaitingAfterAdded;
+				 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
+				 [self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			 }
+				 break;
+			 case InnerStateReadyAfterFailed:{
+				 nextState = InnerStateWaitingAfterAdded;
+				 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
+				 [self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			 }
+				 break;
+				 
+			 default:
+				 nextState = currentState;
+				 break;
+		 }
+		 [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+		} tokenRemovedCallback:^(CK_SLOT_ID slotId){
+		 NSNumber* state = [self.slotStates objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+		 if(nil == state) {
+			 return; //Dont handle this situation
+		 }
+		 
+		 InnerState currentState = [state integerValue];
+		 InnerState nextState;
+		 
+		 switch (currentState) {
+			 case InnerStateWaitingAfterAdded:
+				 nextState = InnerStateCancelingAfterRemoved;
+				 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self];
+				 break;
+			 case InnerStateReadyAfterLoaded:
+			 {
+				 NSNumber* handleToRemove = [self.handles objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+				 if(handleToRemove) {
+					 [self.tokens removeObjectForKey:handleToRemove];
+					 [self.handles removeObjectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+					 
+					 NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
+					 [notificationInfo setObject:handleToRemove forKey:@"handle"];
+					 
+					 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWasRemoved" object:self userInfo:notificationInfo];
+					 nextState = InnerStateReadyAfterRemoved;
+				 }
+			 }
+				 break;
+			 case InnerStateReadyAfterFailed:
+				 nextState = InnerStateReadyAfterRemoved;
+				 break;
+			 case InnerStateCancelingAfterAdded:
+				 nextState = InnerStateCancelingAfterRemoved;
+				 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenAddingFailed" object:self];
+				 break;
+				 
+			 default:
+				 nextState = currentState;
+				 break;
+		 }
+		 [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+		}];
 }
 
 -(void)stop{
