@@ -44,18 +44,9 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	self = [super init];
 	
 	if (self) {
-		CK_FUNCTION_LIST_PTR functions;
-		CK_FUNCTION_LIST_EXTENDED_PTR extendedFunctions;
-		
-		CK_ULONG rv = C_GetFunctionList(&functions);
-		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-		
-		rv = C_EX_GetFunctionListExtended(&extendedFunctions);
-		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-		
 		_pkcs11EventHandler = [[Pkcs11EventHandler alloc] init];
 		
-        _tokenInfoLoader = [[TokenInfoLoader alloc] initWithFunctions:functions extendedFunctions:extendedFunctions tokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
+        _tokenInfoLoader = [[TokenInfoLoader alloc] initWithTokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
 			[self processTokenInfoLoadedAtSlotId:slotId withToken:token];
         } tokenInfoLoadingFailedCallback:^(CK_SLOT_ID slotId) {
 			[self processTokenInfoLoadingFailedAtSlotId: slotId];

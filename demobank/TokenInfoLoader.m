@@ -8,8 +8,6 @@
 
 @interface TokenInfoLoader ()
 
-@property(nonatomic, readwrite) CK_FUNCTION_LIST_PTR functions;
-@property(nonatomic, readwrite) CK_FUNCTION_LIST_EXTENDED_PTR extendedFunctions;
 @property(nonatomic, readwrite, strong) void (^ tokenInfoLoaded)(CK_SLOT_ID, Token*);
 @property(nonatomic, readwrite, strong) void (^ tokenInfoLoadingFailed)(CK_SLOT_ID);
 
@@ -17,14 +15,10 @@
 
 @implementation TokenInfoLoader
 
-- (id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
-      extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions
-tokenInfoLoadedCallback:(void(^)(CK_SLOT_ID, Token*)) tokenInfoLoadedCallback
+- (id)initWithTokenInfoLoadedCallback:(void(^)(CK_SLOT_ID, Token*)) tokenInfoLoadedCallback
 tokenInfoLoadingFailedCallback:(void(^)(CK_SLOT_ID)) tokenInfoLoadingFailedCallback{
 	self = [super init];
 	if (self) {
-		self.functions = functions;
-		self.extendedFunctions = extendedFunctions;
         self.tokenInfoLoadingFailed = tokenInfoLoadingFailedCallback;
         self.tokenInfoLoaded = tokenInfoLoadedCallback;
 	}
