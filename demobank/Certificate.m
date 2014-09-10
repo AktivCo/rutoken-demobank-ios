@@ -40,7 +40,7 @@
     rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
-    NSMutableData* idData = [NSMutableData dataWithLength:attributes[1].ulValueLen];
+    NSMutableData* idData = [NSMutableData dataWithLength:attributes[0].ulValueLen];
     attributes[0].pValue = [idData mutableBytes];
 	
     rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
