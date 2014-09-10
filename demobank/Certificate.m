@@ -7,20 +7,19 @@
 
 @implementation Certificate
 
-- (id)initWithFunctions:(CK_FUNCTION_LIST_PTR)functions
-      extendedFunctions:(CK_FUNCTION_LIST_EXTENDED_PTR)extendedFunctions
-                session:(CK_SESSION_HANDLE)session object:(CK_OBJECT_HANDLE)object {
+- (id)initWithSession:(CK_SESSION_HANDLE)session object:(CK_OBJECT_HANDLE)object {
+	
     self = [super init];
     if (nil == self) return self;
 
     unsigned long length = 0;
     unsigned char* data;
-    CK_RV rv = extendedFunctions->C_EX_GetCertificateInfoText(session, object, &data, &length);
+    CK_RV rv = C_EX_GetCertificateInfoText(session, object, &data, &length);
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
     
     NSString *cert=[[NSString alloc]initWithBytes:data length:length encoding:NSUTF8StringEncoding];
     
-    rv = extendedFunctions->C_EX_FreeBuffer(data);
+    rv = C_EX_FreeBuffer(data);
     
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"Subject: CN=([^\n]*)\n" options:NSRegularExpressionCaseInsensitive error:&error];
@@ -37,13 +36,13 @@
 		{CKA_ID, nil, 0}
     };
 	
-    rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
+    rv = C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
     NSMutableData* idData = [NSMutableData dataWithLength:attributes[0].ulValueLen];
     attributes[0].pValue = [idData mutableBytes];
 	
-    rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
+    rv = C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
     _id = [NSData dataWithData:idData];

@@ -244,5 +244,4 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	[self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
 }
 
-
 @end

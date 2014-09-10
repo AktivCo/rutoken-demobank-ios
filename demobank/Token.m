@@ -41,9 +41,7 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         if (CKR_OK != rv) break;
 
         for (int i = 0; i < count; ++i) {
-            [_certificates addObject:[[Certificate alloc] initWithFunctions:_functions
-                                                          extendedFunctions:_extendedFunctions
-                                                                    session:_session object:objects[i]]];
+            [_certificates addObject:[[Certificate alloc] initWithSession:_session object:objects[i]]];
         }
 
         if (count < ARRAY_LENGTH(objects)) break;
