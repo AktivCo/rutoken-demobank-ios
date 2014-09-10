@@ -46,11 +46,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	if (self) {
 		_pkcs11EventHandler = [[Pkcs11EventHandler alloc] init];
 		
-        _tokenInfoLoader = [[TokenInfoLoader alloc] initWithTokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
-			[self processTokenInfoLoadedAtSlotId:slotId withToken:token];
-        } tokenInfoLoadingFailedCallback:^(CK_SLOT_ID slotId) {
-			[self processTokenInfoLoadingFailedAtSlotId: slotId];
-        }];
+        _tokenInfoLoader = [[TokenInfoLoader alloc] init];
 		
 		_slotStates = [NSMutableDictionary dictionary];
 		_tokens = [NSMutableDictionary dictionary];
@@ -94,7 +90,11 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		case InnerStateReadyAfterRemoved:{
 			nextState = InnerStateWaitingAfterAdded;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
-			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId withTokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
+				[self processTokenInfoLoadedAtSlotId:slotId withToken:token];
+			} tokenInfoLoadingFailedCallback:^(CK_SLOT_ID slotId) {
+				[self processTokenInfoLoadingFailedAtSlotId: slotId];
+			}];
 		}
 			break;
 		case InnerStateCancelingAfterRemoved:
@@ -104,13 +104,21 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		case InnerStateReadyAfterLoaded:{
 			nextState = InnerStateWaitingAfterAdded;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
-			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId withTokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
+				[self processTokenInfoLoadedAtSlotId:slotId withToken:token];
+			} tokenInfoLoadingFailedCallback:^(CK_SLOT_ID slotId) {
+				[self processTokenInfoLoadingFailedAtSlotId: slotId];
+			}];
 		}
 			break;
 		case InnerStateReadyAfterFailed:{
 			nextState = InnerStateWaitingAfterAdded;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWillBeAdded" object:self];
-			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId withTokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
+				[self processTokenInfoLoadedAtSlotId:slotId withToken:token];
+			} tokenInfoLoadingFailedCallback:^(CK_SLOT_ID slotId) {
+				[self processTokenInfoLoadingFailedAtSlotId: slotId];
+			}];
 		}
 			break;
 			
@@ -193,7 +201,11 @@ typedef NS_ENUM(NSInteger, InnerState) {
 			break;
 		case InnerStateCancelingAfterAdded:
 		{
-			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId withTokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
+				[self processTokenInfoLoadedAtSlotId:slotId withToken:token];
+			} tokenInfoLoadingFailedCallback:^(CK_SLOT_ID slotId) {
+				[self processTokenInfoLoadingFailedAtSlotId: slotId];
+			}];
 		}
 			break;
 			
@@ -223,7 +235,11 @@ typedef NS_ENUM(NSInteger, InnerState) {
 			break;
 		case InnerStateCancelingAfterAdded:
 		{
-			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId];
+			[self.tokenInfoLoader loadTokenInfoFromSlot:slotId withTokenInfoLoadedCallback:^(CK_SLOT_ID slotId, Token* token){
+				[self processTokenInfoLoadedAtSlotId:slotId withToken:token];
+			} tokenInfoLoadingFailedCallback:^(CK_SLOT_ID slotId) {
+				[self processTokenInfoLoadingFailedAtSlotId: slotId];
+			}];
 			nextState = InnerStateWaitingAfterAdded;
 		}
 			break;

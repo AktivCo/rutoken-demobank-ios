@@ -5,50 +5,30 @@
 #import "Pkcs11Error.h"
 #import "Token.h"
 
-
-@interface TokenInfoLoader ()
-
-@property(nonatomic, readwrite, strong) void (^ tokenInfoLoaded)(CK_SLOT_ID, Token*);
-@property(nonatomic, readwrite, strong) void (^ tokenInfoLoadingFailed)(CK_SLOT_ID);
-
-@end
-
 @implementation TokenInfoLoader
 
-- (id)initWithTokenInfoLoadedCallback:(void(^)(CK_SLOT_ID, Token*)) tokenInfoLoadedCallback
-tokenInfoLoadingFailedCallback:(void(^)(CK_SLOT_ID)) tokenInfoLoadingFailedCallback{
-	self = [super init];
-	if (self) {
-        self.tokenInfoLoadingFailed = tokenInfoLoadingFailedCallback;
-        self.tokenInfoLoaded = tokenInfoLoadedCallback;
-	}
-	return self;
-}
-
--(void)loadTokenInfoFromSlot:(CK_SLOT_ID)slotId{
-    @autoreleasepool {
-        NSString* queueName = @"ru.rutoken.demobank.tokenLoading";
-        dispatch_queue_t queue = dispatch_queue_create([[queueName stringByAppendingString:[NSString stringWithFormat:@"_%lu", slotId]] UTF8String], nil);
-        dispatch_async(queue, ^() {
-            @try {
-                Token* token = [[Token alloc] initWithSlotId:slotId];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.tokenInfoLoaded(slotId, token);
-                });
-                
-            }@catch (Pkcs11Error* e) {
-				NSLog(@"Error in pkcs11 while loading token with rv = %d (%@)", [e code], [e localizedDescription]);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.tokenInfoLoadingFailed(slotId);
-                });
-            }@catch (NSError* e) {
-				NSLog(@"General error during loading token with code = %d", [e code]);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.tokenInfoLoadingFailed(slotId);
-                });
-            }
-        });
-	}
+-(void)loadTokenInfoFromSlot:(CK_SLOT_ID)slotId withTokenInfoLoadedCallback:(void(^)(CK_SLOT_ID, Token*)) tokenInfoLoadedCallback
+tokenInfoLoadingFailedCallback:(void(^)(CK_SLOT_ID)) tokenInfoLoadingFailedCallback {
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+		@try {
+			Token* token = [[Token alloc] initWithSlotId:slotId];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				tokenInfoLoadedCallback(slotId, token);
+			});
+			
+		}@catch (Pkcs11Error* e) {
+			NSLog(@"Error in pkcs11 while loading token with rv = %d (%@)", [e code], [e localizedDescription]);
+			dispatch_async(dispatch_get_main_queue(), ^{
+				tokenInfoLoadingFailedCallback(slotId);
+			});
+		}@catch (NSError* e) {
+			NSLog(@"General error during loading token with code = %d", [e code]);
+			dispatch_async(dispatch_get_main_queue(), ^{
+				tokenInfoLoadingFailedCallback(slotId);
+			});
+		}
+	});
 }
 
 @end
