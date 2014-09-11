@@ -2,6 +2,8 @@
 
 #import "Pkcs11Error.h"
 
+static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
+
 @implementation Pkcs11Error
 
 - (NSString*)localizedDescription {

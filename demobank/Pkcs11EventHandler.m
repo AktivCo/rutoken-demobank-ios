@@ -58,7 +58,8 @@ typedef NS_ENUM(NSInteger, EventType) {
 }
 
 - (void)startMonitoringWithTokenAddedCallback:(void (^)(CK_SLOT_ID))tokenAddedCallback
-						 tokenRemovedCallback:(void (^)(CK_SLOT_ID))tokenRemovedCallback {
+						 tokenRemovedCallback:(void (^)(CK_SLOT_ID))tokenRemovedCallback
+								errorCallback:(void (^)(NSError *))errorCallback{
 	dispatch_queue_t queue = dispatch_queue_create("ru.rutoken.demobank.pkcs11eventhandler", nil);
     dispatch_async(queue, ^() {
 		@try {
@@ -87,20 +88,18 @@ typedef NS_ENUM(NSInteger, EventType) {
 				[self handleEventWithSlotId:slotId tokenAddedCallback:tokenAddedCallback tokenRemovedCallback:tokenRemovedCallback];
 			}
 		} @catch (NSError* e) {
-			//handle error
+			dispatch_async(dispatch_get_main_queue(), ^(){
+				errorCallback(e);
+			});
 		}
 	});
 }
 
 - (void)stopMonitoring{
-	@try {
 		[self.lastSlotEvent removeAllObjects];
-		
+	
 		CK_RV rv = C_Finalize(NULL_PTR);
 		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-	} @catch (NSError* e) {
-		//handle error
-	}
 }
 
 @end

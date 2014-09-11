@@ -61,16 +61,24 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		[self processTokenWasAddedAtSlotId:slotId];
 	} tokenRemovedCallback:^(CK_SLOT_ID slotId){
 		[self processTokenWasRemovedAtSlotId:slotId];
-	}];
+	} errorCallback:^(NSError * e) {
+		NSLog(@"Failed to start pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
+		//throw some error here
+			  }];
 }
 
 -(void)stopMonitoring{
-	[self.pkcs11EventHandler stopMonitoring];
-	
-	self.currentHandle = 0;
-	[self.slotStates removeAllObjects];
-	[self.tokens removeAllObjects];
-	[self.handles removeAllObjects];
+	@try{
+		self.currentHandle = 0;
+		[self.slotStates removeAllObjects];
+		[self.tokens removeAllObjects];
+		[self.handles removeAllObjects];
+		
+		[self.pkcs11EventHandler stopMonitoring];
+	} @catch(NSError* e){
+		NSLog(@"Failed to stop pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
+		//throw some error here
+	}
 }
 
 -(NSArray*)tokenHandles{

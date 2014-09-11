@@ -7,7 +7,8 @@
 @interface Pkcs11EventHandler : NSObject
 
 - (void)startMonitoringWithTokenAddedCallback:(void (^)(CK_SLOT_ID))tokenAddedCallback
-						 tokenRemovedCallback:(void (^)(CK_SLOT_ID))tokenRemovedCallback;
+						 tokenRemovedCallback:(void (^)(CK_SLOT_ID))tokenRemovedCallback
+								errorCallback:(void(^)(NSError*))errorCallback;
 - (void)stopMonitoring;
 
 @end
