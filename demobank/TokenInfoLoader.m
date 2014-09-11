@@ -18,12 +18,12 @@ tokenInfoLoadingFailedCallback:(void(^)(CK_SLOT_ID)) tokenInfoLoadingFailedCallb
 			});
 			
 		}@catch (Pkcs11Error* e) {
-			NSLog(@"Error in pkcs11 while loading token with rv = %d (%@)", [e code], [e localizedDescription]);
+			NSLog(@"Failed to load token info, error in pkcs11 with rv = %d (%@)", [e code], [e localizedDescription]);
 			dispatch_async(dispatch_get_main_queue(), ^{
 				tokenInfoLoadingFailedCallback(slotId);
 			});
 		}@catch (NSError* e) {
-			NSLog(@"General error during loading token with code = %d", [e code]);
+			NSLog(@"Failed to load token info, reason: %d (%@)", [e code], [e localizedDescription]);
 			dispatch_async(dispatch_get_main_queue(), ^{
 				tokenInfoLoadingFailedCallback(slotId);
 			});

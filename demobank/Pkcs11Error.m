@@ -9,6 +9,8 @@ static NSString* const gPkcs11ErrorDomain = @"ru.rutoken.demobank.pkcs11error";
 - (NSString*)localizedDescription {
 	switch ([self code]) {
 			//Put errors' decription here
+		case 0x06:
+			return @"Function failed";
 		case 0x30:
 			return @"Device error";
 		default:

@@ -2,6 +2,8 @@
 
 #import "TokenManager.h"
 
+#import "ApplicationError.h"
+
 #import "TokenInfoLoader.h"
 #import "Pkcs11Error.h"
 #import "Pkcs11EventHandler.h"
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		[self processTokenWasRemovedAtSlotId:slotId];
 	} errorCallback:^(NSError * e) {
 		NSLog(@"Failed to start pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
-		//throw some error here
+		@throw [ApplicationError errorWithCode:UnrecoverableError];
 			  }];
 }
 
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		[self.pkcs11EventHandler stopMonitoring];
 	} @catch(NSError* e){
 		NSLog(@"Failed to stop pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
-		//throw some error here
+		@throw [ApplicationError errorWithCode:UnrecoverableError];
 	}
 }
 
