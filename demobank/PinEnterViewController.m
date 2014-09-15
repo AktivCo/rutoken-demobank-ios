@@ -51,8 +51,8 @@
     NSData* authData = [NSData dataWithBytes:[authString UTF8String] length:[authString length]];
     
     if(nil != token && nil != cert){
-        [token login:[_pinTextInput text] successCallback:^(void){
-            [token sign:cert data:authData successCallback:^(NSData * result) {
+        [token loginWithPin:[_pinTextInput text] successCallback:^(void){
+            [token signData:authData withCertificate:cert successCallback:^(NSData * result) {
                 [_loginButton setEnabled:YES];
                 [_pinErrorLabel setHidden:YES];
                 [_pinErrorLabel setText:@""];

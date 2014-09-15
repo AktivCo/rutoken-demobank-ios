@@ -22,11 +22,11 @@
 
 -(id)initWithSlotId:(CK_SLOT_ID)slotId;
 
--(void)login:(NSString*)pin successCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
+-(void)loginWithPin:(NSString*)pin successCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
 -(void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
--(void)sign:(Certificate*)certificate data:(NSData*)data successCallback:(void (^)(NSData*))successCallback
+-(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSData*))successCallback
         errorCallback:(void (^)(NSError*))errorCallback;
 
 @end

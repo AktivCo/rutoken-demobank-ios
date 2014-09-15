@@ -38,7 +38,7 @@
         NSString* paymentString = @"Payment";
         NSData* paymentData = [NSData dataWithBytes:[paymentString UTF8String] length:[paymentString length]];
         
-        [token sign:cert data:paymentData successCallback:^(NSData* result){
+        [token signData:paymentData withCertificate:cert successCallback:^(NSData* result){
             [_progressLabel setHidden:YES];
             [_successLabel setHidden:NO];
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -60,7 +60,7 @@
     [token logoutWithSuccessCallback:^(void){}
                        errorCallback:^(NSError* e){}];
     
-    [token login:[_pinTextInput text] successCallback:^(void){
+    [token loginWithPin:[_pinTextInput text] successCallback:^(void){
         [_loginButton setEnabled:YES];
         [_pinTextInput setHidden:YES];
         [_loginButton setHidden:YES];

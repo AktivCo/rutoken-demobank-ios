@@ -11,7 +11,9 @@ static const double kVoltageMin = 3500;
 static const double kVoltageMax = 4200;
 static const double kChargingVoltage = 4800;
 
-static NSString* removeTrailingSpaces(const char* string, size_t length) {
+@implementation Token
+
+- (NSString*)removeTrailingSpaceFromCString:(const char*) string length:(size_t) length {
 	size_t i;
 	for (i = length; i != 0; --i) {
 		if (' ' != string[i - 1]) break;
@@ -20,12 +22,9 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
 	return [[NSString alloc] initWithBytes:string length:i encoding:NSUTF8StringEncoding];
 }
 
-@implementation Token
-
 - (void)readCertificates {
     CK_OBJECT_CLASS certClass = CKO_CERTIFICATE;
-    // token user category
-    CK_ULONG certCategory = 1;
+    CK_ULONG certCategory = 1;     //user category
     CK_ATTRIBUTE template[] = {
             {CKA_CLASS, &certClass, sizeof(certClass)},
             {CKA_CERTIFICATE_CATEGORY, &certCategory, sizeof(certCategory)}
@@ -47,60 +46,63 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
         if (count < ARRAY_LENGTH(objects)) break;
     }
 
-    CK_RV rv2 = C_FindObjectsFinal(_session);
+    CK_RV rv2 = C_FindObjectsFinal(_session); // we should always call C_FindObjectsFinal, even after an error (see pkcs11 standart for more info...)
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
     if (CKR_OK != rv2) @throw [Pkcs11Error errorWithCode:rv2];
+}
+
+-(void)updateTokenInfoFromSlot:(CK_SLOT_ID)slotId {
+	NSMutableData* tokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
+	CK_TOKEN_INFO_PTR tokenInfo  = [tokenInfoData mutableBytes];
+	
+	CK_RV rv = C_GetTokenInfo(slotId, tokenInfo);
+	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+	
+	_label = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->label length: sizeof(tokenInfo->label)];
+	_serialNumber = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->serialNumber length: sizeof(tokenInfo->serialNumber)];
+	_model = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->model length: sizeof(tokenInfo->model)];
+	_totalMemory = tokenInfo->ulTotalPublicMemory;
+	_freeMemory = tokenInfo->ulFreePublicMemory;
+
+	
+	NSMutableData* extendedTokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
+	CK_TOKEN_INFO_EXTENDED_PTR extendedTokenInfo = [extendedTokenInfoData mutableBytes];
+	extendedTokenInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
+	
+	rv = C_EX_GetTokenInfoExtended(slotId, extendedTokenInfo);
+	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+	
+	double batteryVoltage = extendedTokenInfo->ulBatteryVoltage;
+	_charge = ((batteryVoltage - kVoltageMin) / (kVoltageMax - kVoltageMin)) * 100;
+	_charging = NO;
+	if(_charge >= 100) {
+		if (kChargingVoltage <= batteryVoltage) _charging = YES;
+		_charge = 100;
+	}
+	if(_charge < 1) _charge = 1;
 }
 
 - (id)initWithSlotId:(CK_SLOT_ID)slotId{
 	self = [super init];
 	if (self) {
 		_slotId = slotId;
-        
-        NSMutableData* tokenInfo = nil;
-        NSMutableData* extendedTokenInfo = nil;
-        CK_TOKEN_INFO_EXTENDED_PTR extendedInfo = nil;
-        CK_TOKEN_INFO_PTR info = nil;
-        
-        tokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
-        info = [tokenInfo mutableBytes];
-        CK_RV rv = C_GetTokenInfo(slotId, info);
-        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-        
-        extendedTokenInfo = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
-        extendedInfo = [extendedTokenInfo mutableBytes];
-        extendedInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
-        
-        rv = C_EX_GetTokenInfoExtended(slotId, extendedInfo);
-        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-        
-        _label = removeTrailingSpaces((const char*) info->label, sizeof(info->label));
-        _serialNumber = removeTrailingSpaces((const char*) info->serialNumber, sizeof(info->serialNumber));
-        _model = removeTrailingSpaces((const char*) info->model, sizeof(info->model));
-        _totalMemory = info->ulTotalPublicMemory;
-        _freeMemory = info->ulFreePublicMemory;
-        
-        double batteryVoltage = extendedInfo->ulBatteryVoltage;
-        _charge = ((batteryVoltage - kVoltageMin) / (kVoltageMax - kVoltageMin)) * 100;
-        _charging = NO;
-        if(_charge >= 100) {
-			if (kChargingVoltage <= batteryVoltage) _charging = YES;
-            _charge = 100;
+		
+		@try {
+			[self updateTokenInfoFromSlot:slotId];
+
+			CK_RV rv = C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
+			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+		} @catch (NSError* e) {
+            return nil;
         }
-        if(_charge < 1) _charge = 1;
-	}
-        _charge = extendedInfo->ulBatteryVoltage;
-
-        rv = C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
-        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-
-        _certificates = [NSMutableArray array];
+		
+		@try{
+			_certificates = [NSMutableArray array];
         
-        @try {
             [self readCertificates];
         } @catch (NSError* e) {
             C_CloseSession(_session);
-            @throw e;
+            return nil;
         }
     }
 	
@@ -117,35 +119,40 @@ static NSString* removeTrailingSpaces(const char* string, size_t length) {
     });
 }
 
-- (void)login:(NSString*)pin successCallback:(void (^)())successCallback
+- (void)loginWithPin:(NSString*)pin successCallback:(void (^)())successCallback
 errorCallback:(void (^)(NSError*))errorCallback {
-    dispatch_queue_t queue = dispatch_queue_create("Login queue", nil);
-    dispatch_async(queue, ^() {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         NSData* pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
 
         CK_RV rv = C_Login(_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            if (CKR_OK != rv) errorCallback([Pkcs11Error errorWithCode:rv]);
-            else successCallback();
+		if (CKR_OK != rv) {
+			[self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+			return;
+		}
+		
+		dispatch_async(dispatch_get_main_queue(), ^() {
+            successCallback();
         });
     });
 }
 
 - (void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback {
-    dispatch_queue_t queue = dispatch_queue_create("Logout queue", nil);
-    dispatch_async(queue, ^() {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         CK_RV rv = C_Logout(_session);
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            if (CKR_OK != rv) errorCallback([Pkcs11Error errorWithCode:rv]);
-            else successCallback();
+		if (CKR_OK != rv) {
+			[self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+			return;
+		}
+		
+		dispatch_async(dispatch_get_main_queue(), ^() {
+            successCallback();
         });
     });
 }
 
-- (void)sign:(Certificate*)certificate data:(NSData*)data successCallback:(void (^)(NSData*))successCallback
-        errorCallback:(void (^)(NSError*))errorCallback {
-    dispatch_queue_t queue = dispatch_queue_create("Sign queue", nil);
-    dispatch_async(queue, ^() {
+-(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSData*))successCallback
+  errorCallback:(void (^)(NSError*))errorCallback {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         CK_OBJECT_CLASS keyClass = CKO_PRIVATE_KEY;
         CK_ATTRIBUTE template[] = {
                 {CKA_CLASS, &keyClass, sizeof(keyClass)},
