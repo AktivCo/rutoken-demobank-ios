@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	} tokenRemovedCallback:^(CK_SLOT_ID slotId){
 		[self processTokenWasRemovedAtSlotId:slotId];
 	} errorCallback:^(NSError * e) {
-		NSLog(@"Failed to start pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
+		NSLog(@"Error in pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
 		@throw [ApplicationError errorWithCode:UnrecoverableError];
 			  }];
 }
