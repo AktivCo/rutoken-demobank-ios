@@ -17,30 +17,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BT_Black.png" translatesAutoresizingMaskIntoConstraints="NO" id="olY-FC-H0t">
-                                <rect key="frame" x="128" y="492" width="512" height="512"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ipad_grey_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="oe0-Gg-fMy">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Модель токена" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhh-ZF-u6r">
-                                <rect key="frame" x="60" y="95" width="556" height="28"/>
+                                <rect key="frame" x="155" y="201" width="340" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Информационная строка" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtt-Zb-pyM">
-                                <rect key="frame" x="60" y="354" width="648" height="29"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Информационная строка" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="424" translatesAutoresizingMaskIntoConstraints="NO" id="Gtt-Zb-pyM">
+                                <rect key="frame" x="172" y="354" width="424" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NC-23-B6F">
-                                <rect key="frame" x="676" y="100" width="32" height="18"/>
+                                <rect key="frame" x="572" y="207" width="32" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lf7-93-7bR">
-                                <rect key="frame" x="624" y="101" width="49" height="21"/>
+                                <rect key="frame" x="520" y="207" width="49" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -58,16 +58,16 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.96862745100000003" green="0.94509803920000002" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Выбор сертификата" id="gd3-JU-Tpo"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
+                        <outlet property="_backgroundImageView" destination="oe0-Gg-fMy" id="z3H-QS-lfL"/>
                         <outlet property="_batteryChargeImage" destination="9NC-23-B6F" id="FvE-PZ-Xev"/>
                         <outlet property="_batteryPercentageLabel" destination="lf7-93-7bR" id="Ndq-XR-OAM"/>
                         <outlet property="_chooseCertButton" destination="WRZ-er-J2t" id="N5X-kg-9Rj"/>
                         <outlet property="_statusInfoLabel" destination="Gtt-Zb-pyM" id="QUi-Zy-EpG"/>
-                        <outlet property="_tokenImage" destination="olY-FC-H0t" id="b4E-ip-GdU"/>
                         <outlet property="_tokenModelLabel" destination="Xhh-ZF-u6r" id="3aM-1K-A0L"/>
                     </connections>
                 </viewController>
@@ -2626,6 +2626,7 @@
     </scenes>
     <resources>
         <image name="BT_Black.png" width="500" height="500"/>
+        <image name="ipad_grey_background.png" width="768" height="1024"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

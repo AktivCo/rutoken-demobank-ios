@@ -93,13 +93,14 @@
 -(void)setStatewithBluetooth:(bool)bluetoothPoweredOn tokenState:(TokenState)tokenState{
     FirstScreenViewController* rootVC = [[self viewControllers] objectAtIndex:0];
     if(false == bluetoothPoweredOn){
-        [rootVC bluetoothWasPoweredOff];
+        [rootVC setState:FirstVCStateBlueToothPoweredOff withUserInfo:nil];
     } else if (kTokenDisconnected == tokenState){
-        [rootVC removeActiveToken];
+        [rootVC setState:FirstVCStateWaitingForAnyToken withUserInfo:nil];
     } else if (kTokenConnecting == tokenState) {
         [rootVC prepareForSettingAktiveToken];
     } else if (kTokenConnected == tokenState) {
-        [rootVC setActiveTokenWithHandle:_activeTokenHandle];
+		NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithObject:_activeTokenHandle forKey:@"tokenHandle"];
+        [rootVC setState:FirstVCStateTokenPresent withUserInfo:dict];
     }
 }
 
