@@ -168,6 +168,12 @@
 		5573372B19B376F800CF0202 /* TokenManager */ = {
 			isa = PBXGroup;
 			children = (
+				55243FBC19A71DB60097642D /* Token.h */,
+				55243FBD19A71DB60097642D /* Token.m */,
+				550F55A419ACC17700EF41E4 /* Certificate.h */,
+				550F55A519ACC17700EF41E4 /* Certificate.m */,
+				A10E54D3F48E0187229C160B /* ApplicationError.m */,
+				A10E5C6B3B044040C7628600 /* ApplicationError.h */,
 				550F55A719ACC1F900EF41E4 /* Pkcs11Error.h */,
 				550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */,
 				55243FB919A71DA80097642D /* TokenManager.h */,
@@ -259,12 +265,6 @@
 				55E89659199A02DA0082A015 /* Supporting Files */,
 				55828C6419B1D431007CAEA7 /* ViewControllers */,
 				5573372B19B376F800CF0202 /* TokenManager */,
-				55243FBC19A71DB60097642D /* Token.h */,
-				55243FBD19A71DB60097642D /* Token.m */,
-				550F55A419ACC17700EF41E4 /* Certificate.h */,
-				550F55A519ACC17700EF41E4 /* Certificate.m */,
-				A10E54D3F48E0187229C160B /* ApplicationError.m */,
-				A10E5C6B3B044040C7628600 /* ApplicationError.h */,
 				A10E51F08C86AE015D6113AA /* Util.h */,
 			);
 			path = demobank;
