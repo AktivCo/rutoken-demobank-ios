@@ -80,6 +80,18 @@ static const double kChargingVoltage = 4800;
 		_charge = 100;
 	}
 	if(_charge < 1) _charge = 1;
+	
+	switch (extendedTokenInfo->ulBodyColor) {
+		case 0:
+			_color = TokenColorBlack;
+			break;
+		case 1:
+			_color = TokenColorWhite;
+			break;
+			
+		default:
+			break;
+	}
 }
 
 - (id)initWithSlotId:(CK_SLOT_ID)slotId{

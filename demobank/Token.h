@@ -6,6 +6,11 @@
 
 @class Certificate;
 
+typedef NS_ENUM(NSInteger, TokenColor) {
+	TokenColorBlack,
+	TokenColorWhite
+};
+
 @interface Token : NSObject {
 	CK_SLOT_ID _slotId;
     CK_SESSION_HANDLE _session;
@@ -16,9 +21,11 @@
 @property(nonatomic, readonly) NSString* model;
 @property(nonatomic, readonly) NSUInteger totalMemory;
 @property(nonatomic, readonly) NSUInteger freeMemory;
+@property(nonatomic, readonly) TokenColor color;
 @property(nonatomic, readonly) double charge;
 @property(nonatomic, readonly) bool charging;
 @property(nonatomic, readonly) NSMutableArray* certificates;
+
 
 -(id)initWithSlotId:(CK_SLOT_ID)slotId;
 
