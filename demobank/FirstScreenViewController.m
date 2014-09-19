@@ -114,8 +114,6 @@ static NSString* noCertsOnTokenMessage = @"На токене отсутству�
 
 -(void)prepareForSettingAktiveToken{
     [self hideAllUCs];
-//    [_statusInfoLabel setText:@"Токен подключается..."];
-//	[_statusInfoLabel setHidden:NO];
 }
 
 -(void)hideAllUCs{

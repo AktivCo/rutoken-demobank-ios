@@ -138,7 +138,7 @@
 		
 		if(nil != self.hud) {
 			self.hud.labelText = @"Токен подключен";
-			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-checkmark.png"]];
 			self.hud.mode = MBProgressHUDModeCustomView;
 			[self.hud hide:YES afterDelay:1.5];
 			self.hud = nil;
@@ -164,7 +164,7 @@
 			
 			self.hud.labelText = @"Активный токен изменен";
 			self.hud.dimBackground = YES;
-			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-change.png"]];
 			self.hud.mode = MBProgressHUDModeCustomView;
 			self.hud.animationType = MBProgressHUDAnimationZoomIn;
 			self.hud.minSize = CGSizeMake(150.f, 150.f);
@@ -178,7 +178,7 @@
             if(0 == _connectingTokens) {
 				self.hud.labelText = @"Токен был отключен";
 				self.hud.dimBackground = YES;
-				self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+				self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
 				self.hud.mode = MBProgressHUDModeCustomView;
 				self.hud.animationType = MBProgressHUDAnimationZoomIn;
 				self.hud.minSize = CGSizeMake(150.f, 150.f);
@@ -232,7 +232,7 @@
     if(nil == _activeTokenHandle && 0 == _connectingTokens){
 		if(nil != self.hud) {
 			self.hud.labelText = @"Произошла ошибка";
-			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
 			self.hud.mode = MBProgressHUDModeCustomView;
 			[self.hud hide:YES afterDelay:1.5];
 			self.hud = nil;
