@@ -8,6 +8,8 @@
 #import "Token.h"
 #import "FirstScreenViewController.h"
 
+#import "MBProgressHUD.h"
+
 @interface BluetoothDelegate : NSObject <CBCentralManagerDelegate> {
 	BOOL _poweredOn;
 }
@@ -35,6 +37,12 @@
 - (BOOL)poweredOn {
 	return _poweredOn;
 }
+
+@end
+
+@interface DemobankNavigationController ()
+
+@property (nonatomic)  MBProgressHUD * hud;
 
 @end
 
@@ -80,6 +88,8 @@
     _activeTokenHandle = nil;
     _tokenState = kTokenDisconnected;
     _connectingTokens = 0;
+	
+	_hud = nil;
     
     _delegate = [[BluetoothDelegate alloc] init];
 	_manager = [[CBCentralManager alloc] initWithDelegate:_delegate queue:nil];
@@ -94,10 +104,13 @@
     FirstScreenViewController* rootVC = [[self viewControllers] objectAtIndex:0];
     if(false == bluetoothPoweredOn){
         [rootVC setState:FirstVCStateBlueToothPoweredOff withUserInfo:nil];
+		
     } else if (kTokenDisconnected == tokenState){
         [rootVC setState:FirstVCStateWaitingForAnyToken withUserInfo:nil];
+		
     } else if (kTokenConnecting == tokenState) {
         [rootVC prepareForSettingAktiveToken];
+		
     } else if (kTokenConnected == tokenState) {
 		NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithObject:_activeTokenHandle forKey:@"tokenHandle"];
         [rootVC setState:FirstVCStateTokenPresent withUserInfo:dict];
@@ -122,6 +135,15 @@
     
     if(nil == _activeTokenHandle) {
         _activeTokenHandle = handle;
+		
+		if(nil != self.hud) {
+			self.hud.labelText = @"Токен подключен";
+			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+			self.hud.mode = MBProgressHUDModeCustomView;
+			[self.hud hide:YES afterDelay:1.5];
+			self.hud = nil;
+		}
+		
         [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnected];
     }
     
@@ -133,14 +155,49 @@
 	NSNumber* handle = [userInfo objectForKey:@"handle"];
     
     if(handle == _activeTokenHandle){
+		self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+		[self.view addSubview:self.hud];
+		
         NSArray* ids = [_tokenManager tokenHandles];
         if(0 != [ids count]){
             _activeTokenHandle = [ids objectAtIndex:0];
+			
+			self.hud.labelText = @"Активный токен изменен";
+			self.hud.dimBackground = YES;
+			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+			self.hud.mode = MBProgressHUDModeCustomView;
+			self.hud.animationType = MBProgressHUDAnimationZoomIn;
+			self.hud.minSize = CGSizeMake(150.f, 150.f);
+			
+			[self.hud show:YES];
+			[self.hud hide:YES afterDelay:1.5];
+			
             [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnected];
         } else {
             _activeTokenHandle = nil;
-            if(0 == _connectingTokens) [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenDisconnected];
-            else [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnecting];
+            if(0 == _connectingTokens) {
+				self.hud.labelText = @"Токен был отключен";
+				self.hud.dimBackground = YES;
+				self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+				self.hud.mode = MBProgressHUDModeCustomView;
+				self.hud.animationType = MBProgressHUDAnimationZoomIn;
+				self.hud.minSize = CGSizeMake(150.f, 150.f);
+				
+				[self.hud show:YES];
+				[self.hud hide:YES afterDelay:1.5];
+				
+				[self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenDisconnected];
+			}
+            else {
+				self.hud.labelText = @"Подключение другого токена...";
+				self.hud.dimBackground = YES;
+				self.hud.mode = MBProgressHUDModeIndeterminate;
+				self.hud.animationType = MBProgressHUDAnimationZoomIn;
+				self.hud.minSize = CGSizeMake(150.f, 150.f);
+				
+				[self.hud show:YES];
+				[self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnecting];
+			}
         }
         [self popToRootViewControllerAnimated:YES];
     }
@@ -151,7 +208,21 @@
 - (void)tokenWillBeAdded:(NSNotification*)notification {
     _connectingTokens++;
     if(nil == _activeTokenHandle) {
+		if(1 == _connectingTokens) {
+			self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+			[self.view addSubview:self.hud];
+			
+			self.hud.labelText = @"Подключение токена...";
+			self.hud.dimBackground = YES;
+			self.hud.mode = MBProgressHUDModeIndeterminate;
+			self.hud.animationType = MBProgressHUDAnimationZoomIn;
+			self.hud.minSize = CGSizeMake(150.f, 150.f);
+			
+			[self.hud show:YES];
+		}
+		
         [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnecting];
+		
     }
     NSLog(@"New token detected");
 }
@@ -159,6 +230,13 @@
 - (void)tokenAddingFailed:(NSNotification*)notification {
     _connectingTokens--;
     if(nil == _activeTokenHandle && 0 == _connectingTokens){
+		if(nil != self.hud) {
+			self.hud.labelText = @"Произошла ошибка";
+			self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+			self.hud.mode = MBProgressHUDModeCustomView;
+			[self.hud hide:YES afterDelay:1.5];
+			self.hud = nil;
+		}
         [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenDisconnected];
     }
     NSLog(@"Error while loading token info");
