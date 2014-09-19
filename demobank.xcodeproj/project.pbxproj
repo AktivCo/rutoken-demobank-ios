@@ -30,6 +30,7 @@
 		5573372A19B375EF00CF0202 /* TokenInfoLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5573372919B375EF00CF0202 /* TokenInfoLoader.m */; };
 		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
 		55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */; };
+		558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C820E19CC0A4D00236C77 /* MBProgressHUD.m */; };
 		55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911BA519B1A9BD005E38ED /* PinEnterViewController.m */; };
 		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
 		55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C244FB19B092A100DF5964 /* DemobankNavigationController.m */; };
@@ -97,6 +98,8 @@
 		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
 		55828C6519B1EA00007CAEA7 /* PaymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsViewController.h; sourceTree = "<group>"; };
 		55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsViewController.m; sourceTree = "<group>"; };
+		558C820D19CC0A4D00236C77 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		558C820E19CC0A4D00236C77 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		55911BA419B1A9BD005E38ED /* PinEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinEnterViewController.h; sourceTree = "<group>"; };
 		55911BA519B1A9BD005E38ED /* PinEnterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinEnterViewController.m; sourceTree = "<group>"; };
 		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -227,6 +230,15 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
+		558C821019CC0A5400236C77 /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				558C820D19CC0A4D00236C77 /* MBProgressHUD.h */,
+				558C820E19CC0A4D00236C77 /* MBProgressHUD.m */,
+			);
+			name = ProgressHUD;
+			sourceTree = "<group>";
+		};
 		55E89646199A02DA0082A015 = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +286,7 @@
 				55E89659199A02DA0082A015 /* Supporting Files */,
 				55828C6419B1D431007CAEA7 /* ViewControllers */,
 				5573372B19B376F800CF0202 /* TokenManager */,
+				558C821019CC0A5400236C77 /* ProgressHUD */,
 				A10E51F08C86AE015D6113AA /* Util.h */,
 			);
 			path = demobank;
@@ -427,6 +440,7 @@
 				550F55A619ACC17700EF41E4 /* Certificate.m in Sources */,
 				55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */,
 				55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */,
+				558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */,
 				550F55A919ACC1F900EF41E4 /* Pkcs11Error.m in Sources */,
 				55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */,
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
