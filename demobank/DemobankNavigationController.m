@@ -65,11 +65,12 @@
                                          [UIColor whiteColor],UITextAttributeTextColor,
                                          [UIColor blackColor], UITextAttributeTextShadowColor,
                                          [NSValue valueWithUIOffset:UIOffsetMake(-1, 0)], UITextAttributeTextShadowOffset, nil];
-
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.912 green:0.078 blue:0.118 alpha:1]];
-     
-    [[UINavigationBar appearance] setTitleTextAttributes:navBarTitleTextAttr];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+	
+	if ([[UINavigationBar appearance] respondsToSelector:@selector(setBarTintColor:)]) {
+		[[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.912 green:0.078 blue:0.118 alpha:1]];
+		[[UINavigationBar appearance] setTitleTextAttributes:navBarTitleTextAttr];
+		[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+	}
     
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bluetoothWasPoweredOff:)
 												 name:@"BluetoothWasPoweredOff" object:_delegate];

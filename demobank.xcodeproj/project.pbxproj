@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C5199A50A800D2652A /* RtPcsc.framework */; };
 		550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C6199A50A800D2652A /* RtPKCS11ECP.framework */; };
+		550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */; };
 		550F55A619ACC17700EF41E4 /* Certificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F55A519ACC17700EF41E4 /* Certificate.m */; };
 		550F55A919ACC1F900EF41E4 /* Pkcs11Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */; };
 		55243FBB19A71DA80097642D /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBA19A71DA80097642D /* TokenManager.m */; };
@@ -73,6 +74,7 @@
 /* Begin PBXFileReference section */
 		550871C5199A50A800D2652A /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = external/pkcs11bin/RtPcsc.framework; sourceTree = "<group>"; };
 		550871C6199A50A800D2652A /* RtPKCS11ECP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPKCS11ECP.framework; path = external/pkcs11bin/RtPKCS11ECP.framework; sourceTree = "<group>"; };
+		550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		550F55A419ACC17700EF41E4 /* Certificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Certificate.h; sourceTree = "<group>"; };
 		550F55A519ACC17700EF41E4 /* Certificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Certificate.m; sourceTree = "<group>"; };
 		550F55A719ACC1F900EF41E4 /* Pkcs11Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pkcs11Error.h; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */,
 				55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */,
 				550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */,
 				550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */,
@@ -280,6 +283,7 @@
 		55E89651199A02DA0082A015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */,
 				55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */,
 				550871C5199A50A800D2652A /* RtPcsc.framework */,
 				550871C6199A50A800D2652A /* RtPKCS11ECP.framework */,
@@ -383,7 +387,7 @@
 		55E89647199A02DA0082A015 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Aktiv Co";
 				TargetAttributes = {
 					55E8964E199A02DA0082A015 = {
@@ -563,7 +567,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -596,7 +600,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -606,7 +610,6 @@
 		55E89685199A02DA0082A015 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -621,9 +624,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "924ea007-5e8c-45c5-ba99-54af16ac792b";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -631,7 +634,6 @@
 		55E89686199A02DA0082A015 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -646,9 +648,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "924ea007-5e8c-45c5-ba99-54af16ac792b";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
