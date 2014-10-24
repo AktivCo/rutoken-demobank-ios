@@ -17,6 +17,7 @@
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
 		55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8F19B5D8EF00FC1C6A /* SignViewController.m */; };
+		553D266F19FA7D590032099F /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D266E19FA7D590032099F /* line.png */; };
 		5541E55819C9A0BB001FD9E8 /* ipad_grey_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */; };
 		5541E55C19C9A732001FD9E8 /* ipad_black_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55B19C9A732001FD9E8 /* ipad_black_background.png */; };
 		5541E55E19C9B830001FD9E8 /* ipad_white_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55D19C9B830001FD9E8 /* ipad_white_background.png */; };
@@ -89,6 +90,7 @@
 		55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoTableViewController.m; sourceTree = "<group>"; };
 		55295B8E19B5D8EF00FC1C6A /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
 		55295B8F19B5D8EF00FC1C6A /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
+		553D266E19FA7D590032099F /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_grey_background.png; sourceTree = "<group>"; };
 		5541E55B19C9A732001FD9E8 /* ipad_black_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_black_background.png; sourceTree = "<group>"; };
 		5541E55D19C9B830001FD9E8 /* ipad_white_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_white_background.png; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		557DFE9119ADD0B600CC7488 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				553D266E19FA7D590032099F /* line.png */,
 				558C822919CC644D00236C77 /* 37x-checkmark.png */,
 				558C822A19CC644D00236C77 /* 37x-checkmark@2x.png */,
 				558C821919CC5F1C00236C77 /* 37x-change.png */,
@@ -439,6 +442,7 @@
 				5541E55C19C9A732001FD9E8 /* ipad_black_background.png in Resources */,
 				556B854719AF56A700DF95FB /* battery_3_sec.png in Resources */,
 				557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */,
+				553D266F19FA7D590032099F /* line.png in Resources */,
 				55E89666199A02DA0082A015 /* Main_iPhone.storyboard in Resources */,
 				55E8965D199A02DA0082A015 /* InfoPlist.strings in Resources */,
 				556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */,
