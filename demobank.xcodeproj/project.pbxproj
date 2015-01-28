@@ -51,26 +51,11 @@
 		55E89666199A02DA0082A015 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E89664199A02DA0082A015 /* Main_iPhone.storyboard */; };
 		55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E89667199A02DA0082A015 /* Main_iPad.storyboard */; };
 		55E8966E199A02DA0082A015 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E8966D199A02DA0082A015 /* Images.xcassets */; };
-		55E89675199A02DA0082A015 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89674199A02DA0082A015 /* XCTest.framework */; };
-		55E89676199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
-		55E89677199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
-		55E8967F199A02DA0082A015 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E8967D199A02DA0082A015 /* InfoPlist.strings */; };
-		55E89681199A02DA0082A015 /* demobankTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E89680199A02DA0082A015 /* demobankTests.m */; };
 		55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8968E199A0C040082A015 /* FirstScreenViewController.m */; };
 		55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89690199A0D0C0082A015 /* ExternalAccessory.framework */; };
 		55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89692199A0D1A0082A015 /* CoreBluetooth.framework */; };
 		A10E590239465D0317C016BE /* ApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = A10E54D3F48E0187229C160B /* ApplicationError.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		55E89678199A02DA0082A015 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 55E89647199A02DA0082A015 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55E8964E199A02DA0082A015;
-			remoteInfo = demobank;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		550871C5199A50A800D2652A /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = external/pkcs11bin/RtPcsc.framework; sourceTree = "<group>"; };
@@ -134,11 +119,7 @@
 		55E89665199A02DA0082A015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		55E89668199A02DA0082A015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		55E8966D199A02DA0082A015 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		55E89673199A02DA0082A015 /* demobankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demobankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89674199A02DA0082A015 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		55E8967C199A02DA0082A015 /* demobankTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "demobankTests-Info.plist"; sourceTree = "<group>"; };
-		55E8967E199A02DA0082A015 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		55E89680199A02DA0082A015 /* demobankTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = demobankTests.m; sourceTree = "<group>"; };
 		55E8968D199A0C040082A015 /* FirstScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstScreenViewController.h; sourceTree = "<group>"; };
 		55E8968E199A0C040082A015 /* FirstScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstScreenViewController.m; sourceTree = "<group>"; };
 		55E89690199A0D0C0082A015 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -162,16 +143,6 @@
 				55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */,
 				55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */,
 				55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55E89670199A02DA0082A015 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55E89675199A02DA0082A015 /* XCTest.framework in Frameworks */,
-				55E89677199A02DA0082A015 /* UIKit.framework in Frameworks */,
-				55E89676199A02DA0082A015 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +239,6 @@
 			children = (
 				557DFE9119ADD0B600CC7488 /* resources */,
 				55E89658199A02DA0082A015 /* demobank */,
-				55E8967A199A02DA0082A015 /* demobankTests */,
 				55E89651199A02DA0082A015 /* Frameworks */,
 				55E89650199A02DA0082A015 /* Products */,
 			);
@@ -278,7 +248,6 @@
 			isa = PBXGroup;
 			children = (
 				55E8964F199A02DA0082A015 /* demobank.app */,
-				55E89673199A02DA0082A015 /* demobankTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,24 +297,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		55E8967A199A02DA0082A015 /* demobankTests */ = {
-			isa = PBXGroup;
-			children = (
-				55E89680199A02DA0082A015 /* demobankTests.m */,
-				55E8967B199A02DA0082A015 /* Supporting Files */,
-			);
-			path = demobankTests;
-			sourceTree = "<group>";
-		};
-		55E8967B199A02DA0082A015 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				55E8967C199A02DA0082A015 /* demobankTests-Info.plist */,
-				55E8967D199A02DA0082A015 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -366,24 +317,6 @@
 			productReference = 55E8964F199A02DA0082A015 /* demobank.app */;
 			productType = "com.apple.product-type.application";
 		};
-		55E89672199A02DA0082A015 /* demobankTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 55E89687199A02DA0082A015 /* Build configuration list for PBXNativeTarget "demobankTests" */;
-			buildPhases = (
-				55E8966F199A02DA0082A015 /* Sources */,
-				55E89670199A02DA0082A015 /* Frameworks */,
-				55E89671199A02DA0082A015 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				55E89679199A02DA0082A015 /* PBXTargetDependency */,
-			);
-			name = demobankTests;
-			productName = demobankTests;
-			productReference = 55E89673199A02DA0082A015 /* demobankTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -395,9 +328,6 @@
 				TargetAttributes = {
 					55E8964E199A02DA0082A015 = {
 						DevelopmentTeam = TRCKC8GFT7;
-					};
-					55E89672199A02DA0082A015 = {
-						TestTargetID = 55E8964E199A02DA0082A015;
 					};
 				};
 			};
@@ -415,7 +345,6 @@
 			projectRoot = "";
 			targets = (
 				55E8964E199A02DA0082A015 /* demobank */,
-				55E89672199A02DA0082A015 /* demobankTests */,
 			);
 		};
 /* End PBXProject section */
@@ -450,14 +379,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55E89671199A02DA0082A015 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55E8967F199A02DA0082A015 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -485,23 +406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55E8966F199A02DA0082A015 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55E89681199A02DA0082A015 /* demobankTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		55E89679199A02DA0082A015 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 55E8964E199A02DA0082A015 /* demobank */;
-			targetProxy = 55E89678199A02DA0082A015 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		55E8965B199A02DA0082A015 /* InfoPlist.strings */ = {
@@ -526,14 +431,6 @@
 				55E89668199A02DA0082A015 /* Base */,
 			);
 			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		55E8967D199A02DA0082A015 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55E8967E199A02DA0082A015 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -659,46 +556,6 @@
 			};
 			name = Release;
 		};
-		55E89688199A02DA0082A015 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/demobank.app/demobank";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "demobankTests/demobankTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		55E89689199A02DA0082A015 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/demobank.app/demobank";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
-				INFOPLIST_FILE = "demobankTests/demobankTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -716,15 +573,6 @@
 			buildConfigurations = (
 				55E89685199A02DA0082A015 /* Debug */,
 				55E89686199A02DA0082A015 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		55E89687199A02DA0082A015 /* Build configuration list for PBXNativeTarget "demobankTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				55E89688199A02DA0082A015 /* Debug */,
-				55E89689199A02DA0082A015 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
