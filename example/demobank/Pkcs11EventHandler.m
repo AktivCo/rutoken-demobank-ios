@@ -29,39 +29,46 @@ typedef NS_ENUM(NSInteger, EventType) {
             return nil;
         }
 	}
+    
 
 	return self;
 }
 
 - (void)handleEventWithSlotId:(CK_SLOT_ID)slotId
 		   tokenAddedCallback:(void (^)(CK_SLOT_ID))tokenAddedCallback
-		 tokenRemovedCallback:(void (^)(CK_SLOT_ID))tokenRemovedCallback {
-	
-	CK_SLOT_INFO slotInfo;
-	CK_RV rv = [self functions]->C_GetSlotInfo(slotId, &slotInfo);
-	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-    
-	NSNumber* lastEvent = [self.lastSlotEvent objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
-	if(nil == lastEvent){
-		lastEvent = [NSNumber numberWithInteger:EventTypeTokenRemoved];
-	}
-	
-	if (CKF_TOKEN_PRESENT & slotInfo.flags) {
-		if (EventTypeTokenAdded == [lastEvent integerValue]){
-			dispatch_async(dispatch_get_main_queue(), ^(){
+		 tokenRemovedCallback:(void (^)(CK_SLOT_ID))tokenRemovedCallback
+                errorCallback:(void (^)(NSError *))errorCallback {
+    @try{
+        CK_SLOT_INFO slotInfo;
+        CK_RV rv = [self functions]->C_GetSlotInfo(slotId, &slotInfo);
+        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+        
+        NSNumber* lastEvent = [self.lastSlotEvent objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+        if(nil == lastEvent){
+            lastEvent = [NSNumber numberWithInteger:EventTypeTokenRemoved];
+        }
+        
+        if (CKF_TOKEN_PRESENT & slotInfo.flags) {
+            if (EventTypeTokenAdded == [lastEvent integerValue]){
+                dispatch_async(dispatch_get_main_queue(), ^(){
+                    tokenRemovedCallback(slotId);
+                });
+            }
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                tokenAddedCallback(slotId);
+            });
+            [self.lastSlotEvent setObject:[NSNumber numberWithInteger:EventTypeTokenAdded] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+        } else  if (EventTypeTokenAdded == [lastEvent integerValue]){
+            dispatch_async(dispatch_get_main_queue(), ^(){
                 tokenRemovedCallback(slotId);
-			});
-		}
-		dispatch_async(dispatch_get_main_queue(), ^(){
-			tokenAddedCallback(slotId);
-		});
-		[self.lastSlotEvent setObject:[NSNumber numberWithInteger:EventTypeTokenAdded] forKey:[NSNumber numberWithUnsignedLong:slotId]];
-	} else  if (EventTypeTokenAdded == [lastEvent integerValue]){
-		dispatch_async(dispatch_get_main_queue(), ^(){
-			tokenRemovedCallback(slotId);
-		});
-		[self.lastSlotEvent setObject:[NSNumber numberWithInteger:EventTypeTokenRemoved] forKey:[NSNumber numberWithUnsignedLong:slotId]];
-	}
+            });
+            [self.lastSlotEvent setObject:[NSNumber numberWithInteger:EventTypeTokenRemoved] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+        }
+    } @catch (NSError* e) {
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            errorCallback(e);
+        });
+    }
 }
 
 - (void)startMonitoringWithTokenAddedCallback:(void (^)(CK_SLOT_ID))tokenAddedCallback
@@ -84,7 +91,7 @@ typedef NS_ENUM(NSInteger, EventType) {
 			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 			
 			for (size_t i = 0; i != slotCount; ++i) {
-				[self handleEventWithSlotId:slotIds[i] tokenAddedCallback:tokenAddedCallback tokenRemovedCallback:tokenRemovedCallback];
+				[self handleEventWithSlotId:slotIds[i] tokenAddedCallback:tokenAddedCallback tokenRemovedCallback:tokenRemovedCallback errorCallback:errorCallback];
 			}
 			
 			while (YES) {
@@ -93,7 +100,7 @@ typedef NS_ENUM(NSInteger, EventType) {
 				if (CKR_CRYPTOKI_NOT_INITIALIZED == rv) return;
 				
 				if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-				[self handleEventWithSlotId:slotId tokenAddedCallback:tokenAddedCallback tokenRemovedCallback:tokenRemovedCallback];
+				[self handleEventWithSlotId:slotId tokenAddedCallback:tokenAddedCallback tokenRemovedCallback:tokenRemovedCallback errorCallback:errorCallback];
 			}
 		} @catch (NSError* e) {
 			dispatch_async(dispatch_get_main_queue(), ^(){

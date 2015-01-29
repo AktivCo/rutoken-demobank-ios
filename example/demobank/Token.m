@@ -47,7 +47,8 @@ static const double kChargingVoltage = 4800;
         if (CKR_OK != rv) break;
 
         for (int i = 0; i < count; ++i) {
-            [_certificates addObject:[[Certificate alloc] initWithSession:_session object:objects[i]]];
+            Certificate* c = [[Certificate alloc] initWithSession:_session object:objects[i]];
+            if (nil != c) [_certificates addObject:c];
         }
 
         if (count < ARRAY_LENGTH(objects)) break;
