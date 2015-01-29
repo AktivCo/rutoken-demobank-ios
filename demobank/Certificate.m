@@ -15,7 +15,14 @@
 	@try{
 		unsigned long length = 0;
 		unsigned char* data;
-		CK_RV rv = C_EX_GetCertificateInfoText(session, object, &data, &length);
+        
+        CK_FUNCTION_LIST_PTR functions;
+        CK_FUNCTION_LIST_EXTENDED_PTR extendedFunctions;
+        
+        C_GetFunctionList(&functions);
+        C_EX_GetFunctionListExtended(&extendedFunctions);
+        
+		CK_RV rv = extendedFunctions->C_EX_GetCertificateInfoText(session, object, &data, &length);
 		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 		
 		NSString *cert=[[NSString alloc]initWithBytes:data length:length encoding:NSUTF8StringEncoding];
@@ -37,13 +44,13 @@
 			{CKA_ID, nil, 0}
 		};
 		
-		rv = C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
+		rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
 		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 		
 		NSMutableData* idData = [NSMutableData dataWithLength:attributes[0].ulValueLen];
 		attributes[0].pValue = [idData mutableBytes];
 		
-		rv = C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
+		rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
 		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 		
 		_id = [NSData dataWithData:idData];

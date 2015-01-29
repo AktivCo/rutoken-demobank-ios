@@ -11,6 +11,13 @@ static const double kVoltageMin = 3500;
 static const double kVoltageMax = 4200;
 static const double kChargingVoltage = 4800;
 
+@interface Token ()
+
+@property(nonatomic) CK_FUNCTION_LIST_PTR functions;
+@property(nonatomic) CK_FUNCTION_LIST_EXTENDED_PTR extendedFunctions;
+
+@end
+
 @implementation Token
 
 - (NSString*)removeTrailingSpaceFromCString:(const char*) string length:(size_t) length {
@@ -30,13 +37,13 @@ static const double kChargingVoltage = 4800;
             {CKA_CERTIFICATE_CATEGORY, &certCategory, sizeof(certCategory)}
     };
 
-    CK_RV rv = C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+    CK_RV rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 
     while (TRUE) {
         CK_OBJECT_HANDLE objects[30];
         CK_ULONG count;
-        rv = C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
+        rv = [self functions]->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
         if (CKR_OK != rv) break;
 
         for (int i = 0; i < count; ++i) {
@@ -46,7 +53,7 @@ static const double kChargingVoltage = 4800;
         if (count < ARRAY_LENGTH(objects)) break;
     }
 
-    CK_RV rv2 = C_FindObjectsFinal(_session); // we should always call C_FindObjectsFinal, even after an error (see pkcs11 standart for more info...)
+    CK_RV rv2 = [self functions]->C_FindObjectsFinal(_session); // we should always call C_FindObjectsFinal, even after an error (see pkcs11 standart for more info...)
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
     if (CKR_OK != rv2) @throw [Pkcs11Error errorWithCode:rv2];
 }
@@ -55,7 +62,7 @@ static const double kChargingVoltage = 4800;
 	NSMutableData* tokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
 	CK_TOKEN_INFO_PTR tokenInfo  = [tokenInfoData mutableBytes];
 	
-	CK_RV rv = C_GetTokenInfo(slotId, tokenInfo);
+	CK_RV rv = [self functions]->C_GetTokenInfo(slotId, tokenInfo);
 	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
 	_label = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->label length: sizeof(tokenInfo->label)];
@@ -69,7 +76,7 @@ static const double kChargingVoltage = 4800;
 	CK_TOKEN_INFO_EXTENDED_PTR extendedTokenInfo = [extendedTokenInfoData mutableBytes];
 	extendedTokenInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
 	
-	rv = C_EX_GetTokenInfoExtended(slotId, extendedTokenInfo);
+	rv = [self extendedFunctions]->C_EX_GetTokenInfoExtended(slotId, extendedTokenInfo);
 	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 	
 	double batteryVoltage = extendedTokenInfo->ulBatteryVoltage;
@@ -100,9 +107,15 @@ static const double kChargingVoltage = 4800;
 		_slotId = slotId;
 		
 		@try {
+            CK_RV rv = C_GetFunctionList(&_functions);
+            if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+            
+            rv = C_EX_GetFunctionListExtended(&_extendedFunctions);
+            if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+            
 			[self updateTokenInfoFromSlot:slotId];
 
-			CK_RV rv = C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
+			rv = _functions->C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
 			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 		} @catch (NSError* e) {
             return nil;
@@ -122,7 +135,7 @@ static const double kChargingVoltage = 4800;
 }
 
 - (void)dealloc {
-    C_CloseSession(_session);
+    _functions->C_CloseSession(_session);
 }
 
 - (void)onError:(NSError*)error callback:(void (^)(NSError*))callback {
@@ -136,7 +149,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         NSData* pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
 
-        CK_RV rv = C_Login(_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
+        CK_RV rv = [self functions]->C_Login(_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
 		if (CKR_OK != rv) {
 			[self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
 			return;
@@ -150,7 +163,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
 
 - (void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
-        CK_RV rv = C_Logout(_session);
+        CK_RV rv = [self functions]->C_Logout(_session);
 		if (CKR_OK != rv) {
 			[self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
 			return;
@@ -171,7 +184,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
                 {CKA_ID, (void*)[[certificate id] bytes], [[certificate id] length]}
         };
 
-        CK_RV rv = C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+        CK_RV rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -179,9 +192,9 @@ errorCallback:(void (^)(NSError*))errorCallback {
 
         CK_OBJECT_HANDLE objects[2];
         CK_ULONG count;
-        rv = C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
+        rv = [self functions]->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
 
-        CK_RV rv2 = C_FindObjectsFinal(_session);
+        CK_RV rv2 = [self functions]->C_FindObjectsFinal(_session);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -195,20 +208,20 @@ errorCallback:(void (^)(NSError*))errorCallback {
 
         unsigned char oid[] = {0x06, 0x07, 0x2a, 0x85, 0x03, 0x02, 0x02, 0x1e, 0x01};
         CK_MECHANISM mechanism = {CKM_GOSTR3410_WITH_GOSTR3411, oid, ARRAY_LENGTH(oid)};
-        rv = C_SignInit(_session, &mechanism, objects[0]);
+        rv = [self functions]->C_SignInit(_session, &mechanism, objects[0]);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
-        rv = C_Sign(_session, (unsigned char*)[data bytes], [data length], nil, &count);
+        rv = [self functions]->C_Sign(_session, (unsigned char*)[data bytes], [data length], nil, &count);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
         NSMutableData* signature = [NSMutableData dataWithLength:count];
-        rv = C_Sign(_session, (unsigned char*)[data bytes], [data length],
+        rv = [self functions]->C_Sign(_session, (unsigned char*)[data bytes], [data length],
                 [signature mutableBytes], &count);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
