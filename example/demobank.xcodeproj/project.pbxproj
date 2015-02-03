@@ -10,10 +10,6 @@
 		550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C5199A50A800D2652A /* RtPcsc.framework */; };
 		550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C6199A50A800D2652A /* RtPKCS11ECP.framework */; };
 		550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */; };
-		550F55A619ACC17700EF41E4 /* Certificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F55A519ACC17700EF41E4 /* Certificate.m */; };
-		550F55A919ACC1F900EF41E4 /* Pkcs11Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */; };
-		55243FBB19A71DA80097642D /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBA19A71DA80097642D /* TokenManager.m */; };
-		55243FBE19A71DB60097642D /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243FBD19A71DB60097642D /* Token.m */; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
 		55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8F19B5D8EF00FC1C6A /* SignViewController.m */; };
@@ -28,8 +24,6 @@
 		556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854219AF56A700DF95FB /* battery_4_sec.png */; };
 		556B854919AF56A700DF95FB /* battery_charge.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854319AF56A700DF95FB /* battery_charge.png */; };
 		556B854A19AF56A700DF95FB /* battery_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854419AF56A700DF95FB /* battery_empty.png */; };
-		5573372719B3418000CF0202 /* Pkcs11EventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5573372619B3418000CF0202 /* Pkcs11EventHandler.m */; };
-		5573372A19B375EF00CF0202 /* TokenInfoLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5573372919B375EF00CF0202 /* TokenInfoLoader.m */; };
 		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
 		55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */; };
 		558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C820E19CC0A4D00236C77 /* MBProgressHUD.m */; };
@@ -53,21 +47,19 @@
 		55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8968E199A0C040082A015 /* FirstScreenViewController.m */; };
 		55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89690199A0D0C0082A015 /* ExternalAccessory.framework */; };
 		55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89692199A0D1A0082A015 /* CoreBluetooth.framework */; };
-		A10E590239465D0317C016BE /* ApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = A10E54D3F48E0187229C160B /* ApplicationError.m */; };
+		55EFF3661A80DBB60032A390 /* ApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF2CD1A80DBB60032A390 /* ApplicationError.m */; };
+		55EFF3671A80DBB60032A390 /* Certificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF2CF1A80DBB60032A390 /* Certificate.m */; };
+		55EFF3D21A80DBB60032A390 /* Pkcs11Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF35D1A80DBB60032A390 /* Pkcs11Error.m */; };
+		55EFF3D31A80DBB60032A390 /* Pkcs11EventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF35F1A80DBB60032A390 /* Pkcs11EventHandler.m */; };
+		55EFF3D41A80DBB60032A390 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3611A80DBB60032A390 /* Token.m */; };
+		55EFF3D51A80DBB60032A390 /* TokenInfoLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3631A80DBB60032A390 /* TokenInfoLoader.m */; };
+		55EFF3D61A80DBB60032A390 /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3651A80DBB60032A390 /* TokenManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		550871C5199A50A800D2652A /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = external/pkcs11bin/RtPcsc.framework; sourceTree = "<group>"; };
 		550871C6199A50A800D2652A /* RtPKCS11ECP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPKCS11ECP.framework; path = external/pkcs11bin/RtPKCS11ECP.framework; sourceTree = "<group>"; };
 		550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
-		550F55A419ACC17700EF41E4 /* Certificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Certificate.h; sourceTree = "<group>"; };
-		550F55A519ACC17700EF41E4 /* Certificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Certificate.m; sourceTree = "<group>"; };
-		550F55A719ACC1F900EF41E4 /* Pkcs11Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pkcs11Error.h; sourceTree = "<group>"; };
-		550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pkcs11Error.m; sourceTree = "<group>"; };
-		55243FB919A71DA80097642D /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
-		55243FBA19A71DA80097642D /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenManager.m; sourceTree = "<group>"; };
-		55243FBC19A71DB60097642D /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
-		55243FBD19A71DB60097642D /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		55295B8819B5A12F00FC1C6A /* PaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsTableViewController.h; sourceTree = "<group>"; };
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
 		55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoTableViewController.h; sourceTree = "<group>"; };
@@ -85,10 +77,6 @@
 		556B854219AF56A700DF95FB /* battery_4_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_4_sec.png; sourceTree = "<group>"; };
 		556B854319AF56A700DF95FB /* battery_charge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_charge.png; sourceTree = "<group>"; };
 		556B854419AF56A700DF95FB /* battery_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_empty.png; sourceTree = "<group>"; };
-		5573372519B3418000CF0202 /* Pkcs11EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pkcs11EventHandler.h; sourceTree = "<group>"; };
-		5573372619B3418000CF0202 /* Pkcs11EventHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pkcs11EventHandler.m; sourceTree = "<group>"; };
-		5573372819B375EF00CF0202 /* TokenInfoLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenInfoLoader.h; sourceTree = "<group>"; };
-		5573372919B375EF00CF0202 /* TokenInfoLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenInfoLoader.m; sourceTree = "<group>"; };
 		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
 		55828C6519B1EA00007CAEA7 /* PaymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsViewController.h; sourceTree = "<group>"; };
 		55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsViewController.m; sourceTree = "<group>"; };
@@ -121,9 +109,21 @@
 		55E8968E199A0C040082A015 /* FirstScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstScreenViewController.m; sourceTree = "<group>"; };
 		55E89690199A0D0C0082A015 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		55E89692199A0D1A0082A015 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		55EFF2CC1A80DBB60032A390 /* ApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationError.h; path = ../../ApplicationError.h; sourceTree = "<group>"; };
+		55EFF2CD1A80DBB60032A390 /* ApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplicationError.m; path = ../../ApplicationError.m; sourceTree = "<group>"; };
+		55EFF2CE1A80DBB60032A390 /* Certificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Certificate.h; path = ../../Certificate.h; sourceTree = "<group>"; };
+		55EFF2CF1A80DBB60032A390 /* Certificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Certificate.m; path = ../../Certificate.m; sourceTree = "<group>"; };
+		55EFF35C1A80DBB60032A390 /* Pkcs11Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pkcs11Error.h; path = ../../Pkcs11Error.h; sourceTree = "<group>"; };
+		55EFF35D1A80DBB60032A390 /* Pkcs11Error.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pkcs11Error.m; path = ../../Pkcs11Error.m; sourceTree = "<group>"; };
+		55EFF35E1A80DBB60032A390 /* Pkcs11EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pkcs11EventHandler.h; path = ../../Pkcs11EventHandler.h; sourceTree = "<group>"; };
+		55EFF35F1A80DBB60032A390 /* Pkcs11EventHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pkcs11EventHandler.m; path = ../../Pkcs11EventHandler.m; sourceTree = "<group>"; };
+		55EFF3601A80DBB60032A390 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Token.h; path = ../../Token.h; sourceTree = "<group>"; };
+		55EFF3611A80DBB60032A390 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Token.m; path = ../../Token.m; sourceTree = "<group>"; };
+		55EFF3621A80DBB60032A390 /* TokenInfoLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenInfoLoader.h; path = ../../TokenInfoLoader.h; sourceTree = "<group>"; };
+		55EFF3631A80DBB60032A390 /* TokenInfoLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenInfoLoader.m; path = ../../TokenInfoLoader.m; sourceTree = "<group>"; };
+		55EFF3641A80DBB60032A390 /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenManager.h; path = ../../TokenManager.h; sourceTree = "<group>"; };
+		55EFF3651A80DBB60032A390 /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenManager.m; path = ../../TokenManager.m; sourceTree = "<group>"; };
 		A10E51F08C86AE015D6113AA /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
-		A10E54D3F48E0187229C160B /* ApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationError.m; sourceTree = "<group>"; };
-		A10E5C6B3B044040C7628600 /* ApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationError.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,20 +162,20 @@
 		5573372B19B376F800CF0202 /* TokenManager */ = {
 			isa = PBXGroup;
 			children = (
-				55243FBC19A71DB60097642D /* Token.h */,
-				55243FBD19A71DB60097642D /* Token.m */,
-				550F55A419ACC17700EF41E4 /* Certificate.h */,
-				550F55A519ACC17700EF41E4 /* Certificate.m */,
-				A10E54D3F48E0187229C160B /* ApplicationError.m */,
-				A10E5C6B3B044040C7628600 /* ApplicationError.h */,
-				550F55A719ACC1F900EF41E4 /* Pkcs11Error.h */,
-				550F55A819ACC1F900EF41E4 /* Pkcs11Error.m */,
-				55243FB919A71DA80097642D /* TokenManager.h */,
-				55243FBA19A71DA80097642D /* TokenManager.m */,
-				5573372519B3418000CF0202 /* Pkcs11EventHandler.h */,
-				5573372619B3418000CF0202 /* Pkcs11EventHandler.m */,
-				5573372819B375EF00CF0202 /* TokenInfoLoader.h */,
-				5573372919B375EF00CF0202 /* TokenInfoLoader.m */,
+				55EFF2CC1A80DBB60032A390 /* ApplicationError.h */,
+				55EFF2CD1A80DBB60032A390 /* ApplicationError.m */,
+				55EFF2CE1A80DBB60032A390 /* Certificate.h */,
+				55EFF2CF1A80DBB60032A390 /* Certificate.m */,
+				55EFF35C1A80DBB60032A390 /* Pkcs11Error.h */,
+				55EFF35D1A80DBB60032A390 /* Pkcs11Error.m */,
+				55EFF35E1A80DBB60032A390 /* Pkcs11EventHandler.h */,
+				55EFF35F1A80DBB60032A390 /* Pkcs11EventHandler.m */,
+				55EFF3601A80DBB60032A390 /* Token.h */,
+				55EFF3611A80DBB60032A390 /* Token.m */,
+				55EFF3621A80DBB60032A390 /* TokenInfoLoader.h */,
+				55EFF3631A80DBB60032A390 /* TokenInfoLoader.m */,
+				55EFF3641A80DBB60032A390 /* TokenManager.h */,
+				55EFF3651A80DBB60032A390 /* TokenManager.m */,
 			);
 			name = TokenManager;
 			sourceTree = "<group>";
@@ -380,22 +380,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55243FBB19A71DA80097642D /* TokenManager.m in Sources */,
+				55EFF3D41A80DBB60032A390 /* Token.m in Sources */,
 				55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */,
-				5573372719B3418000CF0202 /* Pkcs11EventHandler.m in Sources */,
+				55EFF3D21A80DBB60032A390 /* Pkcs11Error.m in Sources */,
 				55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */,
-				550F55A619ACC17700EF41E4 /* Certificate.m in Sources */,
 				55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */,
 				55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */,
+				55EFF3D31A80DBB60032A390 /* Pkcs11EventHandler.m in Sources */,
 				558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */,
-				550F55A919ACC1F900EF41E4 /* Pkcs11Error.m in Sources */,
+				55EFF3D61A80DBB60032A390 /* TokenManager.m in Sources */,
+				55EFF3D51A80DBB60032A390 /* TokenInfoLoader.m in Sources */,
 				55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */,
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
-				55243FBE19A71DB60097642D /* Token.m in Sources */,
+				55EFF3671A80DBB60032A390 /* Certificate.m in Sources */,
+				55EFF3661A80DBB60032A390 /* ApplicationError.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
-				A10E590239465D0317C016BE /* ApplicationError.m in Sources */,
 				55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */,
-				5573372A19B375EF00CF0202 /* TokenInfoLoader.m in Sources */,
 				55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
