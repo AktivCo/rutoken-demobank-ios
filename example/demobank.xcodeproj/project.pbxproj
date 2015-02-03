@@ -48,7 +48,6 @@
 		55E8965D199A02DA0082A015 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E8965B199A02DA0082A015 /* InfoPlist.strings */; };
 		55E8965F199A02DA0082A015 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8965E199A02DA0082A015 /* main.m */; };
 		55E89663199A02DA0082A015 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E89662199A02DA0082A015 /* AppDelegate.m */; };
-		55E89666199A02DA0082A015 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E89664199A02DA0082A015 /* Main_iPhone.storyboard */; };
 		55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E89667199A02DA0082A015 /* Main_iPad.storyboard */; };
 		55E8966E199A02DA0082A015 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E8966D199A02DA0082A015 /* Images.xcassets */; };
 		55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8968E199A0C040082A015 /* FirstScreenViewController.m */; };
@@ -116,10 +115,8 @@
 		55E89660199A02DA0082A015 /* demobank-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demobank-Prefix.pch"; sourceTree = "<group>"; };
 		55E89661199A02DA0082A015 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		55E89662199A02DA0082A015 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		55E89665199A02DA0082A015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		55E89668199A02DA0082A015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		55E8966D199A02DA0082A015 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		55E89674199A02DA0082A015 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		55E8968D199A0C040082A015 /* FirstScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstScreenViewController.h; sourceTree = "<group>"; };
 		55E8968E199A0C040082A015 /* FirstScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstScreenViewController.m; sourceTree = "<group>"; };
 		55E89690199A0D0C0082A015 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -264,7 +261,6 @@
 				55E89652199A02DA0082A015 /* Foundation.framework */,
 				55E89654199A02DA0082A015 /* CoreGraphics.framework */,
 				55E89656199A02DA0082A015 /* UIKit.framework */,
-				55E89674199A02DA0082A015 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -274,7 +270,6 @@
 			children = (
 				55E89661199A02DA0082A015 /* AppDelegate.h */,
 				55E89662199A02DA0082A015 /* AppDelegate.m */,
-				55E89664199A02DA0082A015 /* Main_iPhone.storyboard */,
 				55E89667199A02DA0082A015 /* Main_iPad.storyboard */,
 				55E8966D199A02DA0082A015 /* Images.xcassets */,
 				55E89659199A02DA0082A015 /* Supporting Files */,
@@ -372,7 +367,6 @@
 				556B854719AF56A700DF95FB /* battery_3_sec.png in Resources */,
 				557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */,
 				553D266F19FA7D590032099F /* line.png in Resources */,
-				55E89666199A02DA0082A015 /* Main_iPhone.storyboard in Resources */,
 				55E8965D199A02DA0082A015 /* InfoPlist.strings in Resources */,
 				556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */,
 				556B854519AF56A700DF95FB /* battery_1_sec.png in Resources */,
@@ -415,14 +409,6 @@
 				55E8965C199A02DA0082A015 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		55E89664199A02DA0082A015 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55E89665199A02DA0082A015 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 		55E89667199A02DA0082A015 /* Main_iPad.storyboard */ = {
