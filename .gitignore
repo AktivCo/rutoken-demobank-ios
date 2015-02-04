@@ -1,3 +1,6 @@
-/demobank.xcodeproj/project.xcworkspace
-/demobank.xcodeproj/xcuserdata/
+/example/demobank.xcodeproj/project.xcworkspace
+/example/demobank.xcodeproj/xcuserdata/
 .DS_Store
+*.xccheckout
+/example/Build
+/example/external
