@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C5199A50A800D2652A /* RtPcsc.framework */; };
-		550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550871C6199A50A800D2652A /* RtPKCS11ECP.framework */; };
 		550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
@@ -57,8 +55,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		550871C5199A50A800D2652A /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = external/pkcs11bin/RtPcsc.framework; sourceTree = "<group>"; };
-		550871C6199A50A800D2652A /* RtPKCS11ECP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPKCS11ECP.framework; path = external/pkcs11bin/RtPKCS11ECP.framework; sourceTree = "<group>"; };
 		550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		55295B8819B5A12F00FC1C6A /* PaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsTableViewController.h; sourceTree = "<group>"; };
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
@@ -133,8 +129,6 @@
 			files = (
 				550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */,
 				55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */,
-				550871C7199A50A800D2652A /* RtPcsc.framework in Frameworks */,
-				550871C8199A50A800D2652A /* RtPKCS11ECP.framework in Frameworks */,
 				55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */,
 				55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */,
 				55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */,
@@ -254,8 +248,6 @@
 			children = (
 				550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */,
 				55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */,
-				550871C5199A50A800D2652A /* RtPcsc.framework */,
-				550871C6199A50A800D2652A /* RtPKCS11ECP.framework */,
 				55E89692199A0D1A0082A015 /* CoreBluetooth.framework */,
 				55E89690199A0D0C0082A015 /* ExternalAccessory.framework */,
 				55E89652199A02DA0082A015 /* Foundation.framework */,
@@ -320,11 +312,6 @@
 			attributes = {
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Aktiv Co";
-				TargetAttributes = {
-					55E8964E199A02DA0082A015 = {
-						DevelopmentTeam = TRCKC8GFT7;
-					};
-				};
 			};
 			buildConfigurationList = 55E8964A199A02DA0082A015 /* Build configuration list for PBXProject "demobank" */;
 			compatibilityVersion = "Xcode 3.2";
