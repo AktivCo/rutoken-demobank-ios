@@ -1,0 +1,48 @@
+##Описание
+
+Рутокен DemoBank это демонстрационное приложение которое позволяет показать типичное применение электронного идентификатора [Рутокен ЭЦП Bluetooth] (http://www.rutoken.ru/products/all/rutoken-ecp-bluetooth/) на практике, а также содержит классы значительно упрощающие работу со сложным устройством совмещающем в себе логику поведения как типичного Buetooth-аксессуара, так и смарт-карты со считывателем.
+
+##Требования
+
+Рутокен DemoBank собирается на iOS SDK 8.1 и запускается на устройствах c iOS начиная с 6.1.3 
+
+Внешние зависимости находятся в [Рутокен SDK] (http://www.rutoken.ru/developers/sdk/)
+
+Необходимые фреймворки:
+* RtPKCS11ECP.framework (Rutoken SDK)
+* RtPcsc.framework (Rutoken SDK)
+
+##Как собрать
+
+* открыть example/demobank.xcodeproj
+* в разделе General/Identity установить правильный Signing Identity
+* в разделе Build Phases/Link Binary With Libraries добавить фреймворки из Рутокен SDK:
+> Libs/ios/pcsc/RtPcsc.framework
+> Libs/ios/pkcs11/static/RtPKCS11ECP.framework
+
+##Ограничения
+
+* Приложение Рутокен DemoBank не может быть запущено только на физических iOS устройствах, не в эмуляторе
+* В настоящий момент поддерживается только экран iPad 
+
+##Лицензия
+
+Исходный код демонстрационного приложения в файлах
+* Application Error.h
+* Application Error.m
+* Certificate.h
+* Certificate.m
+* Pkcs11Error.h
+* Pkcs11Error.m
+* Pkcs11EventHandler.h
+* Pkcs11EventHandler.m
+* Token.h
+* Token.m
+* TokenInfoLoader.h
+* TokenInfoLoader.m
+* TokenManager.h
+* TokenManager.m
+распространяется по академической лицензии MIT [текст лицензии] (LICENSE_RUS)
+
+остальные файлы являются объектами интеллектуальной собственности ЗАО "Актив-Софт" и не могут быть распространены в измененном/модифицированном виде без прямого согласия правообладателя
+[подробнее] (https://download.rutoken.ru/License_Agreement.pdf)
