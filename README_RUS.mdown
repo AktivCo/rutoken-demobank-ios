@@ -17,8 +17,8 @@
 * открыть example/demobank.xcodeproj
 * в разделе General/Identity установить правильный Signing Identity
 * в разделе Build Phases/Link Binary With Libraries добавить фреймворки из Рутокен SDK:
-> Libs/ios/pcsc/RtPcsc.framework
-> Libs/ios/pkcs11/static/RtPKCS11ECP.framework
+	- Libs/ios/pcsc/RtPcsc.framework
+	- Libs/ios/pkcs11/static/RtPKCS11ECP.framework
 
 ##Ограничения
 
