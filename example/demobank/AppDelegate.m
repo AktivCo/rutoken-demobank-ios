@@ -1,10 +1,5 @@
-//
-//  AppDelegate.m
-//  demobank
-//
-//  Created by Андрей Трифонов on 12.08.14.
-//  Copyright (c) 2014 Aktiv Co. All rights reserved.
-//
+// Copyright (c) 2015, CJSC Aktiv-Soft. See https://download.rutoken.ru/License_Agreement.pdf
+// All Rights Reserved.
 
 #import "AppDelegate.h"
 
