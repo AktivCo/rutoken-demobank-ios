@@ -27,22 +27,6 @@
 
 ##Лицензия
 
-Исходный код демонстрационного приложения в файлах
-* Application Error.h
-* Application Error.m
-* Certificate.h
-* Certificate.m
-* Pkcs11Error.h
-* Pkcs11Error.m
-* Pkcs11EventHandler.h
-* Pkcs11EventHandler.m
-* Token.h
-* Token.m
-* TokenInfoLoader.h
-* TokenInfoLoader.m
-* TokenManager.h
-* TokenManager.m
-распространяется по академической лицензии MIT [текст лицензии] (LICENSE_RUS)
+Программный код проекта распространяется по [модифицированной лицензии BSD] (LICENSE_RUS),
+содержимое папки examlple содержит объекты авторского права и распространяется по коммерческой лицензии ЗАО "Актив-Софт", [текст лицензии] (https://download.rutoken.ru/License_Agreement.pdf).
 
-остальные файлы являются объектами интеллектуальной собственности ЗАО "Актив-Софт" и не могут быть распространены в измененном/модифицированном виде без прямого согласия правообладателя
-[подробнее] (https://download.rutoken.ru/License_Agreement.pdf)
