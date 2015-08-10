@@ -128,7 +128,7 @@ static const double kChargingVoltage = 4800;
         
             [self readCertificates];
         } @catch (NSError* e) {
-            C_CloseSession(_session);
+            _functions->C_CloseSession(_session);
             return nil;
         }
     }

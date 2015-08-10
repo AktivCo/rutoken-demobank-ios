@@ -28,7 +28,7 @@
 		
 		NSString *cert=[[NSString alloc]initWithBytes:data length:length encoding:NSUTF8StringEncoding];
 		
-		rv = C_EX_FreeBuffer(data);
+		rv = extendedFunctions->C_EX_FreeBuffer(data);
 		
 		NSError *error = nil;
 		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"Subject: CN=([^\n]*)\n" options:NSRegularExpressionCaseInsensitive error:&error];
