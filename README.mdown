@@ -11,16 +11,16 @@ Rutoken DemoBank should be built using iOS SDK 8.1 and supports iOS 6.1.3 and ne
 External dependencies are located in [Rutoken SDK] (http://www.rutoken.ru/developers/sdk/) 
 
 Required frameworks:
-* RtPKCS11ECP.framework (Rutoken SDK)
-* RtPcsc.framework (Rutoken SDK)
+* Libs/ios/pcsc/RtPcsc.framework (Rutoken SDK)
+* Libs/ios/pkcs11/static/RtPKCS11ECP.framework (Rutoken SDK)
 
 ##How to build
-
+* copy frameworks to example/external/pkcs11bin
 * open example/demobank.xcodeproj
 * in General/Identity set correct Signing Identity
 * in Build Phases/Link Binary With Libraries add frameworks from Rutoken SDK:
-	- Libs/ios/pcsc/RtPcsc.framework
-	- Libs/ios/pkcs11/static/RtPKCS11ECP.framework
+	- RtPcsc.framework
+	- RtPKCS11ECP.framework
 
 ##Preliminary actions
 

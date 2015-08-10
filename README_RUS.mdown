@@ -11,16 +11,17 @@
 Внешние зависимости находятся в [Рутокен SDK] (http://www.rutoken.ru/developers/sdk/)
 
 Необходимые фреймворки:
-* RtPKCS11ECP.framework (Rutoken SDK)
-* RtPcsc.framework (Rutoken SDK)
+* Libs/ios/pcsc/RtPcsc.framework (Rutoken SDK)
+* Libs/ios/pkcs11/static/RtPKCS11ECP.framework (Rutoken SDK)
 
 ##Как собрать
 
+* положить фреймворки в example/external/pkcs11bin
 * открыть example/demobank.xcodeproj
 * в разделе General/Identity установить правильный Signing Identity
 * в разделе Build Phases/Link Binary With Libraries добавить фреймворки из Рутокен SDK:
-	- Libs/ios/pcsc/RtPcsc.framework
-	- Libs/ios/pkcs11/static/RtPKCS11ECP.framework
+	- RtPcsc.framework
+	- RtPKCS11ECP.framework
 
 ##Предварительные действия
 Чтобы создать на Рутокен ЭЦП Bluetooth ключевую пару и сертификат, проделайте следующие действия
@@ -36,7 +37,7 @@
 
 ##Ограничения
 
-* Приложение Рутокен DemoBank не может быть запущено только на физических iOS устройствах, не в эмуляторе
+* Приложение Рутокен DemoBank может быть запущено только на физических iOS устройствах, не в эмуляторе
 * В настоящий момент поддерживается только экран iPad 
 
 ##Лицензия
