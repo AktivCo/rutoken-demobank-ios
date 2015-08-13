@@ -8,7 +8,8 @@
 @interface Certificate : NSObject
 
 @property(nonatomic, readonly) NSString* cn;
-@property(nonatomic, readonly) NSData* id;
+@property(nonatomic, readwrite) NSData* id;
+@property(nonatomic, readonly) NSData* value;
 
 -(id)initWithSession:(CK_SESSION_HANDLE)session object:(CK_OBJECT_HANDLE)object;
 

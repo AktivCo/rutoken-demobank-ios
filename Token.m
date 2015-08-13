@@ -58,6 +58,46 @@ static const double kChargingVoltage = 4800;
     CK_RV rv2 = [self functions]->C_FindObjectsFinal(_session); // we should always call C_FindObjectsFinal, even after an error (see pkcs11 standart for more info...)
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
     if (CKR_OK != rv2) @throw [Pkcs11Error errorWithCode:rv2];
+    
+    //This code only for thoose who hasn't read pkcs11 standart
+    //and set different CKA_ID for key and cert
+    //You should delete it, unless you know, that key's and cert's CKA_IDs are different
+    for (Certificate* cert in _certificates) {
+        CK_OBJECT_CLASS keyClass = CKO_PUBLIC_KEY;
+        
+        CK_ATTRIBUTE keyTemplatebyValue[] = {
+            {CKA_CLASS, &keyClass, sizeof(keyClass)},
+            {CKA_VALUE, (void*)[[cert value] bytes], [[cert value] length]}
+        };
+        
+        rv = [self functions]->C_FindObjectsInit(_session, keyTemplatebyValue, ARRAY_LENGTH(keyTemplatebyValue));
+        if (CKR_OK != rv) continue;
+        
+        CK_OBJECT_HANDLE objects[2];
+        CK_ULONG count;
+        rv = [self functions]->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
+        
+        rv2 = [self functions]->C_FindObjectsFinal(_session); // we should always call C_FindObjectsFinal, even after an error (see pkcs11 standart for more info...)
+        if (CKR_OK != rv) [Pkcs11Error errorWithCode:rv];
+        if (CKR_OK != rv2) [Pkcs11Error errorWithCode:rv2];
+        
+        if (count == 1) { //we found exactly one key, so it's cert's public key, now we have to check CKA_ID to avoid pkcs11 violation.
+            CK_ATTRIBUTE attributes[] = {
+                {CKA_ID, nil, 0}
+            };
+            
+            rv = [self functions]->C_GetAttributeValue(_session, objects[0], attributes, ARRAY_LENGTH(attributes));
+            if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+            
+            NSMutableData* idData = [NSMutableData dataWithLength:attributes[0].ulValueLen];
+            attributes[0].pValue = [idData mutableBytes];
+            
+            rv = [self functions]->C_GetAttributeValue(_session, objects[0], attributes, ARRAY_LENGTH(attributes));
+            if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+            
+            [cert setId:[NSData dataWithData:idData]];
+        }
+    }
 }
 
 -(void)updateTokenInfoFromSlot:(CK_SLOT_ID)slotId {
@@ -180,6 +220,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
 -(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSData*))successCallback
   errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+        //Looking for private key by cert id
         CK_OBJECT_CLASS keyClass = CKO_PRIVATE_KEY;
         CK_ATTRIBUTE template[] = {
                 {CKA_CLASS, &keyClass, sizeof(keyClass)},

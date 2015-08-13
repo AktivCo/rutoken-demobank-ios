@@ -6,6 +6,59 @@
 #import "Util.h"
 #import "Pkcs11Error.h"
 
+@interface NSString (toData)
+- (NSData *)dataFromHexString;
+@end
+
+@implementation NSString (toData)
+
+- (NSData *)dataFromHexString {
+    const char *chars = [self UTF8String];
+    int i = 0, len = self.length;
+    
+    NSMutableData *data = [NSMutableData dataWithCapacity:len / 2];
+    char byteChars[3] = {'\0','\0','\0'};
+    unsigned long wholeByte;
+    
+    while (i < len) {
+        byteChars[0] = chars[i++];
+        byteChars[1] = chars[i++];
+        wholeByte = strtoul(byteChars, NULL, 16);
+        [data appendBytes:&wholeByte length:1];
+    }
+    
+    return data;
+}
+
+@end
+
+@interface NSData (reversible)
+- (NSData*) reversedData;
+@end
+
+@implementation NSData (reversible)
+
+- (NSData*) reversedData
+{
+    NSData *myData = self;
+    
+    const char *bytes = [myData bytes];
+    
+    NSUInteger datalength = [myData length];
+    
+    char *reverseBytes = malloc(sizeof(char) * datalength);
+    NSUInteger index = datalength - 1;
+    
+    for (int i = 0; i < datalength; i++)
+        reverseBytes[index--] = bytes[i];
+    
+    NSData *reversedData = [NSData dataWithBytesNoCopy:reverseBytes length: datalength freeWhenDone:YES];
+    
+    return reversedData;
+}
+
+@end
+
 @implementation Certificate
 
 - (id)initWithSession:(CK_SESSION_HANDLE)session object:(CK_OBJECT_HANDLE)object {
@@ -40,6 +93,20 @@
 			_cn = @"";
 			NSLog(@"Failed to find CN");
 		}
+        
+        NSRegularExpression *regexX = [NSRegularExpression regularExpressionWithPattern:@"X:([0-9A-F]*)\n" options:0 error:&error];
+        NSRegularExpression *regexY = [NSRegularExpression regularExpressionWithPattern:@"Y:([0-9A-F]*)\n" options:0 error:&error];
+        NSTextCheckingResult *matchX = [regexX firstMatchInString:cert options:0 range:NSMakeRange(0, [cert length])];
+        NSTextCheckingResult *matchY = [regexY firstMatchInString:cert options:0 range:NSMakeRange(0, [cert length])];
+        
+        if (matchX != nil && matchY != nil) {
+            NSMutableData* valueData = [NSMutableData dataWithData:[[[cert substringWithRange:[matchX rangeAtIndex:1]] dataFromHexString] reversedData]];
+            [valueData appendData:[[[cert substringWithRange:[matchY rangeAtIndex:1]] dataFromHexString] reversedData]];
+            _value = [NSData dataWithData:valueData];
+        } else {
+            _value = nil;
+            NSLog(@"Failed to find value");
+        }
 		
 		CK_ATTRIBUTE attributes[] = {
 			{CKA_ID, nil, 0}
@@ -54,8 +121,8 @@
 		rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
 		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 		
-		_id = [NSData dataWithData:idData];
-		
+        _id = [NSData dataWithData:idData];
+        
 		return self;
 		
 	} @catch (NSError* e){
