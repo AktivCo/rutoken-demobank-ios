@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	} tokenRemovedCallback:^(CK_SLOT_ID slotId){
 		[self processTokenWasRemovedAtSlotId:slotId];
 	} errorCallback:^(NSError * e) {
-		NSLog(@"Error in pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
+		NSLog(@"Error in pkcs11EventHandler, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
 		@throw [ApplicationError errorWithCode:UnrecoverableError];
 			  }];
 }
@@ -79,7 +79,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		
 		[self.pkcs11EventHandler stopMonitoring];
 	} @catch(NSError* e){
-		NSLog(@"Failed to stop pkcs11EventHandler, reason: %d (%@)", [e code], [e localizedDescription]);
+		NSLog(@"Failed to stop pkcs11EventHandler, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
 		@throw [ApplicationError errorWithCode:UnrecoverableError];
 	}
 }
@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
         }
         [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
     } @catch(NSError* e){
-        NSLog(@"Token Manager iternal error occured, reason: %d (%@)", [e code], [e localizedDescription]);
+        NSLog(@"Token Manager iternal error occured, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
         @throw [ApplicationError errorWithCode:UnrecoverableError];
     }
 }
@@ -195,7 +195,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
         }
         [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
     } @catch(NSError* e){
-        NSLog(@"Token Manager iternal error occured, reason: %d (%@)", [e code], [e localizedDescription]);
+        NSLog(@"Token Manager iternal error occured, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
         @throw [ApplicationError errorWithCode:UnrecoverableError];
     }
 	
@@ -243,7 +243,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
         }
         [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
     } @catch(NSError* e){
-        NSLog(@"Token Manager iternal error occured, reason: %d (%@)", [e code], [e localizedDescription]);
+        NSLog(@"Token Manager iternal error occured, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
         @throw [ApplicationError errorWithCode:UnrecoverableError];
     }
 }
@@ -283,7 +283,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
         }
         [self.slotStates setObject:[NSNumber numberWithInteger:nextState] forKey:[NSNumber numberWithUnsignedLong:slotId]];
     } @catch(NSError* e){
-        NSLog(@"Token Manager iternal error occured, reason: %d (%@)", [e code], [e localizedDescription]);
+        NSLog(@"Token Manager iternal error occured, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
         @throw [ApplicationError errorWithCode:UnrecoverableError];
     }
 }

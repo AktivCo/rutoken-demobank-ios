@@ -32,7 +32,7 @@
         
         NSUInteger decSerial;
         [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
-        NSString* decSerialString = [NSString stringWithFormat:@"0%u", decSerial];
+        NSString* decSerialString = [NSString stringWithFormat:@"0%lu", (unsigned long)decSerial];
         tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
         [_tokenModelLabel setText:tokenLabel];
         
@@ -43,7 +43,7 @@
         else if ([token charge] <= 40 && [token charge] > 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_1_sec.png"]];
         else if ([token charge] <= 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_empty.png"]];
         
-        [_batteryPercentageLabel setText:[NSString stringWithFormat:@"%u%%" ,(NSUInteger)[token charge]]];
+        [_batteryPercentageLabel setText:[NSString stringWithFormat:@"%lu%%" ,(unsigned long)[token charge]]];
     }
 }
 

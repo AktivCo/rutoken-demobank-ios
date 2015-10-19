@@ -127,7 +127,7 @@
 		return self;
 		
 	} @catch (NSError* e){
-		NSLog(@"Error in certificate's init, reason: %d (%@)", [e code], [e localizedDescription]);
+		NSLog(@"Error in certificate's init, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
 		return nil;
 	}
 }
