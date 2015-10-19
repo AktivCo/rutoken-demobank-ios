@@ -34,6 +34,8 @@
 		55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911BA519B1A9BD005E38ED /* PinEnterViewController.m */; };
 		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
 		55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C244FB19B092A100DF5964 /* DemobankNavigationController.m */; };
+		55E7FEF01BD4C86E00E1F254 /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E7FEEE1BD4C86E00E1F254 /* RtPcsc.framework */; };
+		55E7FEF11BD4C86E00E1F254 /* rtpkcs11ecp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E7FEEF1BD4C86E00E1F254 /* rtpkcs11ecp.framework */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
 		55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89654199A02DA0082A015 /* CoreGraphics.framework */; };
 		55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
@@ -89,6 +91,8 @@
 		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		55C244FA19B092A100DF5964 /* DemobankNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemobankNavigationController.h; sourceTree = "<group>"; };
 		55C244FB19B092A100DF5964 /* DemobankNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemobankNavigationController.m; sourceTree = "<group>"; };
+		55E7FEEE1BD4C86E00E1F254 /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = external/pkcs11bin/RtPcsc.framework; sourceTree = "<group>"; };
+		55E7FEEF1BD4C86E00E1F254 /* rtpkcs11ecp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = rtpkcs11ecp.framework; path = external/pkcs11bin/rtpkcs11ecp.framework; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89652199A02DA0082A015 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55E89654199A02DA0082A015 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,6 +131,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E7FEF01BD4C86E00E1F254 /* RtPcsc.framework in Frameworks */,
+				55E7FEF11BD4C86E00E1F254 /* rtpkcs11ecp.framework in Frameworks */,
 				550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */,
 				55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */,
 				55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */,
@@ -246,6 +252,8 @@
 		55E89651199A02DA0082A015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55E7FEEE1BD4C86E00E1F254 /* RtPcsc.framework */,
+				55E7FEEF1BD4C86E00E1F254 /* rtpkcs11ecp.framework */,
 				550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */,
 				55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */,
 				55E89692199A0D1A0082A015 /* CoreBluetooth.framework */,
@@ -488,6 +496,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/external/pkcs11bin",
@@ -512,6 +521,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/external/pkcs11bin",
