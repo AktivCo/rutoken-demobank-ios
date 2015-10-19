@@ -84,7 +84,7 @@
 		rv = extendedFunctions->C_EX_FreeBuffer(data);
 		
 		NSError *error = nil;
-		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"Subject: CN=([^\n]*)\n" options:NSRegularExpressionCaseInsensitive error:&error];
+		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"Subject: [A-Za-z,=]*?CN=([^\n,]*)" options:NSRegularExpressionCaseInsensitive error:&error];
 		NSTextCheckingResult *match = [regex firstMatchInString:cert options:0 range:NSMakeRange(0, [cert length])];
 		
 		if (match != nil) {

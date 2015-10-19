@@ -12,6 +12,11 @@ static const double kVoltageMin = 3500;
 static const double kVoltageMax = 4200;
 static const double kChargingVoltage = 4800;
 
+typedef NS_ENUM(CK_ULONG, CertificateCategory) {
+    CertificateCategoryUnspecified = 0,
+    CertificateCategoryUser = 1,
+};
+
 @interface Token ()
 
 @property(nonatomic) CK_FUNCTION_LIST_PTR functions;
@@ -30,12 +35,11 @@ static const double kChargingVoltage = 4800;
 	return [[NSString alloc] initWithBytes:string length:i encoding:NSUTF8StringEncoding];
 }
 
-- (void)readCertificates {
+- (void)readCertificatesWithCategory:(CK_ULONG) category {
     CK_OBJECT_CLASS certClass = CKO_CERTIFICATE;
-    CK_ULONG certCategory = 1;     //user category
     CK_ATTRIBUTE template[] = {
             {CKA_CLASS, &certClass, sizeof(certClass)},
-            {CKA_CERTIFICATE_CATEGORY, &certCategory, sizeof(certCategory)}
+            {CKA_CERTIFICATE_CATEGORY, &category, sizeof(category)}
     };
 
     CK_RV rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
@@ -166,7 +170,8 @@ static const double kChargingVoltage = 4800;
 		@try{
 			_certificates = [NSMutableArray array];
         
-            [self readCertificates];
+            [self readCertificatesWithCategory:CertificateCategoryUnspecified];
+            [self readCertificatesWithCategory:CertificateCategoryUser];
         } @catch (NSError* e) {
             _functions->C_CloseSession(_session);
             return nil;
