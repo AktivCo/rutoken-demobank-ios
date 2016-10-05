@@ -25,7 +25,7 @@
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager*)central {
-	CBCentralManagerState state = [central state];
+	CBCentralManagerState state = (CBCentralManagerState)[central state];
 	if (CBCentralManagerStatePoweredOn == state) {
 		_poweredOn = YES;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"BluetoothWasPoweredOn" object:self];

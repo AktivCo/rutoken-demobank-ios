@@ -30,7 +30,7 @@
         if([[token model] isEqualToString:@"Rutoken ECP BT"]) tokenLabel = @"Рутокен ЭЦП Bluetooth";
         else tokenLabel = @"Рутокен";
         
-        NSUInteger decSerial;
+        uint decSerial;
         [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
         NSString* decSerialString = [NSString stringWithFormat:@"0%lu", (unsigned long)decSerial];
         tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
