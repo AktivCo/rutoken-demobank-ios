@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C81D75520E0F37D000D8AD1 /* rtpkcs11ecp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; };
+		4C81D75720E0F390000D8AD1 /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75620E0F390000D8AD1 /* RtPcsc.framework */; };
+		4C81D75820E0F397000D8AD1 /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75620E0F390000D8AD1 /* RtPcsc.framework */; };
+		4C81D75920E0F397000D8AD1 /* RtPcsc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75620E0F390000D8AD1 /* RtPcsc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C81D75A20E0F397000D8AD1 /* rtpkcs11ecp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; };
+		4C81D75B20E0F397000D8AD1 /* rtpkcs11ecp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
@@ -15,7 +21,6 @@
 		5541E55819C9A0BB001FD9E8 /* ipad_grey_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */; };
 		5541E55C19C9A732001FD9E8 /* ipad_black_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55B19C9A732001FD9E8 /* ipad_black_background.png */; };
 		5541E55E19C9B830001FD9E8 /* ipad_white_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55D19C9B830001FD9E8 /* ipad_white_background.png */; };
-		55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */; };
 		556B854519AF56A700DF95FB /* battery_1_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B853F19AF56A700DF95FB /* battery_1_sec.png */; };
 		556B854619AF56A700DF95FB /* battery_2_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854019AF56A700DF95FB /* battery_2_sec.png */; };
 		556B854719AF56A700DF95FB /* battery_3_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854119AF56A700DF95FB /* battery_3_sec.png */; };
@@ -34,8 +39,6 @@
 		55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911BA519B1A9BD005E38ED /* PinEnterViewController.m */; };
 		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
 		55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C244FB19B092A100DF5964 /* DemobankNavigationController.m */; };
-		55E7FEF01BD4C86E00E1F254 /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E7FEEE1BD4C86E00E1F254 /* RtPcsc.framework */; };
-		55E7FEF11BD4C86E00E1F254 /* rtpkcs11ecp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E7FEEF1BD4C86E00E1F254 /* rtpkcs11ecp.framework */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
 		55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89654199A02DA0082A015 /* CoreGraphics.framework */; };
 		55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
@@ -56,7 +59,24 @@
 		55EFF3D61A80DBB60032A390 /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3651A80DBB60032A390 /* TokenManager.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4C81D75C20E0F397000D8AD1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4C81D75B20E0F397000D8AD1 /* rtpkcs11ecp.framework in Embed Frameworks */,
+				4C81D75920E0F397000D8AD1 /* RtPcsc.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = rtpkcs11ecp.framework; path = Framework/rtpkcs11ecp.framework; sourceTree = "<group>"; };
+		4C81D75620E0F390000D8AD1 /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = Framework/RtPcsc.framework; sourceTree = "<group>"; };
 		550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		55295B8819B5A12F00FC1C6A /* PaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsTableViewController.h; sourceTree = "<group>"; };
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
@@ -68,7 +88,6 @@
 		5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_grey_background.png; sourceTree = "<group>"; };
 		5541E55B19C9A732001FD9E8 /* ipad_black_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_black_background.png; sourceTree = "<group>"; };
 		5541E55D19C9B830001FD9E8 /* ipad_white_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_white_background.png; sourceTree = "<group>"; };
-		55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		556B853F19AF56A700DF95FB /* battery_1_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_1_sec.png; sourceTree = "<group>"; };
 		556B854019AF56A700DF95FB /* battery_2_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_2_sec.png; sourceTree = "<group>"; };
 		556B854119AF56A700DF95FB /* battery_3_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_3_sec.png; sourceTree = "<group>"; };
@@ -91,8 +110,6 @@
 		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		55C244FA19B092A100DF5964 /* DemobankNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemobankNavigationController.h; sourceTree = "<group>"; };
 		55C244FB19B092A100DF5964 /* DemobankNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemobankNavigationController.m; sourceTree = "<group>"; };
-		55E7FEEE1BD4C86E00E1F254 /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = external/pkcs11bin/RtPcsc.framework; sourceTree = "<group>"; };
-		55E7FEEF1BD4C86E00E1F254 /* rtpkcs11ecp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = rtpkcs11ecp.framework; path = external/pkcs11bin/rtpkcs11ecp.framework; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89652199A02DA0082A015 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55E89654199A02DA0082A015 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -131,15 +148,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E7FEF01BD4C86E00E1F254 /* RtPcsc.framework in Frameworks */,
-				55E7FEF11BD4C86E00E1F254 /* rtpkcs11ecp.framework in Frameworks */,
+				4C81D75720E0F390000D8AD1 /* RtPcsc.framework in Frameworks */,
+				4C81D75A20E0F397000D8AD1 /* rtpkcs11ecp.framework in Frameworks */,
+				4C81D75520E0F37D000D8AD1 /* rtpkcs11ecp.framework in Frameworks */,
 				550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */,
-				55450A82199B5D1F00A0E8A9 /* libstdc++.dylib in Frameworks */,
 				55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */,
 				55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */,
 				55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */,
 				55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */,
 				55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */,
+				4C81D75820E0F397000D8AD1 /* RtPcsc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,10 +270,9 @@
 		55E89651199A02DA0082A015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				55E7FEEE1BD4C86E00E1F254 /* RtPcsc.framework */,
-				55E7FEEF1BD4C86E00E1F254 /* rtpkcs11ecp.framework */,
+				4C81D75620E0F390000D8AD1 /* RtPcsc.framework */,
+				4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */,
 				550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */,
-				55450A81199B5D1F00A0E8A9 /* libstdc++.dylib */,
 				55E89692199A0D1A0082A015 /* CoreBluetooth.framework */,
 				55E89690199A0D0C0082A015 /* ExternalAccessory.framework */,
 				55E89652199A02DA0082A015 /* Foundation.framework */,
@@ -302,6 +319,7 @@
 				55E8964B199A02DA0082A015 /* Sources */,
 				55E8964C199A02DA0082A015 /* Frameworks */,
 				55E8964D199A02DA0082A015 /* Resources */,
+				4C81D75C20E0F397000D8AD1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -517,12 +535,13 @@
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/external/pkcs11bin",
+					"$(PROJECT_DIR)/Framework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
 				INFOPLIST_FILE = "demobank/demobank-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.rutoken.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -544,12 +563,13 @@
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/external/pkcs11bin",
+					"$(PROJECT_DIR)/Framework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
 				INFOPLIST_FILE = "demobank/demobank-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.rutoken.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
