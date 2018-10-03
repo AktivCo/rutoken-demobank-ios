@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C5626B32164F37200379AF5 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5626B22164F37200379AF5 /* libc++.tbd */; };
 		4C81D75520E0F37D000D8AD1 /* rtpkcs11ecp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; };
 		4C81D75720E0F390000D8AD1 /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75620E0F390000D8AD1 /* RtPcsc.framework */; };
 		4C81D75820E0F397000D8AD1 /* RtPcsc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75620E0F390000D8AD1 /* RtPcsc.framework */; };
 		4C81D75920E0F397000D8AD1 /* RtPcsc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75620E0F390000D8AD1 /* RtPcsc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C81D75A20E0F397000D8AD1 /* rtpkcs11ecp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; };
 		4C81D75B20E0F397000D8AD1 /* rtpkcs11ecp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
 		55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8F19B5D8EF00FC1C6A /* SignViewController.m */; };
@@ -75,9 +75,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C5626B22164F37200379AF5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = rtpkcs11ecp.framework; path = Framework/rtpkcs11ecp.framework; sourceTree = "<group>"; };
 		4C81D75620E0F390000D8AD1 /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = Framework/RtPcsc.framework; sourceTree = "<group>"; };
-		550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		55295B8819B5A12F00FC1C6A /* PaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsTableViewController.h; sourceTree = "<group>"; };
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
 		55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoTableViewController.h; sourceTree = "<group>"; };
@@ -151,10 +151,10 @@
 				4C81D75720E0F390000D8AD1 /* RtPcsc.framework in Frameworks */,
 				4C81D75A20E0F397000D8AD1 /* rtpkcs11ecp.framework in Frameworks */,
 				4C81D75520E0F37D000D8AD1 /* rtpkcs11ecp.framework in Frameworks */,
-				550BB65D19E3C0BB00989F45 /* libstdc++.6.dylib in Frameworks */,
 				55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */,
 				55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */,
 				55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */,
+				4C5626B32164F37200379AF5 /* libc++.tbd in Frameworks */,
 				55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */,
 				55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */,
 				4C81D75820E0F397000D8AD1 /* RtPcsc.framework in Frameworks */,
@@ -270,9 +270,9 @@
 		55E89651199A02DA0082A015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C5626B22164F37200379AF5 /* libc++.tbd */,
 				4C81D75620E0F390000D8AD1 /* RtPcsc.framework */,
 				4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */,
-				550BB65C19E3C0BB00989F45 /* libstdc++.6.dylib */,
 				55E89692199A0D1A0082A015 /* CoreBluetooth.framework */,
 				55E89690199A0D0C0082A015 /* ExternalAccessory.framework */,
 				55E89652199A02DA0082A015 /* Foundation.framework */,
