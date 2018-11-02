@@ -3,7 +3,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <RtPKCS11ECP/rtpkcs11.h>
+#import <rtpkcs11ecp/rtpkcs11.h>
 
 @class Token;
 
