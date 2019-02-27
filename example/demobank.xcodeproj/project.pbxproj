@@ -16,7 +16,6 @@
 		4C81D75B20E0F397000D8AD1 /* rtpkcs11ecp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
-		55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8F19B5D8EF00FC1C6A /* SignViewController.m */; };
 		553D266F19FA7D590032099F /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D266E19FA7D590032099F /* line.png */; };
 		5541E55819C9A0BB001FD9E8 /* ipad_grey_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */; };
 		5541E55C19C9A732001FD9E8 /* ipad_black_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55B19C9A732001FD9E8 /* ipad_black_background.png */; };
@@ -57,6 +56,7 @@
 		55EFF3D41A80DBB60032A390 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3611A80DBB60032A390 /* Token.m */; };
 		55EFF3D51A80DBB60032A390 /* TokenInfoLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3631A80DBB60032A390 /* TokenInfoLoader.m */; };
 		55EFF3D61A80DBB60032A390 /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3651A80DBB60032A390 /* TokenManager.m */; };
+		C3780910220DA5AA001D4D83 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C378090F220DA5AA001D4D83 /* Storyboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,8 +82,6 @@
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
 		55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoTableViewController.h; sourceTree = "<group>"; };
 		55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoTableViewController.m; sourceTree = "<group>"; };
-		55295B8E19B5D8EF00FC1C6A /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
-		55295B8F19B5D8EF00FC1C6A /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
 		553D266E19FA7D590032099F /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_grey_background.png; sourceTree = "<group>"; };
 		5541E55B19C9A732001FD9E8 /* ipad_black_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_black_background.png; sourceTree = "<group>"; };
@@ -141,6 +139,7 @@
 		55EFF3641A80DBB60032A390 /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenManager.h; path = ../../TokenManager.h; sourceTree = "<group>"; };
 		55EFF3651A80DBB60032A390 /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenManager.m; path = ../../TokenManager.m; sourceTree = "<group>"; };
 		A10E51F08C86AE015D6113AA /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		C378090F220DA5AA001D4D83 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,8 +233,6 @@
 				55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */,
 				55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */,
 				55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */,
-				55295B8E19B5D8EF00FC1C6A /* SignViewController.h */,
-				55295B8F19B5D8EF00FC1C6A /* SignViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -288,6 +285,7 @@
 				55E89661199A02DA0082A015 /* AppDelegate.h */,
 				55E89662199A02DA0082A015 /* AppDelegate.m */,
 				55E89667199A02DA0082A015 /* Main_iPad.storyboard */,
+				C378090F220DA5AA001D4D83 /* Storyboard.storyboard */,
 				55E8966D199A02DA0082A015 /* Images.xcassets */,
 				55E89659199A02DA0082A015 /* Supporting Files */,
 				55828C6419B1D431007CAEA7 /* ViewControllers */,
@@ -369,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */,
+				C3780910220DA5AA001D4D83 /* Storyboard.storyboard in Resources */,
 				558C822C19CC644D00236C77 /* 37x-checkmark@2x.png in Resources */,
 				55E8966E199A02DA0082A015 /* Images.xcassets in Resources */,
 				5541E55E19C9B830001FD9E8 /* ipad_white_background.png in Resources */,
@@ -415,7 +414,6 @@
 				55EFF3661A80DBB60032A390 /* ApplicationError.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
 				55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */,
-				55295B9019B5D8EF00FC1C6A /* SignViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +435,7 @@
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 /* End PBXVariantGroup section */
 
@@ -546,7 +545,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.rutoken.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = arm64;
 				WRAPPER_EXTENSION = app;
 			};
@@ -574,7 +573,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.rutoken.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = arm64;
 				WRAPPER_EXTENSION = app;
 			};

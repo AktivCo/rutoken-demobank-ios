@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SDu-ve-kew">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Demobank Navigation Controller-->
+        <scene sceneID="unb-CR-Xmu">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="SDu-ve-kew" customClass="DemobankNavigationController" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="KEr-vd-gi6">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hDN-5W-bfq" kind="relationship" relationship="rootViewController" id="N9e-dW-RQx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p2b-HH-XBR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3927" y="-620"/>
+        </scene>
+        <!--Выбор сертификата-->
+        <scene sceneID="9Hb-U9-hAe">
+            <objects>
+                <viewController id="hDN-5W-bfq" customClass="FirstScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="747-95-iEd"/>
+                        <viewControllerLayoutGuide type="bottom" id="DRt-gk-2wz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vXk-xQ-O8N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информационная строка" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="424" translatesAutoresizingMaskIntoConstraints="NO" id="zEZ-fj-xBG">
+                                <rect key="frame" x="20" y="393.33333333333331" width="335" height="25.666666666666686"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcX-IN-5zP">
+                                <rect key="frame" x="362" y="101" width="32" height="14"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Модель токена" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppe-vS-rGc">
+                                <rect key="frame" x="20" y="96" width="138.33333333333334" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DLj-6x-3ep">
+                                <rect key="frame" x="20" y="343.33333333333331" width="335" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Коснитесь, чтобы войти">
+                                    <color key="titleColor" red="0.20682400470000001" green="0.5026587844" blue="0.55890852209999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="y3Z-XU-8AH" kind="push" id="Bl0-dX-wt1"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GC5-5J-64n">
+                                <rect key="frame" x="311" y="99" width="43" height="19"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="GC5-5J-64n" firstAttribute="top" secondItem="747-95-iEd" secondAttribute="bottom" constant="11" id="G4H-uX-zn7"/>
+                            <constraint firstItem="zEZ-fj-xBG" firstAttribute="centerY" secondItem="vXk-xQ-O8N" secondAttribute="centerY" id="I98-dM-GWq"/>
+                            <constraint firstItem="ppe-vS-rGc" firstAttribute="leading" secondItem="GDK-tL-kbY" secondAttribute="leading" constant="20" id="Njc-qU-B0l"/>
+                            <constraint firstItem="GDK-tL-kbY" firstAttribute="trailing" secondItem="DLj-6x-3ep" secondAttribute="trailing" constant="20" id="PpT-kI-UHu"/>
+                            <constraint firstItem="zEZ-fj-xBG" firstAttribute="leading" secondItem="GDK-tL-kbY" secondAttribute="leading" constant="20" id="SEt-48-Gnp"/>
+                            <constraint firstItem="zEZ-fj-xBG" firstAttribute="top" secondItem="DLj-6x-3ep" secondAttribute="bottom" constant="8.6699999999999999" id="XhH-Ot-vhH"/>
+                            <constraint firstItem="GDK-tL-kbY" firstAttribute="trailing" secondItem="zEZ-fj-xBG" secondAttribute="trailing" constant="20" id="aqZ-9v-yKJ"/>
+                            <constraint firstItem="vcX-IN-5zP" firstAttribute="leading" secondItem="GC5-5J-64n" secondAttribute="trailing" constant="6" id="eIX-Jl-yw5"/>
+                            <constraint firstItem="ppe-vS-rGc" firstAttribute="top" secondItem="GDK-tL-kbY" secondAttribute="top" constant="8" id="iOQ-p6-IAt"/>
+                            <constraint firstItem="GDK-tL-kbY" firstAttribute="trailing" secondItem="vcX-IN-5zP" secondAttribute="trailing" constant="20" id="jpg-Md-GeY"/>
+                            <constraint firstItem="DLj-6x-3ep" firstAttribute="leading" secondItem="GDK-tL-kbY" secondAttribute="leading" constant="20" id="oMb-Av-0dA"/>
+                            <constraint firstItem="vcX-IN-5zP" firstAttribute="top" secondItem="747-95-iEd" secondAttribute="bottom" constant="13" id="z2L-Yf-iT3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GDK-tL-kbY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Выбор сертификата" id="cug-d4-eLb">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="ctG-tL-AaW"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="_batteryChargeImage" destination="vcX-IN-5zP" id="9Zm-PB-diu"/>
+                        <outlet property="_batteryPercentageLabel" destination="GC5-5J-64n" id="bME-AU-5Vr"/>
+                        <outlet property="_chooseCertButton" destination="DLj-6x-3ep" id="yfd-Sd-sxs"/>
+                        <outlet property="_statusInfoLabel" destination="zEZ-fj-xBG" id="950-W3-A1Z"/>
+                        <outlet property="_tokenModelLabel" destination="ppe-vS-rGc" id="cAn-CY-kkt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYD-sD-Ccb" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3130.434782608696" y="-620.08928571428567"/>
+        </scene>
+        <!--Ввод PIN-кода-->
+        <scene sceneID="QLb-GB-RYK">
+            <objects>
+                <viewController id="y3Z-XU-8AH" customClass="PinEnterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="i6K-yL-X2I"/>
+                        <viewControllerLayoutGuide type="bottom" id="xiW-7g-UV3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hyY-kz-nKG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ПИН введен неверно" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfA-44-sEw">
+                                <rect key="frame" x="116" y="219" width="143" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNg-0v-XvJ">
+                                <rect key="frame" x="146" y="286" width="83" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Войти">
+                                    <color key="titleColor" red="0.20682400470000001" green="0.5026587844" blue="0.55890852209999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="_loginToken:" destination="y3Z-XU-8AH" eventType="touchUpInside" id="gUk-nQ-Wa6"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите PIN" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s8g-jt-l21">
+                                <rect key="frame" x="16" y="248" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" secureTextEntry="YES"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95545285940170288" green="0.9562792181968689" blue="0.92820781469345093" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="s8g-jt-l21" firstAttribute="top" secondItem="VfA-44-sEw" secondAttribute="bottom" constant="12" id="7uf-F2-zYu"/>
+                            <constraint firstItem="s8g-jt-l21" firstAttribute="leading" secondItem="JbD-Jc-V7O" secondAttribute="leading" constant="16" id="bWu-NZ-hxW"/>
+                            <constraint firstItem="JbD-Jc-V7O" firstAttribute="trailing" secondItem="s8g-jt-l21" secondAttribute="trailing" constant="16" id="cgO-87-CIE"/>
+                            <constraint firstItem="VfA-44-sEw" firstAttribute="centerX" secondItem="hyY-kz-nKG" secondAttribute="centerX" id="ecj-Ly-dRm"/>
+                            <constraint firstItem="lNg-0v-XvJ" firstAttribute="top" secondItem="s8g-jt-l21" secondAttribute="bottom" constant="8" id="j6j-8a-EF3"/>
+                            <constraint firstItem="lNg-0v-XvJ" firstAttribute="centerX" secondItem="hyY-kz-nKG" secondAttribute="centerX" id="poh-dL-tGI"/>
+                            <constraint firstItem="VfA-44-sEw" firstAttribute="top" secondItem="i6K-yL-X2I" secondAttribute="bottom" constant="131" id="uae-oy-JRg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JbD-Jc-V7O"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Ввод PIN-кода" id="9JR-Ru-Je9">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="f88-Mq-hOx"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="_loginButton" destination="lNg-0v-XvJ" id="Que-bT-aVl"/>
+                        <outlet property="_pinErrorLabel" destination="VfA-44-sEw" id="QTO-56-PhE"/>
+                        <outlet property="_pinTextInput" destination="s8g-jt-l21" id="oHJ-mu-46j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Qw-GF-EZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2346.4000000000001" y="-620.68965517241384"/>
+        </scene>
+    </scenes>
+</document>

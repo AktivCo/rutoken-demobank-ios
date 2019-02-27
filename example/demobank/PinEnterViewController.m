@@ -7,7 +7,11 @@
 #import "Token.h"
 #import "PaymentsViewController.h"
 
+#import "MBProgressHUD.h"
+
 @interface PinEnterViewController ()
+
+@property (nonatomic)  MBProgressHUD * hud;
 
 @end
 
@@ -38,10 +42,24 @@
         [_pinTextInput setHidden:YES];
     }
     
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    self.hud.animationType = MBProgressHUDAnimationZoomIn;
+    self.hud.dimBackground = YES;
+    self.hud.minSize = CGSizeMake(150.f, 150.f);
+    [self.view addSubview:self.hud];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard
+{
+    [_pinTextInput resignFirstResponder];
 }
 
 - (IBAction)_loginToken:(id)sender {
     [_loginButton setEnabled:NO];
+    [self dismissKeyboard];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     TokenManager* tokenManager = [TokenManager sharedInstance];
     
@@ -51,9 +69,20 @@
     NSString* authString = @"Auth Me";
     NSData* authData = [NSData dataWithBytes:[authString UTF8String] length:[authString length]];
     
+    self.hud.labelText = @"Проверяю PIN-код токена...";
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    [self.hud show:YES];
+    
     if(nil != token && nil != cert){
         [token loginWithPin:[_pinTextInput text] successCallback:^(void){
+            self.hud.labelText = @"Выполняю вход в ЛК...";
             [token signData:authData withCertificate:cert successCallback:^(NSData * result) {
+                
+                self.hud.labelText = @"Вход выполнен";
+                self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-checkmark.png"]];
+                self.hud.mode = MBProgressHUDModeCustomView;
+                [self.hud hide:YES afterDelay:1.5];
+                
                 [_loginButton setEnabled:YES];
                 [_pinErrorLabel setHidden:YES];
                 [_pinErrorLabel setText:@""];
@@ -69,6 +98,11 @@
                 }
                 //[self performSegueWithIdentifier:@"segueToPayments" sender:self];
             } errorCallback:^(NSError * e) {
+                self.hud.labelText = @"Произошла ошибка";
+                self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+                self.hud.mode = MBProgressHUDModeCustomView;
+                [self.hud hide:YES afterDelay:1.5];
+                
                 [_pinTextInput setText:@""];
                 [_pinErrorLabel setHidden:NO];
                 [_pinErrorLabel setText:@"Что-то не так с сертификатом"];
@@ -76,6 +110,11 @@
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             }];
         } errorCallback:^(NSError * e) {
+            self.hud.labelText = @"Произошла ошибка";
+            self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+            self.hud.mode = MBProgressHUDModeCustomView;
+            [self.hud hide:YES afterDelay:1.5];
+            
             [_pinTextInput setText:@""];
             [_pinErrorLabel setHidden:NO];
             [_pinErrorLabel setText:@"ПИН введен неверно"];

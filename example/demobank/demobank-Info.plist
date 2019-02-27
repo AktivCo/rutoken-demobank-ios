@@ -31,7 +31,7 @@
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>
-	<string>Main_iPad</string>
+	<string>Storyboard</string>
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>Main_iPad</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -43,6 +43,11 @@
 	<key>UISupportedExternalAccessoryProtocols</key>
 	<array>
 		<string>com.aktivco.rutokenecp</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
