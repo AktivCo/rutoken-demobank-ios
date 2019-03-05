@@ -74,11 +74,14 @@ typedef NS_ENUM(NSInteger, EventType) {
 - (void)startMonitoringWithTokenAddedCallback:(void (^)(CK_SLOT_ID))tokenAddedCallback
 						 tokenRemovedCallback:(void (^)(CK_SLOT_ID))tokenRemovedCallback
 								errorCallback:(void (^)(NSError *))errorCallback{
-    
+
 	dispatch_queue_t queue = dispatch_queue_create("ru.rutoken.demobank.pkcs11eventhandler", nil);
-    dispatch_async(queue, ^() {
+	dispatch_async(queue, ^() {
 		@try {
-			CK_RV rv = [self functions]->C_Initialize(NULL_PTR);
+			CK_C_INITIALIZE_ARGS args = {};
+			args.flags = CKF_OS_LOCKING_OK;
+
+			CK_RV rv = [self functions]->C_Initialize(&args);
 			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 			
 			CK_ULONG slotCount;
