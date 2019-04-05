@@ -7,7 +7,9 @@ static NSString* const gApplicationErrorDomain = @"ru.rutoken.demobank.applicati
 
 enum ApplicationErrorCode {
 	UnrecoverableError,
-    CertNotFoundError
+    CertNotFoundError,
+    RtEngineError,
+    OpensslError,
 };
 
 @interface ApplicationError : NSError

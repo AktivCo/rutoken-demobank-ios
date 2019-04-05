@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, TokenColor) {
 
 -(void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
--(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSData*))successCallback
+-(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSValue*))successCallback
         errorCallback:(void (^)(NSError*))errorCallback;
 
 @end

@@ -1,6 +1,8 @@
 // Copyright (c) 2015, CJSC Aktiv-Soft. See https://download.rutoken.ru/License_Agreement.pdf
 // All Rights Reserved.
 
+#import <openssl/cms.h>
+
 #import "PaymentInfoTableViewController.h"
 
 #include "Token.h"
@@ -71,11 +73,13 @@
         NSString* paymentString = @"Payment";
         NSData* paymentData = [NSData dataWithBytes:[paymentString UTF8String] length:[paymentString length]];
         
-        [token signData:paymentData withCertificate:cert successCallback:^(NSData* result){
+        [token signData:paymentData withCertificate:cert successCallback:^(NSValue* cms){
             self.hud.labelText = @"Успешно!";
             self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-checkmark.png"]];
             self.hud.mode = MBProgressHUDModeCustomView;
             [self.hud hide:YES afterDelay:1.5];
+
+            CMS_ContentInfo_free([cms pointerValue]);
         }errorCallback:^(NSError* e){
             self.hud.labelText = @"Ошибка!";
             self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];

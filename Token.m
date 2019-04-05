@@ -2,6 +2,9 @@
 // All Rights Reserved.
 
 #import <openssl/x509.h>
+#import <openssl/cms.h>
+
+#import <rtengine/engine.h>
 
 #import "Token.h"
 
@@ -267,27 +270,35 @@ errorCallback:(void (^)(NSError*))errorCallback {
     });
 }
 
--(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSData*))successCallback
+-(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSValue*))successCallback
   errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
-        //Looking for private key by cert id
+        BIO* bio;
+        CMS_ContentInfo* cms;
+        EVP_PKEY* evpPKey;
+
+        rt_eng_p11_session wrappedSession;
+
+        CK_OBJECT_HANDLE privateKey, publicKey;
+        CK_ULONG count;
+        CK_RV rv, rv2;
+
+        // Looking for private key by cert id
         CK_OBJECT_CLASS keyClass = CKO_PRIVATE_KEY;
         CK_ATTRIBUTE template[] = {
                 {CKA_CLASS, &keyClass, sizeof(keyClass)},
                 {CKA_ID, (void*)[[certificate id] bytes], [[certificate id] length]}
         };
 
-        CK_RV rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+        rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
-        CK_OBJECT_HANDLE objects[2];
-        CK_ULONG count;
-        rv = [self functions]->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
+        rv = [self functions]->C_FindObjects(_session, &privateKey, 1, &count);
 
-        CK_RV rv2 = [self functions]->C_FindObjectsFinal(_session);
+        rv2 = [self functions]->C_FindObjectsFinal(_session);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -299,31 +310,77 @@ errorCallback:(void (^)(NSError*))errorCallback {
             return;
         }
 
-        unsigned char oid[] = {0x06, 0x07, 0x2a, 0x85, 0x03, 0x02, 0x02, 0x1e, 0x01};
-        CK_MECHANISM mechanism = {CKM_GOSTR3410_WITH_GOSTR3411, oid, ARRAY_LENGTH(oid)};
-        rv = [self functions]->C_SignInit(_session, &mechanism, objects[0]);
-        if (CKR_OK != rv){
+        // Now looking for public key by cert id using the same template
+        keyClass = CKO_PUBLIC_KEY;
+
+        rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+        if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
-        rv = [self functions]->C_Sign(_session, (unsigned char*)[data bytes], [data length], nil, &count);
+        rv = [self functions]->C_FindObjects(_session, &publicKey, 1, &count);
+
+        rv2 = [self functions]->C_FindObjectsFinal(_session);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
-
-        NSMutableData* signature = [NSMutableData dataWithLength:count];
-        rv = [self functions]->C_Sign(_session, (unsigned char*)[data bytes], [data length],
-                [signature mutableBytes], &count);
-        if (CKR_OK != rv){
-            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+        if (CKR_OK != rv2) {
+            [self onError:[Pkcs11Error errorWithCode:rv2] callback:errorCallback];
+            return;
+        }
+        if (count != 1) {
+            [self onError:[ApplicationError errorWithCode:CertNotFoundError] callback:errorCallback];
             return;
         }
 
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            successCallback(signature);
-        });
+        // Creating an EVP_PKEY
+        wrappedSession = rt_eng_p11_session_new([self functions], _session, 0, NULL);
+        if (!wrappedSession.self) {
+            [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
+            return;
+        }
+
+        evpPKey = rt_eng_new_p11_ossl_evp_pkey(wrappedSession, privateKey, publicKey);
+        RT_ENG_CALL(wrappedSession, free);
+        if (!evpPKey) {
+            [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
+            return;
+        }
+
+        // Creating an input buffer
+        bio = BIO_new(BIO_s_mem());
+        if (!bio) {
+            EVP_PKEY_free(evpPKey);
+            [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
+            return;
+        }
+
+        rv = BIO_write(bio, [data bytes], (int)[data length]);
+        if (rv != [data length]) {
+            BIO_free(bio);
+            EVP_PKEY_free(evpPKey);
+            [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
+            return;
+        }
+
+        // Creating a CMS
+        cms = CMS_sign([certificate x509], evpPKey, NULL, bio, CMS_BINARY | CMS_NOSMIMECAP);
+
+        BIO_free(bio);
+        EVP_PKEY_free(evpPKey);
+
+        if (cms) {
+            dispatch_async(dispatch_get_main_queue(), ^() {
+                // Don't forget to free the CMS
+                successCallback([NSValue valueWithPointer:cms]);
+            });
+            return;
+        } else {
+            [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
+            return;
+        }
     });
 }
 

@@ -1,6 +1,8 @@
 // Copyright (c) 2015, CJSC Aktiv-Soft. See https://download.rutoken.ru/License_Agreement.pdf
 // All Rights Reserved.
 
+#import <openssl/cms.h>
+
 #import "PinEnterViewController.h"
 
 #import "TokenManager.h"
@@ -94,12 +96,14 @@
     if(nil != token && nil != cert){
         [token loginWithPin:[_pinTextInput text] successCallback:^(void){
             self.hud.labelText = @"Выполняю вход в ЛК...";
-            [token signData:authData withCertificate:cert successCallback:^(NSData * result) {
+            [token signData:authData withCertificate:cert successCallback:^(NSValue* cms) {
                 
                 self.hud.labelText = @"Вход выполнен";
                 self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-checkmark.png"]];
                 self.hud.mode = MBProgressHUDModeCustomView;
                 [self.hud hide:YES afterDelay:1.5];
+
+                CMS_ContentInfo_free([cms pointerValue]);
                 
                 SecAccessControlRef access = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, kSecAccessControlUserPresence, nil);
                 
