@@ -40,6 +40,24 @@
         [_pinErrorLabel setText:@"На токене нет сертификатов"];
         [_loginButton setHidden:YES];
         [_pinTextInput setHidden:YES];
+    } else {
+        CFTypeRef item = NULL;
+        NSDictionary* query = @{ (id)kSecClass: (id)kSecClassGenericPassword,
+                                 (id)kSecAttrAccount: [token serialNumber],
+                                 (id)kSecAttrService: @"demobank.rutoken.ru",
+                                 (id)kSecReturnData: @YES,
+                                 (id)kSecUseOperationPrompt: @"Доступ к сохраненному ПИН-коду",
+                                 };
+        OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &item);
+        switch (status) {
+            case errSecSuccess:
+                [_pinTextInput setText:[NSString stringWithUTF8String:[(__bridge NSData *)item bytes]]];
+                break;
+            case errSecItemNotFound:
+                break;
+            default:
+                NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+        }
     }
     
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -82,6 +100,23 @@
                 self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-checkmark.png"]];
                 self.hud.mode = MBProgressHUDModeCustomView;
                 [self.hud hide:YES afterDelay:1.5];
+                
+                SecAccessControlRef access = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, kSecAccessControlUserPresence, nil);
+                
+                NSDictionary* query = @{ (id)kSecClass: (id)kSecClassGenericPassword,
+                                         (id)kSecValueData:[[_pinTextInput text] dataUsingEncoding:NSUTF8StringEncoding],
+                                         (id)kSecAttrAccount: [token serialNumber],
+                                         (id)kSecAttrService: @"demobank.rutoken.ru",
+                                         (id)kSecAttrAccessControl: (__bridge id)access,
+                                         };
+                OSStatus status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
+                if (status == errSecDuplicateItem){
+                    status = SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)query);
+                    if (status != errSecSuccess)
+                        NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                } else if (status != errSecSuccess) {
+                    NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                }
                 
                 [_loginButton setEnabled:YES];
                 [_pinErrorLabel setHidden:YES];
