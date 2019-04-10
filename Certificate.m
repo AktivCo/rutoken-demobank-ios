@@ -62,74 +62,29 @@
 
 @implementation Certificate
 
-- (id)initWithSession:(CK_SESSION_HANDLE)session object:(CK_OBJECT_HANDLE)object {
-	
+- (id)initWithSession:(CK_SESSION_HANDLE)session withObjectId:(CK_OBJECT_HANDLE)object withId:(NSData*)id withX509:(X509*)x509 {
     self = [super init];
     if (nil == self) return self;
-	
-	@try{
-		unsigned long length = 0;
-		unsigned char* data;
-        
-        CK_FUNCTION_LIST_PTR functions;
-        CK_FUNCTION_LIST_EXTENDED_PTR extendedFunctions;
-        
-        C_GetFunctionList(&functions);
-        C_EX_GetFunctionListExtended(&extendedFunctions);
-        
-		CK_RV rv = extendedFunctions->C_EX_GetCertificateInfoText(session, object, &data, &length);
-		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-		
-		NSString *cert=[[NSString alloc]initWithBytes:data length:length encoding:NSUTF8StringEncoding];
-		
-		rv = extendedFunctions->C_EX_FreeBuffer(data);
-		
-		NSError *error = nil;
-		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"Subject: [A-Za-z,=]*?CN=([^\n,]*)" options:NSRegularExpressionCaseInsensitive error:&error];
-		NSTextCheckingResult *match = [regex firstMatchInString:cert options:0 range:NSMakeRange(0, [cert length])];
-		
-		if (match != nil) {
-			_cn = [cert substringWithRange:[match rangeAtIndex:1]];
-		} else {
-			_cn = @"";
-			NSLog(@"Failed to find CN");
-		}
-        
-        NSRegularExpression *regexX = [NSRegularExpression regularExpressionWithPattern:@"X:([0-9A-F]*)\n" options:0 error:&error];
-        NSRegularExpression *regexY = [NSRegularExpression regularExpressionWithPattern:@"Y:([0-9A-F]*)\n" options:0 error:&error];
-        NSTextCheckingResult *matchX = [regexX firstMatchInString:cert options:0 range:NSMakeRange(0, [cert length])];
-        NSTextCheckingResult *matchY = [regexY firstMatchInString:cert options:0 range:NSMakeRange(0, [cert length])];
-        
-        if (matchX != nil && matchY != nil) {
-            NSMutableData* valueData = [NSMutableData dataWithData:[[[cert substringWithRange:[matchX rangeAtIndex:1]] dataFromHexString] reversedData]];
-            [valueData appendData:[[[cert substringWithRange:[matchY rangeAtIndex:1]] dataFromHexString] reversedData]];
-            _value = [NSData dataWithData:valueData];
-        } else {
-            _value = nil;
-            NSLog(@"Failed to find value");
-        }
-		
-		CK_ATTRIBUTE attributes[] = {
-			{CKA_ID, nil, 0}
-		};
-		
-		rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
-		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-		
-		NSMutableData* idData = [NSMutableData dataWithLength:attributes[0].ulValueLen];
-		attributes[0].pValue = [idData mutableBytes];
-		
-		rv = functions->C_GetAttributeValue(session, object, attributes, ARRAY_LENGTH(attributes));
-		if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-		
-        _id = [NSData dataWithData:idData];
-        
-		return self;
-		
-	} @catch (NSError* e){
-		NSLog(@"Error in certificate's init, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
-		return nil;
-	}
+
+    _id = id;
+    _x509 = x509;
+
+    int cnLength = X509_NAME_get_text_by_NID(X509_get_subject_name(_x509), NID_commonName, 0, 0);
+    if (cnLength <= 0) {
+        NSLog(@"Failed to find CN");
+        _cn = @"";
+    } else {
+        cnLength += 1; // zero byte
+        NSMutableData* cn = [NSMutableData dataWithLength:cnLength];
+        X509_NAME_get_text_by_NID(X509_get_subject_name(_x509), NID_commonName, [cn mutableBytes], cnLength);
+        _cn = [[NSString alloc] initWithCString:[cn mutableBytes] encoding:NSUTF8StringEncoding];
+    }
+
+    return self;
+}
+
+- (void)dealloc {
+    X509_free(_x509);
 }
 
 @end

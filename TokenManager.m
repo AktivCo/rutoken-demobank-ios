@@ -11,7 +11,11 @@
 
 #import <RtPcsc/winscard.h>
 
+#import <rtengine/engine.h>
+
 @interface TokenManager ()
+
+@property (nonatomic) ENGINE* rtEngine;
 
 @property (nonatomic) Pkcs11EventHandler* pkcs11EventHandler;
 @property (nonatomic) TokenInfoLoader* tokenInfoLoader;
@@ -46,7 +50,21 @@ typedef NS_ENUM(NSInteger, InnerState) {
 
 - (id)init {
 	self = [super init];
-	
+
+    int r = rt_eng_init();
+    if (r != 1) {
+        NSLog(@"RtEngine initialization failed!");
+        @throw [ApplicationError errorWithCode:UnrecoverableError];
+    }
+
+    _rtEngine = rt_eng_get0_engine();
+    if (!_rtEngine) {
+        NSLog(@"RtEngine retreiving failed!");
+        @throw [ApplicationError errorWithCode:UnrecoverableError];
+    }
+
+    ENGINE_set_default(_rtEngine, ENGINE_METHOD_ALL - ENGINE_METHOD_RAND);
+
 	if (self) {
 		_pkcs11EventHandler = [[Pkcs11EventHandler alloc] init];
         _tokenInfoLoader = [[TokenInfoLoader alloc] init];
@@ -57,6 +75,15 @@ typedef NS_ENUM(NSInteger, InnerState) {
 		_currentHandle = 0;
 	}
 	return self;
+}
+
+-(void)dealloc {
+    ENGINE_unregister_pkey_asn1_meths(_rtEngine);
+    ENGINE_unregister_pkey_meths(_rtEngine);
+    ENGINE_unregister_digests(_rtEngine);
+    ENGINE_unregister_ciphers(_rtEngine);
+
+    rt_eng_final();
 }
 
 -(void)startMonitoring{

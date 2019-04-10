@@ -1,6 +1,8 @@
 // Copyright (c) 2015, CJSC Aktiv-Soft. See the LICENSE file at the top-level directory of this distribution.
 // All Rights Reserved.
 
+#import <openssl/x509.h>
+
 #import "Token.h"
 
 #import "Pkcs11Error.h"
@@ -35,71 +37,115 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
 	return [[NSString alloc] initWithBytes:string length:i encoding:NSUTF8StringEncoding];
 }
 
-- (void)readCertificatesWithCategory:(CK_ULONG) category {
-    CK_OBJECT_CLASS certClass = CKO_CERTIFICATE;
-    CK_ATTRIBUTE template[] = {
-            {CKA_CLASS, &certClass, sizeof(certClass)},
-            {CKA_CERTIFICATE_CATEGORY, &category, sizeof(category)}
+- (void)readCertificates {
+    CK_CERTIFICATE_TYPE certificateType = CKC_X_509;
+    CK_OBJECT_CLASS certificateClass = CKO_CERTIFICATE;
+    CK_ATTRIBUTE certificateTemplate[] = {
+        {CKA_CLASS, &certificateClass, sizeof(certificateClass)},
+        {CKA_CERTIFICATE_TYPE, &certificateType, sizeof(certificateType)},
     };
+    CK_OBJECT_HANDLE certificates[32];
+    CK_ULONG certificateCount;
+    CK_RV rv, rv2;
 
-    CK_RV rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+    // Find all certificates on token
+    rv = [self functions]->C_FindObjectsInit(_session, certificateTemplate, ARRAY_LENGTH(certificateTemplate));
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
 
-    while (TRUE) {
-        CK_OBJECT_HANDLE objects[30];
-        CK_ULONG count;
-        rv = [self functions]->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
-        if (CKR_OK != rv) break;
+    rv = [self functions]->C_FindObjects(_session, certificates, ARRAY_LENGTH(certificates), &certificateCount);
 
-        for (int i = 0; i < count; ++i) {
-            Certificate* c = [[Certificate alloc] initWithSession:_session object:objects[i]];
-            if (nil != c) [_certificates addObject:c];
-        }
-
-        if (count < ARRAY_LENGTH(objects)) break;
-    }
-
-    CK_RV rv2 = [self functions]->C_FindObjectsFinal(_session); // we should always call C_FindObjectsFinal, even after an error (see pkcs11 standart for more info...)
+    rv2 = [self functions]->C_FindObjectsFinal(_session);
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
     if (CKR_OK != rv2) @throw [Pkcs11Error errorWithCode:rv2];
-    
-    //This code only for thoose who hasn't read pkcs11 standart
-    //and set different CKA_ID for key and cert
-    //You should delete it, unless you know, that key's and cert's CKA_IDs are different
-    for (Certificate* cert in _certificates) {
-        CK_OBJECT_CLASS keyClass = CKO_PUBLIC_KEY;
-        
-        CK_ATTRIBUTE keyTemplatebyValue[] = {
-            {CKA_CLASS, &keyClass, sizeof(keyClass)},
-            {CKA_VALUE, (void*)[[cert value] bytes], [[cert value] length]}
+
+    for (int i = 0; i < certificateCount; ++i) {
+        NSMutableData* value;
+        NSMutableData* id;
+
+        const unsigned char* certificateValue;
+
+        EVP_PKEY* key;
+        X509* x509;
+
+        CK_ATTRIBUTE certificateAttributes[] = {
+            {CKA_VALUE, NULL_PTR, 0},
+            {CKA_ID, NULL_PTR, 0},
         };
-        
-        rv = [self functions]->C_FindObjectsInit(_session, keyTemplatebyValue, ARRAY_LENGTH(keyTemplatebyValue));
-        if (CKR_OK != rv) continue;
-        
-        CK_OBJECT_HANDLE objects[2];
-        CK_ULONG count;
-        rv = [self functions]->C_FindObjects(_session, objects, ARRAY_LENGTH(objects), &count);
-        
-        rv2 = [self functions]->C_FindObjectsFinal(_session); // we should always call C_FindObjectsFinal, even after an error (see pkcs11 standart for more info...)
-        if (CKR_OK != rv) [Pkcs11Error errorWithCode:rv];
-        if (CKR_OK != rv2) [Pkcs11Error errorWithCode:rv2];
-        
-        if (count == 1) { //we found exactly one key, so it's cert's public key, now we have to check CKA_ID to avoid pkcs11 violation.
-            CK_ATTRIBUTE attributes[] = {
-                {CKA_ID, nil, 0}
-            };
-            
-            rv = [self functions]->C_GetAttributeValue(_session, objects[0], attributes, ARRAY_LENGTH(attributes));
-            if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-            
-            NSMutableData* idData = [NSMutableData dataWithLength:attributes[0].ulValueLen];
-            attributes[0].pValue = [idData mutableBytes];
-            
-            rv = [self functions]->C_GetAttributeValue(_session, objects[0], attributes, ARRAY_LENGTH(attributes));
-            if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-            
-            [cert setId:[NSData dataWithData:idData]];
+        CK_OBJECT_CLASS publicKeyClass = CKO_PUBLIC_KEY;
+        CK_ATTRIBUTE publicKeyTemplate[] = {
+            {CKA_CLASS, &publicKeyClass, sizeof(publicKeyClass)},
+            {CKA_ID, NULL_PTR, 0},
+        };
+        CK_OBJECT_HANDLE publicKeys[16];
+        CK_ULONG publicKeyCount;
+
+        // Get certificate value and id
+        rv = [self functions]->C_GetAttributeValue(_session, certificates[i], certificateAttributes, ARRAY_LENGTH(certificateAttributes));
+        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+
+        value = [NSMutableData dataWithLength:certificateAttributes[0].ulValueLen];
+        certificateAttributes[0].pValue = [value mutableBytes];
+        id = [NSMutableData dataWithLength:certificateAttributes[1].ulValueLen];
+        certificateAttributes[1].pValue = [id mutableBytes];
+
+        rv = [self functions]->C_GetAttributeValue(_session, certificates[i], certificateAttributes, ARRAY_LENGTH(certificateAttributes));
+        if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+
+        // Filter non-GOST certificates
+        certificateValue = [value mutableBytes];
+        x509 = d2i_X509(NULL, &certificateValue, [value length]);
+        if (!x509) continue;
+
+        key = X509_get0_pubkey(x509);
+        if (!key) {
+            X509_free(x509);
+            continue;
+        }
+
+        switch (EVP_PKEY_base_id(key)) {
+            case NID_id_GostR3410_2001:
+            case NID_id_GostR3410_2012_256:
+            case NID_id_GostR3410_2012_512:
+                break;
+            default:
+                X509_free(x509);
+                continue;
+        }
+
+        // Find public keys by certificate id
+        publicKeyTemplate[1].pValue = certificateAttributes[1].pValue;
+        publicKeyTemplate[1].ulValueLen = certificateAttributes[1].ulValueLen;
+
+        rv = [self functions]->C_FindObjectsInit(_session, publicKeyTemplate, ARRAY_LENGTH(publicKeyTemplate));
+        if (CKR_OK != rv) {
+            X509_free(x509);
+            @throw [Pkcs11Error errorWithCode:rv];
+        }
+
+        rv = [self functions]->C_FindObjects(_session, publicKeys, ARRAY_LENGTH(publicKeys), &publicKeyCount);
+
+        rv2 = [self functions]->C_FindObjectsFinal(_session);
+        if (CKR_OK != rv) {
+            X509_free(x509);
+            @throw [Pkcs11Error errorWithCode:rv];
+        }
+        if (CKR_OK != rv2) {
+            X509_free(x509);
+            @throw [Pkcs11Error errorWithCode:rv2];
+        }
+
+        switch (publicKeyCount) {
+            case 0:
+                // Nothing has been found.
+                X509_free(x509);
+                continue;
+            case 1:
+                [_certificates addObject:[[Certificate alloc] initWithSession:_session withObjectId:certificates[i] withId:id withX509:x509]];
+                break;
+            default:
+                // There are several public keys with certificate ID. We dont know which to choose so skip.
+                X509_free(x509);
+                continue;
         }
     }
 }
@@ -170,8 +216,7 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
 		@try{
 			_certificates = [NSMutableArray array];
         
-            [self readCertificatesWithCategory:CertificateCategoryUnspecified];
-            [self readCertificatesWithCategory:CertificateCategoryUser];
+            [self readCertificates];
         } @catch (NSError* e) {
             _functions->C_CloseSession(_session);
             return nil;

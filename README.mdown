@@ -6,21 +6,24 @@ Rutoken DemoBank is a demonstration application which show typical usage of elec
 
 ##Requirements
 
-Rutoken DemoBank should be built using iOS SDK 8.1 and supports iOS 7.0 and newer.
+Rutoken DemoBank should be built using iOS SDK 8.1 and supports iOS 9.0 and newer.
 
 External dependencies are located in [Rutoken SDK] (http://www.rutoken.ru/developers/sdk/) 
 
 Required frameworks:
 * mobile/ios/pcsc/lib/RtPcsc.framework (Rutoken SDK)
 * mobile/ios/pkcs11/lib/rtpkcs11ecp.framework (Rutoken SDK)
+* openssl/rtengine/bin/ios-arm64/rtengine.framework (Rutoken SDK)
+
+Required libraries:
+* openssl/openssl-shared-1.1/ios-arm64/* (Rutoken SDK)
 
 ##How to build
+
 * copy frameworks to example/Frameworks
+* copy openssl library libcrypto.so and include folder to example/Frameworks/openssl
 * open example/demobank.xcodeproj
 * in General/Identity set correct Signing Identity
-* in Build Phases/Link Binary With Libraries add frameworks from Rutoken SDK:
-	- RtPcsc.framework
-	- rtpkcs11ecp.framework
 
 ##Preliminary actions
 
@@ -39,7 +42,7 @@ To create key pairs and certificate on Rutoken ECP Bluetooth, follow these steps
 ##Restriction
 
 * Rutoken DemoBank can only be run on physical iOS devices, not on emulators.
-* Currently only iPad screen is supported.
+* Currently only iPad and iPhone screens are supported.
 
 ##License
 

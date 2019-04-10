@@ -5,12 +5,14 @@
 
 #import <rtpkcs11ecp/rtpkcs11.h>
 
+#import <openssl/x509.h>
+
 @interface Certificate : NSObject
 
 @property(nonatomic, readonly) NSString* cn;
-@property(nonatomic, readwrite) NSData* id;
-@property(nonatomic, readonly) NSData* value;
+@property(nonatomic, readonly) NSData* id;
+@property(nonatomic, readonly) X509* x509;
 
--(id)initWithSession:(CK_SESSION_HANDLE)session object:(CK_OBJECT_HANDLE)object;
+-(id)initWithSession:(CK_SESSION_HANDLE)session withObjectId:(CK_OBJECT_HANDLE)object withId:(NSData*)id withX509:(X509*)x509;
 
 @end

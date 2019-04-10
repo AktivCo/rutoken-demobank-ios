@@ -12,6 +12,10 @@
 		4C81D75920E0F397000D8AD1 /* RtPcsc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75620E0F390000D8AD1 /* RtPcsc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C81D75A20E0F397000D8AD1 /* rtpkcs11ecp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; };
 		4C81D75B20E0F397000D8AD1 /* rtpkcs11ecp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4E64A3332254CF36004393AB /* rtengine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E64A3312254CF30004393AB /* rtengine.framework */; };
+		4E64A3342254CF36004393AB /* rtengine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E64A3312254CF30004393AB /* rtengine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4E64A3362254CF49004393AB /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E64A3352254CF49004393AB /* libcrypto.1.1.dylib */; };
+		4E64A3372254CF4F004393AB /* libcrypto.1.1.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E64A3352254CF49004393AB /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
 		553D266F19FA7D590032099F /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D266E19FA7D590032099F /* line.png */; };
@@ -64,8 +68,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4E64A3342254CF36004393AB /* rtengine.framework in Embed Frameworks */,
 				4C81D75B20E0F397000D8AD1 /* rtpkcs11ecp.framework in Embed Frameworks */,
 				4C81D75920E0F397000D8AD1 /* RtPcsc.framework in Embed Frameworks */,
+				4E64A3372254CF4F004393AB /* libcrypto.1.1.dylib in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +82,8 @@
 		4C5626B22164F37200379AF5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = rtpkcs11ecp.framework; path = Framework/rtpkcs11ecp.framework; sourceTree = "<group>"; };
 		4C81D75620E0F390000D8AD1 /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = Framework/RtPcsc.framework; sourceTree = "<group>"; };
+		4E64A3312254CF30004393AB /* rtengine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = rtengine.framework; path = Framework/rtengine.framework; sourceTree = "<group>"; };
+		4E64A3352254CF49004393AB /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = Framework/openssl/libcrypto.1.1.dylib; sourceTree = "<group>"; };
 		55295B8819B5A12F00FC1C6A /* PaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsTableViewController.h; sourceTree = "<group>"; };
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
 		55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoTableViewController.h; sourceTree = "<group>"; };
@@ -145,10 +153,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E64A3362254CF49004393AB /* libcrypto.1.1.dylib in Frameworks */,
 				4C81D75720E0F390000D8AD1 /* RtPcsc.framework in Frameworks */,
 				4C81D75A20E0F397000D8AD1 /* rtpkcs11ecp.framework in Frameworks */,
 				55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */,
 				55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */,
+				4E64A3332254CF36004393AB /* rtengine.framework in Frameworks */,
 				55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */,
 				4C5626B32164F37200379AF5 /* libc++.tbd in Frameworks */,
 				55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */,
@@ -263,6 +273,8 @@
 		55E89651199A02DA0082A015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E64A3352254CF49004393AB /* libcrypto.1.1.dylib */,
+				4E64A3312254CF30004393AB /* rtengine.framework */,
 				4C5626B22164F37200379AF5 /* libc++.tbd */,
 				4C81D75620E0F390000D8AD1 /* RtPcsc.framework */,
 				4C81D75420E0F37D000D8AD1 /* rtpkcs11ecp.framework */,
@@ -553,9 +565,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Framework/openssl/include",
+					"$(PROJECT_DIR)/Framework/rtpkcs11ecp.framework/Headers",
+				);
 				INFOPLIST_FILE = "demobank/demobank-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework/openssl",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.rutoken.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -581,9 +601,17 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "demobank/demobank-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Framework/openssl/include",
+					"$(PROJECT_DIR)/Framework/rtpkcs11ecp.framework/Headers",
+				);
 				INFOPLIST_FILE = "demobank/demobank-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework/openssl",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.rutoken.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
