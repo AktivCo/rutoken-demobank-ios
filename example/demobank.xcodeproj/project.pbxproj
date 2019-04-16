@@ -39,7 +39,6 @@
 		558C822C19CC644D00236C77 /* 37x-checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 558C822A19CC644D00236C77 /* 37x-checkmark@2x.png */; };
 		55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911BA519B1A9BD005E38ED /* PinEnterViewController.m */; };
 		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
-		55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C244FB19B092A100DF5964 /* DemobankNavigationController.m */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
 		55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89654199A02DA0082A015 /* CoreGraphics.framework */; };
 		55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
@@ -48,7 +47,6 @@
 		55E89663199A02DA0082A015 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E89662199A02DA0082A015 /* AppDelegate.m */; };
 		55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E89667199A02DA0082A015 /* Main_iPad.storyboard */; };
 		55E8966E199A02DA0082A015 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E8966D199A02DA0082A015 /* Images.xcassets */; };
-		55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8968E199A0C040082A015 /* FirstScreenViewController.m */; };
 		55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89690199A0D0C0082A015 /* ExternalAccessory.framework */; };
 		55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89692199A0D1A0082A015 /* CoreBluetooth.framework */; };
 		55EFF3661A80DBB60032A390 /* ApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF2CD1A80DBB60032A390 /* ApplicationError.m */; };
@@ -58,6 +56,10 @@
 		55EFF3D41A80DBB60032A390 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3611A80DBB60032A390 /* Token.m */; };
 		55EFF3D51A80DBB60032A390 /* TokenInfoLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3631A80DBB60032A390 /* TokenInfoLoader.m */; };
 		55EFF3D61A80DBB60032A390 /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EFF3651A80DBB60032A390 /* TokenManager.m */; };
+		C315E2902265B8820051DF85 /* TokenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E28F2265B8820051DF85 /* TokenTableViewController.m */; };
+		C315E2932265C0B30051DF85 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E2922265C0B30051DF85 /* NavigationController.m */; };
+		C315E2962265CC650051DF85 /* TokenCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E2952265CC650051DF85 /* TokenCard.m */; };
+		C315E2992265EAA70051DF85 /* CertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E2982265EAA70051DF85 /* CertViewController.m */; };
 		C3780910220DA5AA001D4D83 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C378090F220DA5AA001D4D83 /* Storyboard.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -112,8 +114,6 @@
 		55911BA419B1A9BD005E38ED /* PinEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinEnterViewController.h; sourceTree = "<group>"; };
 		55911BA519B1A9BD005E38ED /* PinEnterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinEnterViewController.m; sourceTree = "<group>"; };
 		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		55C244FA19B092A100DF5964 /* DemobankNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemobankNavigationController.h; sourceTree = "<group>"; };
-		55C244FB19B092A100DF5964 /* DemobankNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemobankNavigationController.m; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89652199A02DA0082A015 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55E89654199A02DA0082A015 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,8 +126,6 @@
 		55E89662199A02DA0082A015 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		55E89668199A02DA0082A015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		55E8966D199A02DA0082A015 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		55E8968D199A0C040082A015 /* FirstScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstScreenViewController.h; sourceTree = "<group>"; };
-		55E8968E199A0C040082A015 /* FirstScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstScreenViewController.m; sourceTree = "<group>"; };
 		55E89690199A0D0C0082A015 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		55E89692199A0D1A0082A015 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		55EFF2CC1A80DBB60032A390 /* ApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationError.h; path = ../../ApplicationError.h; sourceTree = "<group>"; };
@@ -145,6 +143,14 @@
 		55EFF3641A80DBB60032A390 /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenManager.h; path = ../../TokenManager.h; sourceTree = "<group>"; };
 		55EFF3651A80DBB60032A390 /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenManager.m; path = ../../TokenManager.m; sourceTree = "<group>"; };
 		A10E51F08C86AE015D6113AA /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		C315E28E2265B8820051DF85 /* TokenTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenTableViewController.h; sourceTree = "<group>"; };
+		C315E28F2265B8820051DF85 /* TokenTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenTableViewController.m; sourceTree = "<group>"; };
+		C315E2912265C0B30051DF85 /* NavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		C315E2922265C0B30051DF85 /* NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		C315E2942265CC650051DF85 /* TokenCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenCard.h; sourceTree = "<group>"; };
+		C315E2952265CC650051DF85 /* TokenCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenCard.m; sourceTree = "<group>"; };
+		C315E2972265EAA70051DF85 /* CertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertViewController.h; sourceTree = "<group>"; };
+		C315E2982265EAA70051DF85 /* CertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertViewController.m; sourceTree = "<group>"; };
 		C378090F220DA5AA001D4D83 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,10 +233,6 @@
 		55828C6419B1D431007CAEA7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				55C244FA19B092A100DF5964 /* DemobankNavigationController.h */,
-				55C244FB19B092A100DF5964 /* DemobankNavigationController.m */,
-				55E8968D199A0C040082A015 /* FirstScreenViewController.h */,
-				55E8968E199A0C040082A015 /* FirstScreenViewController.m */,
 				55911BA419B1A9BD005E38ED /* PinEnterViewController.h */,
 				55911BA519B1A9BD005E38ED /* PinEnterViewController.m */,
 				55828C6519B1EA00007CAEA7 /* PaymentsViewController.h */,
@@ -239,6 +241,14 @@
 				55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */,
 				55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */,
 				55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */,
+				C315E2972265EAA70051DF85 /* CertViewController.h */,
+				C315E2982265EAA70051DF85 /* CertViewController.m */,
+				C315E28E2265B8820051DF85 /* TokenTableViewController.h */,
+				C315E28F2265B8820051DF85 /* TokenTableViewController.m */,
+				C315E2942265CC650051DF85 /* TokenCard.h */,
+				C315E2952265CC650051DF85 /* TokenCard.m */,
+				C315E2912265C0B30051DF85 /* NavigationController.h */,
+				C315E2922265C0B30051DF85 /* NavigationController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -410,17 +420,19 @@
 				55EFF3D41A80DBB60032A390 /* Token.m in Sources */,
 				55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */,
 				55EFF3D21A80DBB60032A390 /* Pkcs11Error.m in Sources */,
+				C315E2932265C0B30051DF85 /* NavigationController.m in Sources */,
+				C315E2992265EAA70051DF85 /* CertViewController.m in Sources */,
 				55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */,
 				55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */,
-				55E8968F199A0C040082A015 /* FirstScreenViewController.m in Sources */,
 				55EFF3D31A80DBB60032A390 /* Pkcs11EventHandler.m in Sources */,
+				C315E2902265B8820051DF85 /* TokenTableViewController.m in Sources */,
 				558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */,
 				55EFF3D61A80DBB60032A390 /* TokenManager.m in Sources */,
 				55EFF3D51A80DBB60032A390 /* TokenInfoLoader.m in Sources */,
-				55C244FC19B092A100DF5964 /* DemobankNavigationController.m in Sources */,
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
 				55EFF3671A80DBB60032A390 /* Certificate.m in Sources */,
 				55EFF3661A80DBB60032A390 /* ApplicationError.m in Sources */,
+				C315E2962265CC650051DF85 /* TokenCard.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
 				55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */,
 			);

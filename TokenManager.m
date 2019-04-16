@@ -111,8 +111,12 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	}
 }
 
--(NSArray*)tokenHandles{
-	return[self.tokens allKeys];
+-(NSArray*)tokenHandles {
+	return [self.tokens allKeys];
+}
+
+-(NSInteger)tokenCount {
+    return [self.tokens count];
 }
 
 -(Token*)tokenForHandle:(NSNumber*)tokenId{

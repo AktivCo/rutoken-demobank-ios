@@ -16,5 +16,6 @@
 
 -(NSArray*)tokenHandles;
 -(Token*)tokenForHandle:(NSNumber*)tokenId;
+-(NSInteger)tokenCount;
 
 @end

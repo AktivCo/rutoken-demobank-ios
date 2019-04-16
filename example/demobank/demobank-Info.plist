@@ -35,7 +35,7 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Storyboard</string>
 	<key>UIMainStoryboardFile~ipad</key>
-	<string>Main_iPad</string>
+	<string>Storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
