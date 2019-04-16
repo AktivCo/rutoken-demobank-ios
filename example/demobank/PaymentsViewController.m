@@ -21,30 +21,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if(nil != _activeTokenHandle){
-        TokenManager* tokenManager = [TokenManager sharedInstance];
-        Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
-        
-        NSString* tokenLabel;
-        if([[token model] isEqualToString:@"Rutoken ECP BT"]) tokenLabel = @"Рутокен ЭЦП Bluetooth";
-        else tokenLabel = @"Рутокен";
-        
-        uint decSerial;
-        [[NSScanner scannerWithString:[token serialNumber]] scanHexInt:&decSerial];
-        NSString* decSerialString = [NSString stringWithFormat:@"0%lu", (unsigned long)decSerial];
-        tokenLabel = [NSString stringWithFormat:@"%@ %@", tokenLabel, [decSerialString substringFromIndex:[decSerialString length] -5]];
-        [_tokenModelLabel setText:tokenLabel];
-        
-        if(YES == [token charging]) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_charge.png"]];
-        else if ([token charge] > 80) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_4_sec.png"]];
-        else if ([token charge] <= 80 && [token charge] > 60 ) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_3_sec.png"]];
-        else if ([token charge] <= 60 && [token charge] > 40) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_2_sec.png"]];
-        else if ([token charge] <= 40 && [token charge] > 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_1_sec.png"]];
-        else if ([token charge] <= 20) [_batteryChargeImage setImage: [UIImage imageNamed:@"battery_empty.png"]];
-        
-        [_batteryPercentageLabel setText:[NSString stringWithFormat:@"%lu%%" ,(unsigned long)[token charge]]];
-    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

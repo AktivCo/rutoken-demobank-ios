@@ -127,7 +127,7 @@
                 [_pinErrorLabel setText:@""];
                 [_pinTextInput setText:@""];
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                PaymentsViewController* vc =[[UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"PaymentsVC"];
+                PaymentsViewController* vc =[[UIStoryboard storyboardWithName:@"Storyboard" bundle:nil] instantiateViewControllerWithIdentifier:@"PaymentsVC"];
                 [vc setActiveTokenHandle:_activeTokenHandle];
                 NSMutableArray *vcs = [[self.navigationController viewControllers] mutableCopy];
                 NSUInteger lastVcIndex = [vcs count] - 1;

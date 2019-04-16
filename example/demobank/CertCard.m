@@ -1,15 +1,13 @@
 //
-//  TokenTableViewController.h
+//  CertCard.m
 //  demobank
 //
 //  Created by Андрей Трифонов on 16/04/2019.
 //  Copyright © 2019 Aktiv Co. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CertCard.h"
 
-@interface TokenTableViewController : UITableViewController
-
--(void)updateState;
+@implementation CertCard
 
 @end

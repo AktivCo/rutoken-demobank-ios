@@ -128,61 +128,13 @@
 - (void)tokenWasRemoved:(NSNotification*)notification {
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* handle = [userInfo objectForKey:@"handle"];
-    
-    if(handle == _activeTokenHandle){
-        self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.view addSubview:self.hud];
-        
-        NSArray* ids = [_tokenManager tokenHandles];
-        if(0 != [ids count]){
-            _activeTokenHandle = [ids objectAtIndex:0];
-            
-//            self.hud.labelText = @"Активный токен изменен";
-//            self.hud.dimBackground = YES;
-//            self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-change.png"]];
-//            self.hud.mode = MBProgressHUDModeCustomView;
-//            self.hud.animationType = MBProgressHUDAnimationZoomIn;
-//            self.hud.minSize = CGSizeMake(150.f, 150.f);
-//
-//            [self.hud show:YES];
-//            [self.hud hide:YES afterDelay:1.5];
-            
-            [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnected];
-        } else {
-            _activeTokenHandle = nil;
-            if(0 == _connectingTokens) {
-//                self.hud.labelText = @"Токен был отключен";
-//                self.hud.dimBackground = YES;
-//                self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
-//                self.hud.mode = MBProgressHUDModeCustomView;
-//                self.hud.animationType = MBProgressHUDAnimationZoomIn;
-//                self.hud.minSize = CGSizeMake(150.f, 150.f);
-//
-//                [self.hud show:YES];
-//                [self.hud hide:YES afterDelay:1.5];
-                
-                [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenDisconnected];
-            }
-            else {
-//                self.hud.labelText = @"Подключение другого токена...";
-//                self.hud.dimBackground = YES;
-//                self.hud.mode = MBProgressHUDModeIndeterminate;
-//                self.hud.animationType = MBProgressHUDAnimationZoomIn;
-//                self.hud.minSize = CGSizeMake(150.f, 150.f);
-//
-//                [self.hud show:YES];
-                [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnecting];
-            }
-        }
-        [self popToRootViewControllerAnimated:YES];
-    }
-    
+    [self popToRootViewControllerAnimated:YES];
     NSLog(@"Token with handle %d was removed", [handle intValue]);
 }
 
 - (void)tokenWillBeAdded:(NSNotification*)notification {
     _connectingTokens++;
-    if([_tokenManager tokenCount] == 0) {
+    if([_tokenManager tokenCount] == 0 && _connectingTokens == 1) {
         self.hud = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:self.hud];
 
@@ -199,7 +151,7 @@
 
 - (void)tokenAddingFailed:(NSNotification*)notification {
     _connectingTokens--;
-    if([_tokenManager tokenCount] == 0) {
+    if([_tokenManager tokenCount] == 0 && _connectingTokens == 0) {
         if(nil != self.hud) {
             self.hud.labelText = @"Произошла ошибка";
             self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];

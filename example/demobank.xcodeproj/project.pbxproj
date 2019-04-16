@@ -45,7 +45,6 @@
 		55E8965D199A02DA0082A015 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E8965B199A02DA0082A015 /* InfoPlist.strings */; };
 		55E8965F199A02DA0082A015 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E8965E199A02DA0082A015 /* main.m */; };
 		55E89663199A02DA0082A015 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E89662199A02DA0082A015 /* AppDelegate.m */; };
-		55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E89667199A02DA0082A015 /* Main_iPad.storyboard */; };
 		55E8966E199A02DA0082A015 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E8966D199A02DA0082A015 /* Images.xcassets */; };
 		55E89691199A0D0C0082A015 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89690199A0D0C0082A015 /* ExternalAccessory.framework */; };
 		55E89693199A0D1A0082A015 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89692199A0D1A0082A015 /* CoreBluetooth.framework */; };
@@ -59,8 +58,9 @@
 		C315E2902265B8820051DF85 /* TokenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E28F2265B8820051DF85 /* TokenTableViewController.m */; };
 		C315E2932265C0B30051DF85 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E2922265C0B30051DF85 /* NavigationController.m */; };
 		C315E2962265CC650051DF85 /* TokenCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E2952265CC650051DF85 /* TokenCard.m */; };
-		C315E2992265EAA70051DF85 /* CertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C315E2982265EAA70051DF85 /* CertViewController.m */; };
 		C3780910220DA5AA001D4D83 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C378090F220DA5AA001D4D83 /* Storyboard.storyboard */; };
+		C3CD66852265F5880011A057 /* CertCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CD66842265F5880011A057 /* CertCard.m */; };
+		C3CD66882265F5A50011A057 /* CertTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CD66872265F5A50011A057 /* CertTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -124,7 +124,6 @@
 		55E89660199A02DA0082A015 /* demobank-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demobank-Prefix.pch"; sourceTree = "<group>"; };
 		55E89661199A02DA0082A015 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		55E89662199A02DA0082A015 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		55E89668199A02DA0082A015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		55E8966D199A02DA0082A015 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55E89690199A0D0C0082A015 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		55E89692199A0D1A0082A015 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -149,9 +148,11 @@
 		C315E2922265C0B30051DF85 /* NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		C315E2942265CC650051DF85 /* TokenCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenCard.h; sourceTree = "<group>"; };
 		C315E2952265CC650051DF85 /* TokenCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenCard.m; sourceTree = "<group>"; };
-		C315E2972265EAA70051DF85 /* CertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertViewController.h; sourceTree = "<group>"; };
-		C315E2982265EAA70051DF85 /* CertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertViewController.m; sourceTree = "<group>"; };
 		C378090F220DA5AA001D4D83 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		C3CD66832265F5880011A057 /* CertCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertCard.h; sourceTree = "<group>"; };
+		C3CD66842265F5880011A057 /* CertCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertCard.m; sourceTree = "<group>"; };
+		C3CD66862265F5A50011A057 /* CertTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertTableViewController.h; sourceTree = "<group>"; };
+		C3CD66872265F5A50011A057 /* CertTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,12 +242,14 @@
 				55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */,
 				55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */,
 				55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */,
-				C315E2972265EAA70051DF85 /* CertViewController.h */,
-				C315E2982265EAA70051DF85 /* CertViewController.m */,
-				C315E28E2265B8820051DF85 /* TokenTableViewController.h */,
-				C315E28F2265B8820051DF85 /* TokenTableViewController.m */,
+				C3CD66832265F5880011A057 /* CertCard.h */,
+				C3CD66842265F5880011A057 /* CertCard.m */,
+				C3CD66862265F5A50011A057 /* CertTableViewController.h */,
+				C3CD66872265F5A50011A057 /* CertTableViewController.m */,
 				C315E2942265CC650051DF85 /* TokenCard.h */,
 				C315E2952265CC650051DF85 /* TokenCard.m */,
+				C315E28E2265B8820051DF85 /* TokenTableViewController.h */,
+				C315E28F2265B8820051DF85 /* TokenTableViewController.m */,
 				C315E2912265C0B30051DF85 /* NavigationController.h */,
 				C315E2922265C0B30051DF85 /* NavigationController.m */,
 			);
@@ -302,7 +305,6 @@
 			children = (
 				55E89661199A02DA0082A015 /* AppDelegate.h */,
 				55E89662199A02DA0082A015 /* AppDelegate.m */,
-				55E89667199A02DA0082A015 /* Main_iPad.storyboard */,
 				C378090F220DA5AA001D4D83 /* Storyboard.storyboard */,
 				55E8966D199A02DA0082A015 /* Images.xcassets */,
 				55E89659199A02DA0082A015 /* Supporting Files */,
@@ -385,7 +387,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E89669199A02DA0082A015 /* Main_iPad.storyboard in Resources */,
 				C3780910220DA5AA001D4D83 /* Storyboard.storyboard in Resources */,
 				558C822C19CC644D00236C77 /* 37x-checkmark@2x.png in Resources */,
 				55E8966E199A02DA0082A015 /* Images.xcassets in Resources */,
@@ -421,16 +422,17 @@
 				55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */,
 				55EFF3D21A80DBB60032A390 /* Pkcs11Error.m in Sources */,
 				C315E2932265C0B30051DF85 /* NavigationController.m in Sources */,
-				C315E2992265EAA70051DF85 /* CertViewController.m in Sources */,
 				55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */,
 				55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */,
 				55EFF3D31A80DBB60032A390 /* Pkcs11EventHandler.m in Sources */,
 				C315E2902265B8820051DF85 /* TokenTableViewController.m in Sources */,
+				C3CD66882265F5A50011A057 /* CertTableViewController.m in Sources */,
 				558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */,
 				55EFF3D61A80DBB60032A390 /* TokenManager.m in Sources */,
 				55EFF3D51A80DBB60032A390 /* TokenInfoLoader.m in Sources */,
 				55E89663199A02DA0082A015 /* AppDelegate.m in Sources */,
 				55EFF3671A80DBB60032A390 /* Certificate.m in Sources */,
+				C3CD66852265F5880011A057 /* CertCard.m in Sources */,
 				55EFF3661A80DBB60032A390 /* ApplicationError.m in Sources */,
 				C315E2962265CC650051DF85 /* TokenCard.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
@@ -448,15 +450,6 @@
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
-		};
-		55E89667199A02DA0082A015 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55E89668199A02DA0082A015 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-			usesTabs = 0;
 		};
 /* End PBXVariantGroup section */
 

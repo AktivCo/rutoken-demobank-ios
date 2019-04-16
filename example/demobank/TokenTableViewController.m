@@ -8,7 +8,7 @@
 
 #import "TokenTableViewController.h"
 
-#import "CertViewController.h"
+#import "CertTableViewController.h"
 
 #import "TokenCard.h"
 
@@ -46,7 +46,6 @@
         messageLabel.text = @"Подключите токен для продолжения работы";
         messageLabel.numberOfLines = 2;
         messageLabel.textAlignment = NSTextAlignmentCenter;
-        // messageLabel.sizeToFit();
         
         self.tableView.backgroundView = messageLabel;
         return 0;
@@ -63,7 +62,7 @@
     
     tokenCard.tokenLabel.text = [token label];
     tokenCard.serialValue.text = [token serialNumber];
-    tokenCard.chargeValue.text = [NSString stringWithFormat:@"%d%", (int)[token charge]];
+    tokenCard.chargeValue.text = [NSString stringWithFormat:@"%d%%", (int)[token charge]];
     tokenCard.certCountValue.text = [NSString stringWithFormat:@"%d", [[token certificates] count]];
  
     return tokenCard;
@@ -76,8 +75,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toCertList"]) {
-        CertViewController* vc = segue.destinationViewController;
-        vc.tokenHandle = sender;
+        CertTableViewController* vc = segue.destinationViewController;
+        [vc setTokenHandle:sender];
     }
 }
 

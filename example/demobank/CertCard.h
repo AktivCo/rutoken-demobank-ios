@@ -1,5 +1,5 @@
 //
-//  TokenTableViewController.h
+//  CertCard.h
 //  demobank
 //
 //  Created by Андрей Трифонов on 16/04/2019.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TokenTableViewController : UITableViewController
+@interface CertCard : UITableViewCell
 
--(void)updateState;
+@property (weak, nonatomic) IBOutlet UILabel *commonName;
 
 @end

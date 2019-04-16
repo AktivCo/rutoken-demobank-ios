@@ -1,5 +1,5 @@
 //
-//  CertViewController.h
+//  CertTableViewController.h
 //  demobank
 //
 //  Created by Андрей Трифонов on 16/04/2019.
@@ -8,15 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class TokenManager;
+@interface CertTableViewController : UITableViewController
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface CertViewController : UIViewController
-
-@property (weak, nonatomic) IBOutlet UIButton *certButton;
 @property (nonatomic, readwrite) NSNumber* tokenHandle;
 
 @end
 
-NS_ASSUME_NONNULL_END
