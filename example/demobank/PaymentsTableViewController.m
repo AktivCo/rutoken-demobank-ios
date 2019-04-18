@@ -5,27 +5,52 @@
 
 #import "PaymentInfoTableViewController.h"
 
+#import "PaymentShortInfoCell.h"
+
+#import "PaymentsDB.h"
+
 @implementation PaymentsTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    PaymentsDB* paymentsDB = [PaymentsDB sharedInstance];
+
+    return [[paymentsDB getPayments] count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (CGFloat)[PaymentShortInfoCell getCellHeight];
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString* cellIdentifier = @"PaymentShortInfoCell";
+    PaymentShortInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        [tableView registerNib:[UINib nibWithNibName:cellIdentifier bundle:nil] forCellReuseIdentifier:cellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    }
+
+    NSInteger index = [indexPath row];
+    PaymentsDB* paymentsDB = [PaymentsDB sharedInstance];
+
+    [cell fillPaymentCellWithDate:[paymentsDB getDateByIndex:index] recipient:[paymentsDB getRecipientByIndex:index] sum:[paymentsDB getSumByIndex:index]];
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"toPaymentInfo" sender:[NSNumber numberWithInteger:[indexPath row]]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([[segue identifier] isEqualToString:@"paymentInfo"]){
+    if([[segue identifier] isEqualToString:@"toPaymentInfo"]){
         PaymentInfoTableViewController* vc = [segue destinationViewController];
         [vc setActiveTokenHandle:_activeTokenHandle];
+        [vc setPaymentNumber:sender];
     }
 }
 

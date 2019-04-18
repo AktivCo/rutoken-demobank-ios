@@ -7,7 +7,7 @@
 
 #import "TokenManager.h"
 #import "Token.h"
-#import "PaymentsViewController.h"
+#import "PaymentsTableViewController.h"
 
 #import "MBProgressHUD.h"
 
@@ -127,15 +127,8 @@
                 [_pinErrorLabel setText:@""];
                 [_pinTextInput setText:@""];
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                PaymentsViewController* vc =[[UIStoryboard storyboardWithName:@"Storyboard" bundle:nil] instantiateViewControllerWithIdentifier:@"PaymentsVC"];
-                [vc setActiveTokenHandle:_activeTokenHandle];
-                NSMutableArray *vcs = [[self.navigationController viewControllers] mutableCopy];
-                NSUInteger lastVcIndex = [vcs count] - 1;
-                if (lastVcIndex > 0) {
-                    [vcs replaceObjectAtIndex:lastVcIndex withObject:vc];
-                    [self.navigationController setViewControllers:vcs animated:YES];
-                }
-                //[self performSegueWithIdentifier:@"segueToPayments" sender:self];
+
+                [self performSegueWithIdentifier:@"toPayments" sender:self];
             } errorCallback:^(NSError * e) {
                 self.hud.labelText = @"Произошла ошибка";
                 self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
@@ -163,16 +156,13 @@
     }    
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([[segue identifier] isEqualToString:@"toPayments"]){
+        PaymentsTableViewController* vc = [segue destinationViewController];
+        [vc setActiveTokenHandle:_activeTokenHandle];
+    }
 }
-*/
+
 
 @end

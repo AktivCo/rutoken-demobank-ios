@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PaymentShortInfoCell" rowHeight="166" id="KGk-i7-Jjw" customClass="PaymentShortInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="65.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhW-P4-dwd">
+                        <rect key="frame" x="16" y="11" width="75" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sum" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yo6-xX-oSa">
+                        <rect key="frame" x="265.5" y="22.5" width="34.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hN4-XL-L5x">
+                        <rect key="frame" x="16" y="40.5" width="26.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Yo6-xX-oSa" secondAttribute="trailing" constant="20" symbolic="YES" id="P3j-RX-kha"/>
+                    <constraint firstItem="zhW-P4-dwd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="QpF-pC-0t3"/>
+                    <constraint firstItem="zhW-P4-dwd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="TbV-FL-glK"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hN4-XL-L5x" secondAttribute="bottom" id="qjU-IZ-Qpj"/>
+                    <constraint firstItem="Yo6-xX-oSa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uh4-pi-5zZ"/>
+                    <constraint firstItem="hN4-XL-L5x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="va0-Xd-uby"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="date" destination="hN4-XL-L5x" id="lwK-cJ-gtV"/>
+                <outlet property="recipient" destination="zhW-P4-dwd" id="ah7-kp-UJ3"/>
+                <outlet property="sum" destination="Yo6-xX-oSa" id="XLE-cJ-jx5"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="71"/>
+        </tableViewCell>
+    </objects>
+</document>

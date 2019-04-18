@@ -16,6 +16,9 @@
 		4E64A3342254CF36004393AB /* rtengine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E64A3312254CF30004393AB /* rtengine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E64A3362254CF49004393AB /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E64A3352254CF49004393AB /* libcrypto.1.1.dylib */; };
 		4E64A3372254CF4F004393AB /* libcrypto.1.1.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E64A3352254CF49004393AB /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4E7E3757226DE4CD00D24B74 /* PaymentsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E3756226DE4CD00D24B74 /* PaymentsDB.m */; };
+		4E7E375D226DEA2100D24B74 /* PaymentShortInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E375B226DEA2100D24B74 /* PaymentShortInfoCell.m */; };
+		4E7E375E226DEA2100D24B74 /* PaymentShortInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E7E375C226DEA2100D24B74 /* PaymentShortInfoCell.xib */; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
 		553D266F19FA7D590032099F /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D266E19FA7D590032099F /* line.png */; };
@@ -29,7 +32,6 @@
 		556B854919AF56A700DF95FB /* battery_charge.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854319AF56A700DF95FB /* battery_charge.png */; };
 		556B854A19AF56A700DF95FB /* battery_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854419AF56A700DF95FB /* battery_empty.png */; };
 		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
-		55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */; };
 		558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C820E19CC0A4D00236C77 /* MBProgressHUD.m */; };
 		558C821F19CC5F1C00236C77 /* 37x-change.png in Resources */ = {isa = PBXBuildFile; fileRef = 558C821919CC5F1C00236C77 /* 37x-change.png */; };
 		558C822019CC5F1C00236C77 /* 37x-change@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 558C821A19CC5F1C00236C77 /* 37x-change@2x.png */; };
@@ -86,6 +88,11 @@
 		4C81D75620E0F390000D8AD1 /* RtPcsc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RtPcsc.framework; path = Framework/RtPcsc.framework; sourceTree = "<group>"; };
 		4E64A3312254CF30004393AB /* rtengine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = rtengine.framework; path = Framework/rtengine.framework; sourceTree = "<group>"; };
 		4E64A3352254CF49004393AB /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = Framework/openssl/libcrypto.1.1.dylib; sourceTree = "<group>"; };
+		4E7E3756226DE4CD00D24B74 /* PaymentsDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentsDB.m; sourceTree = "<group>"; };
+		4E7E3758226DE4EC00D24B74 /* PaymentsDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentsDB.h; sourceTree = "<group>"; };
+		4E7E375A226DEA2100D24B74 /* PaymentShortInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentShortInfoCell.h; sourceTree = "<group>"; };
+		4E7E375B226DEA2100D24B74 /* PaymentShortInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentShortInfoCell.m; sourceTree = "<group>"; };
+		4E7E375C226DEA2100D24B74 /* PaymentShortInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentShortInfoCell.xib; sourceTree = "<group>"; };
 		55295B8819B5A12F00FC1C6A /* PaymentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsTableViewController.h; sourceTree = "<group>"; };
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
 		55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoTableViewController.h; sourceTree = "<group>"; };
@@ -101,8 +108,6 @@
 		556B854319AF56A700DF95FB /* battery_charge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_charge.png; sourceTree = "<group>"; };
 		556B854419AF56A700DF95FB /* battery_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_empty.png; sourceTree = "<group>"; };
 		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
-		55828C6519B1EA00007CAEA7 /* PaymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsViewController.h; sourceTree = "<group>"; };
-		55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsViewController.m; sourceTree = "<group>"; };
 		558C820D19CC0A4D00236C77 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		558C820E19CC0A4D00236C77 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		558C821919CC5F1C00236C77 /* 37x-change.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-change.png"; sourceTree = "<group>"; };
@@ -176,6 +181,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E7E3759226DE5C900D24B74 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				4E7E3756226DE4CD00D24B74 /* PaymentsDB.m */,
+				4E7E3758226DE4EC00D24B74 /* PaymentsDB.h */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		4E7E375F226E033200D24B74 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4E7E375A226DEA2100D24B74 /* PaymentShortInfoCell.h */,
+				4E7E375B226DEA2100D24B74 /* PaymentShortInfoCell.m */,
+				4E7E375C226DEA2100D24B74 /* PaymentShortInfoCell.xib */,
+				C3CD66832265F5880011A057 /* CertCard.h */,
+				C3CD66842265F5880011A057 /* CertCard.m */,
+				C315E2942265CC650051DF85 /* TokenCard.h */,
+				C315E2952265CC650051DF85 /* TokenCard.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		556B853E19AF56A700DF95FB /* battery */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,18 +264,12 @@
 			children = (
 				55911BA419B1A9BD005E38ED /* PinEnterViewController.h */,
 				55911BA519B1A9BD005E38ED /* PinEnterViewController.m */,
-				55828C6519B1EA00007CAEA7 /* PaymentsViewController.h */,
-				55828C6619B1EA00007CAEA7 /* PaymentsViewController.m */,
 				55295B8819B5A12F00FC1C6A /* PaymentsTableViewController.h */,
 				55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */,
 				55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */,
 				55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */,
-				C3CD66832265F5880011A057 /* CertCard.h */,
-				C3CD66842265F5880011A057 /* CertCard.m */,
 				C3CD66862265F5A50011A057 /* CertTableViewController.h */,
 				C3CD66872265F5A50011A057 /* CertTableViewController.m */,
-				C315E2942265CC650051DF85 /* TokenCard.h */,
-				C315E2952265CC650051DF85 /* TokenCard.m */,
 				C315E28E2265B8820051DF85 /* TokenTableViewController.h */,
 				C315E28F2265B8820051DF85 /* TokenTableViewController.m */,
 				C315E2912265C0B30051DF85 /* NavigationController.h */,
@@ -303,15 +325,14 @@
 		55E89658199A02DA0082A015 /* demobank */ = {
 			isa = PBXGroup;
 			children = (
-				55E89661199A02DA0082A015 /* AppDelegate.h */,
-				55E89662199A02DA0082A015 /* AppDelegate.m */,
 				C378090F220DA5AA001D4D83 /* Storyboard.storyboard */,
 				55E8966D199A02DA0082A015 /* Images.xcassets */,
+				4E7E3759226DE5C900D24B74 /* DB */,
 				55E89659199A02DA0082A015 /* Supporting Files */,
+				4E7E375F226E033200D24B74 /* Cells */,
 				55828C6419B1D431007CAEA7 /* ViewControllers */,
 				5573372B19B376F800CF0202 /* TokenManager */,
 				558C821019CC0A5400236C77 /* ProgressHUD */,
-				A10E51F08C86AE015D6113AA /* Util.h */,
 			);
 			path = demobank;
 			sourceTree = "<group>";
@@ -319,6 +340,9 @@
 		55E89659199A02DA0082A015 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55E89661199A02DA0082A015 /* AppDelegate.h */,
+				55E89662199A02DA0082A015 /* AppDelegate.m */,
+				A10E51F08C86AE015D6113AA /* Util.h */,
 				55E8965A199A02DA0082A015 /* demobank-Info.plist */,
 				55E8965B199A02DA0082A015 /* InfoPlist.strings */,
 				55E8965E199A02DA0082A015 /* main.m */,
@@ -396,6 +420,7 @@
 				558C822019CC5F1C00236C77 /* 37x-change@2x.png in Resources */,
 				556B854619AF56A700DF95FB /* battery_2_sec.png in Resources */,
 				556B854919AF56A700DF95FB /* battery_charge.png in Resources */,
+				4E7E375E226DEA2100D24B74 /* PaymentShortInfoCell.xib in Resources */,
 				558C822B19CC644D00236C77 /* 37x-checkmark.png in Resources */,
 				558C821F19CC5F1C00236C77 /* 37x-change.png in Resources */,
 				55BC87CC19ADF32E008ABF1E /* logo.png in Resources */,
@@ -423,7 +448,6 @@
 				55EFF3D21A80DBB60032A390 /* Pkcs11Error.m in Sources */,
 				C315E2932265C0B30051DF85 /* NavigationController.m in Sources */,
 				55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */,
-				55828C6719B1EA00007CAEA7 /* PaymentsViewController.m in Sources */,
 				55EFF3D31A80DBB60032A390 /* Pkcs11EventHandler.m in Sources */,
 				C315E2902265B8820051DF85 /* TokenTableViewController.m in Sources */,
 				C3CD66882265F5A50011A057 /* CertTableViewController.m in Sources */,
@@ -434,9 +458,11 @@
 				55EFF3671A80DBB60032A390 /* Certificate.m in Sources */,
 				C3CD66852265F5880011A057 /* CertCard.m in Sources */,
 				55EFF3661A80DBB60032A390 /* ApplicationError.m in Sources */,
+				4E7E375D226DEA2100D24B74 /* PaymentShortInfoCell.m in Sources */,
 				C315E2962265CC650051DF85 /* TokenCard.m in Sources */,
 				55E8965F199A02DA0082A015 /* main.m in Sources */,
 				55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */,
+				4E7E3757226DE4CD00D24B74 /* PaymentsDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

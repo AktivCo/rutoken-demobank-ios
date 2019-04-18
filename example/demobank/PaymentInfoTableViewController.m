@@ -5,6 +5,8 @@
 
 #import "PaymentInfoTableViewController.h"
 
+#import "PaymentsDB.h"
+
 #include "Token.h"
 #include "TokenManager.h"
 #include "Certificate.h"
@@ -14,21 +16,19 @@
 @interface PaymentInfoTableViewController ()
 
 @property (nonatomic)  MBProgressHUD * hud;
+@property (nonatomic) NSArray* viewPayment;
+@property (nonatomic) NSDictionary* payment;
 
 @end
 
 @implementation PaymentInfoTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
 - (IBAction)signAndSend:(id)sender {
+    NSInteger sum = [_payment[@"Информация"][@"Сумма"] integerValue];
+    NSData* paymentData = [self paymentToJson];
+
     if(nil != _activeTokenHandle){
-        if([[_costLabel text] integerValue] >= 50000) {
+        if(sum >= 50000) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Подтверждение перевода" message:@"" preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"Перевести" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
                 NSString *pin = [((UITextField *)[[alert textFields] objectAtIndex:0]) text];
@@ -41,7 +41,7 @@
                                    errorCallback:^(NSError* e){}];
                 
                 [token loginWithPin:pin successCallback:^(void){
-                    [self  sign];
+                    [self  signWithData:paymentData];
                 } errorCallback:^(NSError * e) {
                     self.hud.labelText = @"Ошибка!";
                     self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
@@ -55,13 +55,13 @@
             }];
             [self presentViewController:alert animated:YES completion:nil];
         } else {
-            [self sign];
+            [self signWithData:paymentData];
         }
     }
         
 }
 
--(void)sign{
+-(void)signWithData:(NSData*)paymentData {
     if(_activeTokenHandle){
         TokenManager* tokenManager = [TokenManager sharedInstance];
         Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
@@ -69,9 +69,6 @@
         
         self.hud.labelText = @"Подписываю...";
         [self.hud show:YES];
-        
-        NSString* paymentString = @"Payment";
-        NSData* paymentData = [NSData dataWithBytes:[paymentString UTF8String] length:[paymentString length]];
         
         [token signData:paymentData withCertificate:cert successCallback:^(NSValue* cms){
             self.hud.labelText = @"Успешно!";
@@ -90,6 +87,10 @@
     }
 }
 
+- (NSData*)paymentToJson {
+    return [NSJSONSerialization dataWithJSONObject:_payment options:0 error:NULL];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -99,6 +100,79 @@
     _hud.animationType = MBProgressHUDAnimationZoomIn;
     _hud.minSize = CGSizeMake(150.f, 150.f);
     [self.view addSubview:self.hud];
+
+    PaymentsDB* paymentsDB = [PaymentsDB sharedInstance];
+    _payment = [[paymentsDB getPayments] objectAtIndex:[_paymentNumber integerValue]];
+
+    _viewPayment = @[
+                     @{
+                         @"header":@"Плательщик",
+                         @"data":@[
+                                 @"Наименование",
+                                 @"ИНН",
+                                 @"КПП",
+                                 @"Счет",
+                                 ],
+                         },
+                     @{
+                         @"header":@"Банк плательщика",
+                         @"data":@[
+                                 @"Наименование",
+                                 @"БИК",
+                                 @"Счет",
+                                 ],
+                         },
+                     @{
+                         @"header":@"Получатель",
+                         @"data":@[
+                                 @"Наименование",
+                                 @"ИНН",
+                                 @"КПП",
+                                 @"Счет",
+                                 ],
+                         },
+                     @{
+                         @"header":@"Банк получателя",
+                         @"data":@[
+                                 @"Наименование",
+                                 @"БИК",
+                                 @"Счет",
+                                 ],
+                         },
+                     @{
+                         @"header":@"Информация",
+                         @"data":@[
+                                 @"Сумма",
+                                 @"Назначение",
+                                 ],
+                         },
+                     ];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [_viewPayment count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_viewPayment[section][@"data"] count];
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"PaymentCell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"PaymentCell"];
+    }
+
+    NSString* section = _viewPayment[[indexPath section]][@"header"];
+    NSString* row = _viewPayment[[indexPath section]][@"data"][[indexPath row]];
+    [cell.textLabel setText:row];
+    [cell.detailTextLabel setText:_payment[section][row]];
+
+    return cell;
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return _viewPayment[section][@"header"];
 }
 
 @end

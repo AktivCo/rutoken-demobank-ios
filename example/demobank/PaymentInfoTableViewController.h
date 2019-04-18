@@ -3,11 +3,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PaymentInfoTableViewController : UITableViewController{
-    
-    __weak IBOutlet UILabel *_costLabel;
-}
+@interface PaymentInfoTableViewController : UITableViewController
 
 @property(nonatomic) NSNumber* activeTokenHandle;
+@property (nonatomic) NSNumber* paymentNumber;
 
 @end
