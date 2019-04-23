@@ -121,6 +121,7 @@
                                     <outlet property="chargeValue" destination="C5m-FG-VRG" id="IFM-3t-0tu"/>
                                     <outlet property="serialValue" destination="HIt-bl-FZ9" id="fhr-e1-Y8G"/>
                                     <outlet property="tokenLabel" destination="zH1-bf-fdD" id="5kC-Mx-cHF"/>
+                                    <outlet property="tokenView" destination="JFb-8V-Xgw" id="Vs2-rH-x8Q"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

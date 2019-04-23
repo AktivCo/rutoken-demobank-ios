@@ -237,7 +237,7 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
     });
 }
 
-- (void)readCertificatesWithsuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError *))errorCallback {
+- (void)readCertificatesWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError *))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         @try{
             [self readCertificates];
