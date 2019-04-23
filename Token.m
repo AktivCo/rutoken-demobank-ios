@@ -152,9 +152,8 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
                 X509_free(x509);
                 continue;
         }
-        
-        _certificates = certs;
     }
+    _certificates = certs;
 }
 
 -(void)updateTokenInfoFromSlot:(CK_SLOT_ID)slotId {
@@ -247,6 +246,26 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
         } @catch (NSError* e) {
             [self onError:[Pkcs11Error errorWithCode:e.code] callback:errorCallback];
         }
+    });
+}
+
+-(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+
+        CK_RV rv = [self extendedFunctions]->C_EX_SetActivationPassword(_slotId, [password cStringUsingEncoding:NSUTF8StringEncoding]);
+        if (CKR_OK != rv) {
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
+        rv = _functions->C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
+        if (CKR_OK != rv) {
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
+        _isLocked = NO;       
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            successCallback();
+        });
     });
 }
 

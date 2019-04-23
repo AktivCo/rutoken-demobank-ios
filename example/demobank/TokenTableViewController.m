@@ -99,7 +99,8 @@
     tokenCard.chargeValue.text = [NSString stringWithFormat:@"%d%%", (int)[token charge]];
     if ([token isLocked]) {
         tokenCard.certCountValue.text = @"🔒";
-        [tokenCard setUserInteractionEnabled:NO];
+        [[tokenCard tokenView] setBackgroundColor:[UIColor rutokenMurenaColor]];
+        [tokenCard setUserInteractionEnabled:YES];
     } else if ([token certificates]) {
         tokenCard.certCountValue.text = [NSString stringWithFormat:@"%d", [[token certificates] count]];
         [[tokenCard tokenView] setBackgroundColor:[UIColor rutokenMurenaColor]];
@@ -112,10 +113,42 @@
  
     return tokenCard;
 }
+
 #pragma mark - Navigation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"toCertList" sender:[[self tokenManager] tokenHandles][[indexPath row]]];
+    Token * token = [self.tokenManager tokenForHandle:[[self tokenManager] tokenHandles][[indexPath row]]];
+    if ([token isLocked]){
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Активация защищенного канала"
+                                                                       message:@"Введите пароль активации защищенного канала"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+             textField.placeholder = @"Пароль активации";
+        }];
+
+        UIAlertAction* activateAction = [UIAlertAction actionWithTitle:@"Активировать" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            NSString* smPassword = [alert.textFields[0] text];
+            TokenCard* tokenCard = [self.tableView cellForRowAtIndexPath:indexPath];
+            tokenCard.certCountValue.text = @"⏳";
+            [[tokenCard tokenView] setBackgroundColor:[UIColor rutokenLightGreyColor]];
+            [tokenCard setUserInteractionEnabled:NO];
+            [token activateSmWithPassword:smPassword successCallback:^{
+                [self updateState];
+            } errorCallback:^(NSError * e) {
+                [self updateState];
+                NSLog(@"Error during sm activation");
+            }];
+        }];
+        [alert addAction:activateAction];
+
+        UIAlertAction* rejectAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:rejectAction];
+
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self performSegueWithIdentifier:@"toCertList" sender:[[self tokenManager] tokenHandles][[indexPath row]]];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
