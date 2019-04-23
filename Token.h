@@ -8,12 +8,12 @@
 @class Certificate;
 
 typedef NS_ENUM(NSInteger, TokenColor) {
-	TokenColorBlack,
-	TokenColorWhite
+    TokenColorBlack,
+    TokenColorWhite
 };
 
 @interface Token : NSObject {
-	CK_SLOT_ID _slotId;
+    CK_SLOT_ID _slotId;
     CK_SESSION_HANDLE _session;
 }
 
@@ -26,9 +26,12 @@ typedef NS_ENUM(NSInteger, TokenColor) {
 @property(nonatomic, readonly) double charge;
 @property(nonatomic, readonly) bool charging;
 @property(nonatomic, readonly) NSMutableArray* certificates;
+@property(nonatomic, readonly) bool isLocked;
 
 
 -(id)initWithSlotId:(CK_SLOT_ID)slotId;
+
+-(void)readCertificatesWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
 -(void)loginWithPin:(NSString*)pin successCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
 

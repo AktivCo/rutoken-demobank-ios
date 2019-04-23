@@ -32,15 +32,17 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
 @implementation Token
 
 - (NSString*)removeTrailingSpaceFromCString:(const char*) string length:(size_t) length {
-	size_t i;
-	for (i = length; i != 0; --i) {
-		if (' ' != string[i - 1]) break;
-	}
-	
-	return [[NSString alloc] initWithBytes:string length:i encoding:NSUTF8StringEncoding];
+    size_t i;
+    for (i = length; i != 0; --i) {
+        if (' ' != string[i - 1]) break;
+    }
+
+    return [[NSString alloc] initWithBytes:string length:i encoding:NSUTF8StringEncoding];
 }
 
 - (void)readCertificates {
+    NSMutableArray * certs = [NSMutableArray array];
+    
     CK_CERTIFICATE_TYPE certificateType = CKC_X_509;
     CK_OBJECT_CLASS certificateClass = CKO_CERTIFICATE;
     CK_ATTRIBUTE certificateTemplate[] = {
@@ -143,90 +145,86 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
                 X509_free(x509);
                 continue;
             case 1:
-                [_certificates addObject:[[Certificate alloc] initWithSession:_session withObjectId:certificates[i] withId:id withX509:x509]];
+                [certs addObject:[[Certificate alloc] initWithSession:_session withObjectId:certificates[i] withId:id withX509:x509]];
                 break;
             default:
                 // There are several public keys with certificate ID. We dont know which to choose so skip.
                 X509_free(x509);
                 continue;
         }
+        
+        _certificates = certs;
     }
 }
 
 -(void)updateTokenInfoFromSlot:(CK_SLOT_ID)slotId {
-	NSMutableData* tokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
-	CK_TOKEN_INFO_PTR tokenInfo  = [tokenInfoData mutableBytes];
-	
-	CK_RV rv = [self functions]->C_GetTokenInfo(slotId, tokenInfo);
-	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-	
-	_label = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->label length: sizeof(tokenInfo->label)];
-	_serialNumber = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->serialNumber length: sizeof(tokenInfo->serialNumber)];
-	_model = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->model length: sizeof(tokenInfo->model)];
-	_totalMemory = tokenInfo->ulTotalPublicMemory;
-	_freeMemory = tokenInfo->ulFreePublicMemory;
+    NSMutableData* tokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO)];
+    CK_TOKEN_INFO_PTR tokenInfo  = [tokenInfoData mutableBytes];
 
-	
-	NSMutableData* extendedTokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
-	CK_TOKEN_INFO_EXTENDED_PTR extendedTokenInfo = [extendedTokenInfoData mutableBytes];
-	extendedTokenInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
-	
-	rv = [self extendedFunctions]->C_EX_GetTokenInfoExtended(slotId, extendedTokenInfo);
-	if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-	
-	double batteryVoltage = extendedTokenInfo->ulBatteryVoltage;
-	_charge = ((batteryVoltage - kVoltageMin) / (kVoltageMax - kVoltageMin)) * 100;
-	_charging = NO;
-	if(_charge >= 100) {
-		if (kChargingVoltage <= batteryVoltage) _charging = YES;
-		_charge = 100;
-	}
-	if(_charge < 1) _charge = 1;
-	
-	switch (extendedTokenInfo->ulBodyColor) {
-		case 0:
-			_color = TokenColorBlack;
-			break;
-		case 1:
-			_color = TokenColorWhite;
-			break;
-			
-		default:
-			break;
-	}
+    CK_RV rv = [self functions]->C_GetTokenInfo(slotId, tokenInfo);
+    if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+
+    _label = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->label length: sizeof(tokenInfo->label)];
+    _serialNumber = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->serialNumber length: sizeof(tokenInfo->serialNumber)];
+    _model = [self removeTrailingSpaceFromCString:(const char*) tokenInfo->model length: sizeof(tokenInfo->model)];
+    _totalMemory = tokenInfo->ulTotalPublicMemory;
+    _freeMemory = tokenInfo->ulFreePublicMemory;
+
+
+    NSMutableData* extendedTokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
+    CK_TOKEN_INFO_EXTENDED_PTR extendedTokenInfo = [extendedTokenInfoData mutableBytes];
+    extendedTokenInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
+
+    rv = [self extendedFunctions]->C_EX_GetTokenInfoExtended(slotId, extendedTokenInfo);
+    if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+
+    double batteryVoltage = extendedTokenInfo->ulBatteryVoltage;
+    _charge = ((batteryVoltage - kVoltageMin) / (kVoltageMax - kVoltageMin)) * 100;
+    _charging = NO;
+    if(_charge >= 100) {
+        if (kChargingVoltage <= batteryVoltage) _charging = YES;
+        _charge = 100;
+    }
+    if(_charge < 1) _charge = 1;
+
+    switch (extendedTokenInfo->ulBodyColor) {
+        case 0:
+            _color = TokenColorBlack;
+            break;
+        case 1:
+            _color = TokenColorWhite;
+            break;
+
+        default:
+            break;
+    }
 }
 
 - (id)initWithSlotId:(CK_SLOT_ID)slotId{
-	self = [super init];
-	if (self) {
-		_slotId = slotId;
-		
-		@try {
+    self = [super init];
+    if (self) {
+        _slotId = slotId;
+        _certificates = nil;
+
+        @try {
             CK_RV rv = C_GetFunctionList(&_functions);
             if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
             
             rv = C_EX_GetFunctionListExtended(&_extendedFunctions);
             if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
             
-			[self updateTokenInfoFromSlot:slotId];
+            [self updateTokenInfoFromSlot:slotId];
 
-			rv = _functions->C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
-			if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
-		} @catch (NSError* e) {
-            return nil;
-        }
-		
-		@try{
-			_certificates = [NSMutableArray array];
-        
-            [self readCertificates];
+            rv = _functions->C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
+            _isLocked = NO;
+            if (CKR_FUNCTION_NOT_SUPPORTED == rv) _isLocked = YES;
+            else if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
         } @catch (NSError* e) {
-            _functions->C_CloseSession(_session);
             return nil;
         }
     }
-	
-	return self;
+
+    return self;
 }
 
 - (void)dealloc {
@@ -239,18 +237,31 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
     });
 }
 
+- (void)readCertificatesWithsuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError *))errorCallback {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+        @try{
+            [self readCertificates];
+            dispatch_async(dispatch_get_main_queue(), ^() {
+                successCallback();
+            });
+        } @catch (NSError* e) {
+            [self onError:[Pkcs11Error errorWithCode:e.code] callback:errorCallback];
+        }
+    });
+}
+
 - (void)loginWithPin:(NSString*)pin successCallback:(void (^)())successCallback
 errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         NSData* pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
 
         CK_RV rv = [self functions]->C_Login(_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
-		if (CKR_OK != rv) {
-			[self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
-			return;
-		}
-		
-		dispatch_async(dispatch_get_main_queue(), ^() {
+        if (CKR_OK != rv) {
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^() {
             successCallback();
         });
     });
@@ -259,12 +270,12 @@ errorCallback:(void (^)(NSError*))errorCallback {
 - (void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         CK_RV rv = [self functions]->C_Logout(_session);
-		if (CKR_OK != rv) {
-			[self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
-			return;
-		}
-		
-		dispatch_async(dispatch_get_main_queue(), ^() {
+        if (CKR_OK != rv) {
+            [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
+            return;
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^() {
             successCallback();
         });
     });

@@ -30,7 +30,16 @@
 }
 
 - (void)updateState {
-    
+    for (NSNumber* handle in [self.tokenManager tokenHandles]) {
+        Token* t = [self.tokenManager tokenForHandle:handle];
+        if ([t certificates] == nil && ![t isLocked]) {
+            [t readCertificatesWithSuccessCallback:^{
+                [self updateState];
+            } errorCallback:^(NSError * e) {
+                NSLog(@"Error during certificate reading");
+            }];
+        }
+    }
     [[self tableView] reloadData];
 }
 
@@ -63,7 +72,16 @@
     tokenCard.tokenLabel.text = [token label];
     tokenCard.serialValue.text = [token serialNumber];
     tokenCard.chargeValue.text = [NSString stringWithFormat:@"%d%%", (int)[token charge]];
-    tokenCard.certCountValue.text = [NSString stringWithFormat:@"%d", [[token certificates] count]];
+    if ([token isLocked]) {
+        tokenCard.certCountValue.text = @"🔒";
+        [tokenCard setUserInteractionEnabled:NO];
+    } else if ([token certificates]) {
+        tokenCard.certCountValue.text = [NSString stringWithFormat:@"%d", [[token certificates] count]];
+        [tokenCard setUserInteractionEnabled:YES];
+    } else {
+        tokenCard.certCountValue.text = @"⏳";
+        [tokenCard setUserInteractionEnabled:NO];
+    }
  
     return tokenCard;
 }
