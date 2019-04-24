@@ -74,34 +74,23 @@
     _manager = [[CBCentralManager alloc] initWithDelegate:_delegate queue:nil];
     _tokenManager = [TokenManager sharedInstance];
     
-    [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:_tokenState];
+    [self updateRootViewController];
     
     [_tokenManager startMonitoring];
 }
 
--(void)setStatewithBluetooth:(bool)bluetoothPoweredOn tokenState:(TokenState)tokenState{
+-(void)updateRootViewController {
     TokenTableViewController* rootVC = [[self viewControllers] objectAtIndex:0];
-    if(false == bluetoothPoweredOn){
-        [rootVC updateState];
-        //rootVC setState:FirstVCStateBlueToothPoweredOff withUserInfo:nil];
-        
-    } else if (kTokenDisconnected == tokenState){
-        [rootVC updateState];
-        //[rootVC setState:FirstVCStateWaitingForAnyToken withUserInfo:nil];
-    } else if (kTokenConnected == tokenState) {
-        //NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithObject:_activeTokenHandle forKey:@"tokenHandle"];
-        [rootVC updateState];
-        //[rootVC setState:FirstVCStateTokenPresent withUserInfo:dict];
-    }
+    [rootVC updateState];
 }
 
 - (void)bluetoothWasPoweredOn:(NSNotification*)notification {
-    [self setStatewithBluetooth:YES  tokenState:_tokenState];
+    [self updateRootViewController];
     NSLog(@"Bluetooth was powered on");
 }
 
 - (void)bluetoothWasPoweredOff:(NSNotification*)notification {
-    [self setStatewithBluetooth:NO  tokenState:_tokenState];
+    [self updateRootViewController];
     NSLog(@"Bluetooth was powered off");
 }
 
@@ -120,7 +109,7 @@
             self.hud = nil;
         }
     }
-    [self setStatewithBluetooth:[_delegate poweredOn]  tokenState:kTokenConnected];
+    [self updateRootViewController];
     
     NSLog(@"Info for token with handle %d was loaded: \"Model: %@, Serial: %@, Label: %@\"", [handle intValue], [token model], [token serialNumber], [token label]);
 }
@@ -128,6 +117,7 @@
 - (void)tokenWasRemoved:(NSNotification*)notification {
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* handle = [userInfo objectForKey:@"handle"];
+    [self updateRootViewController];
     [self popToRootViewControllerAnimated:YES];
     NSLog(@"Token with handle %d was removed", [handle intValue]);
 }
