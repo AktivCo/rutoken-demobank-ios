@@ -21,17 +21,6 @@
 		4E7E375E226DEA2100D24B74 /* PaymentShortInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E7E375C226DEA2100D24B74 /* PaymentShortInfoCell.xib */; };
 		55295B8A19B5A12F00FC1C6A /* PaymentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */; };
 		55295B8D19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */; };
-		553D266F19FA7D590032099F /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 553D266E19FA7D590032099F /* line.png */; };
-		5541E55819C9A0BB001FD9E8 /* ipad_grey_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */; };
-		5541E55C19C9A732001FD9E8 /* ipad_black_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55B19C9A732001FD9E8 /* ipad_black_background.png */; };
-		5541E55E19C9B830001FD9E8 /* ipad_white_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5541E55D19C9B830001FD9E8 /* ipad_white_background.png */; };
-		556B854519AF56A700DF95FB /* battery_1_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B853F19AF56A700DF95FB /* battery_1_sec.png */; };
-		556B854619AF56A700DF95FB /* battery_2_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854019AF56A700DF95FB /* battery_2_sec.png */; };
-		556B854719AF56A700DF95FB /* battery_3_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854119AF56A700DF95FB /* battery_3_sec.png */; };
-		556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854219AF56A700DF95FB /* battery_4_sec.png */; };
-		556B854919AF56A700DF95FB /* battery_charge.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854319AF56A700DF95FB /* battery_charge.png */; };
-		556B854A19AF56A700DF95FB /* battery_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 556B854419AF56A700DF95FB /* battery_empty.png */; };
-		557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */ = {isa = PBXBuildFile; fileRef = 557DFE9219ADD0B600CC7488 /* BT_Black.png */; };
 		558C820F19CC0A4D00236C77 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 558C820E19CC0A4D00236C77 /* MBProgressHUD.m */; };
 		558C821F19CC5F1C00236C77 /* 37x-change.png in Resources */ = {isa = PBXBuildFile; fileRef = 558C821919CC5F1C00236C77 /* 37x-change.png */; };
 		558C822019CC5F1C00236C77 /* 37x-change@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 558C821A19CC5F1C00236C77 /* 37x-change@2x.png */; };
@@ -40,7 +29,6 @@
 		558C822B19CC644D00236C77 /* 37x-checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 558C822919CC644D00236C77 /* 37x-checkmark.png */; };
 		558C822C19CC644D00236C77 /* 37x-checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 558C822A19CC644D00236C77 /* 37x-checkmark@2x.png */; };
 		55911BA619B1A9BD005E38ED /* PinEnterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55911BA519B1A9BD005E38ED /* PinEnterViewController.m */; };
-		55BC87CC19ADF32E008ABF1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC87CB19ADF32E008ABF1E /* logo.png */; };
 		55E89653199A02DA0082A015 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89652199A02DA0082A015 /* Foundation.framework */; };
 		55E89655199A02DA0082A015 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89654199A02DA0082A015 /* CoreGraphics.framework */; };
 		55E89657199A02DA0082A015 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E89656199A02DA0082A015 /* UIKit.framework */; };
@@ -97,17 +85,6 @@
 		55295B8919B5A12F00FC1C6A /* PaymentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentsTableViewController.m; sourceTree = "<group>"; };
 		55295B8B19B5BB7E00FC1C6A /* PaymentInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoTableViewController.h; sourceTree = "<group>"; };
 		55295B8C19B5BB7E00FC1C6A /* PaymentInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoTableViewController.m; sourceTree = "<group>"; };
-		553D266E19FA7D590032099F /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
-		5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_grey_background.png; sourceTree = "<group>"; };
-		5541E55B19C9A732001FD9E8 /* ipad_black_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_black_background.png; sourceTree = "<group>"; };
-		5541E55D19C9B830001FD9E8 /* ipad_white_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_white_background.png; sourceTree = "<group>"; };
-		556B853F19AF56A700DF95FB /* battery_1_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_1_sec.png; sourceTree = "<group>"; };
-		556B854019AF56A700DF95FB /* battery_2_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_2_sec.png; sourceTree = "<group>"; };
-		556B854119AF56A700DF95FB /* battery_3_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_3_sec.png; sourceTree = "<group>"; };
-		556B854219AF56A700DF95FB /* battery_4_sec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_4_sec.png; sourceTree = "<group>"; };
-		556B854319AF56A700DF95FB /* battery_charge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_charge.png; sourceTree = "<group>"; };
-		556B854419AF56A700DF95FB /* battery_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_empty.png; sourceTree = "<group>"; };
-		557DFE9219ADD0B600CC7488 /* BT_Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BT_Black.png; sourceTree = "<group>"; };
 		558C820D19CC0A4D00236C77 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		558C820E19CC0A4D00236C77 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		558C821919CC5F1C00236C77 /* 37x-change.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-change.png"; sourceTree = "<group>"; };
@@ -118,7 +95,6 @@
 		558C822A19CC644D00236C77 /* 37x-checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-checkmark@2x.png"; sourceTree = "<group>"; };
 		55911BA419B1A9BD005E38ED /* PinEnterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinEnterViewController.h; sourceTree = "<group>"; };
 		55911BA519B1A9BD005E38ED /* PinEnterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinEnterViewController.m; sourceTree = "<group>"; };
-		55BC87CB19ADF32E008ABF1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		55E8964F199A02DA0082A015 /* demobank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demobank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E89652199A02DA0082A015 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55E89654199A02DA0082A015 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -204,19 +180,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		556B853E19AF56A700DF95FB /* battery */ = {
-			isa = PBXGroup;
-			children = (
-				556B853F19AF56A700DF95FB /* battery_1_sec.png */,
-				556B854019AF56A700DF95FB /* battery_2_sec.png */,
-				556B854119AF56A700DF95FB /* battery_3_sec.png */,
-				556B854219AF56A700DF95FB /* battery_4_sec.png */,
-				556B854319AF56A700DF95FB /* battery_charge.png */,
-				556B854419AF56A700DF95FB /* battery_empty.png */,
-			);
-			path = battery;
-			sourceTree = "<group>";
-		};
 		5573372B19B376F800CF0202 /* TokenManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,19 +204,12 @@
 		557DFE9119ADD0B600CC7488 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				553D266E19FA7D590032099F /* line.png */,
 				558C822919CC644D00236C77 /* 37x-checkmark.png */,
 				558C822A19CC644D00236C77 /* 37x-checkmark@2x.png */,
 				558C821919CC5F1C00236C77 /* 37x-change.png */,
 				558C821A19CC5F1C00236C77 /* 37x-change@2x.png */,
 				558C821D19CC5F1C00236C77 /* 37x-error.png */,
 				558C821E19CC5F1C00236C77 /* 37x-error@2x.png */,
-				5541E55D19C9B830001FD9E8 /* ipad_white_background.png */,
-				5541E55719C9A0BB001FD9E8 /* ipad_grey_background.png */,
-				5541E55B19C9A732001FD9E8 /* ipad_black_background.png */,
-				556B853E19AF56A700DF95FB /* battery */,
-				55BC87CB19ADF32E008ABF1E /* logo.png */,
-				557DFE9219ADD0B600CC7488 /* BT_Black.png */,
 			);
 			name = resources;
 			path = demobank/resources;
@@ -414,25 +370,13 @@
 				C3780910220DA5AA001D4D83 /* Storyboard.storyboard in Resources */,
 				558C822C19CC644D00236C77 /* 37x-checkmark@2x.png in Resources */,
 				55E8966E199A02DA0082A015 /* Images.xcassets in Resources */,
-				5541E55E19C9B830001FD9E8 /* ipad_white_background.png in Resources */,
-				5541E55819C9A0BB001FD9E8 /* ipad_grey_background.png in Resources */,
 				558C822319CC5F1C00236C77 /* 37x-error.png in Resources */,
 				558C822019CC5F1C00236C77 /* 37x-change@2x.png in Resources */,
-				556B854619AF56A700DF95FB /* battery_2_sec.png in Resources */,
-				556B854919AF56A700DF95FB /* battery_charge.png in Resources */,
 				4E7E375E226DEA2100D24B74 /* PaymentShortInfoCell.xib in Resources */,
 				558C822B19CC644D00236C77 /* 37x-checkmark.png in Resources */,
 				558C821F19CC5F1C00236C77 /* 37x-change.png in Resources */,
-				55BC87CC19ADF32E008ABF1E /* logo.png in Resources */,
 				558C822419CC5F1C00236C77 /* 37x-error@2x.png in Resources */,
-				556B854A19AF56A700DF95FB /* battery_empty.png in Resources */,
-				5541E55C19C9A732001FD9E8 /* ipad_black_background.png in Resources */,
-				556B854719AF56A700DF95FB /* battery_3_sec.png in Resources */,
-				557DFE9319ADD0B600CC7488 /* BT_Black.png in Resources */,
-				553D266F19FA7D590032099F /* line.png in Resources */,
 				55E8965D199A02DA0082A015 /* InfoPlist.strings in Resources */,
-				556B854819AF56A700DF95FB /* battery_4_sec.png in Resources */,
-				556B854519AF56A700DF95FB /* battery_1_sec.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
