@@ -129,7 +129,9 @@
                             <outlet property="delegate" destination="SBK-bU-Wv5" id="BrW-dC-O5t"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Выбор токена" id="ZUD-Tn-OC5"/>
+                    <navigationItem key="navigationItem" title="Выбор токена" id="ZUD-Tn-OC5">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="llR-lu-Bdy"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="ylW-Eo-d4G" kind="push" identifier="toCertList" id="tQx-UD-buu"/>
                     </connections>
@@ -202,7 +204,7 @@
                         <viewLayoutGuide key="safeArea" id="JbD-Jc-V7O"/>
                     </view>
                     <navigationItem key="navigationItem" title="Ввод PIN-кода" id="9JR-Ru-Je9">
-                        <barButtonItem key="backBarButtonItem" title="Назад" id="f88-Mq-hOx"/>
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="0on-TB-UAE"/>
                     </navigationItem>
                     <connections>
                         <outlet property="_loginButton" destination="lNg-0v-XvJ" id="Que-bT-aVl"/>
@@ -215,7 +217,7 @@
             </objects>
             <point key="canvasLocation" x="-3194" y="-822"/>
         </scene>
-        <!--Cert Table View Controller-->
+        <!--Выбор сертификата-->
         <scene sceneID="xjm-6W-Nkh">
             <objects>
                 <tableViewController id="ylW-Eo-d4G" customClass="CertTableViewController" sceneMemberID="viewController">
@@ -271,7 +273,9 @@
                             <outlet property="delegate" destination="ylW-Eo-d4G" id="zIq-Se-wMh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="me6-Et-jcS"/>
+                    <navigationItem key="navigationItem" title="Выбор сертификата" id="me6-Et-jcS">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="Ygf-K0-sRA"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="y3Z-XU-8AH" kind="push" identifier="toLogin" id="Rtg-Em-mRr"/>
                     </connections>
@@ -294,7 +298,9 @@
                             <outlet property="delegate" destination="eKk-FQ-QIz" id="mYV-Pp-ClA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Платежи" id="2Hg-BO-ydV"/>
+                    <navigationItem key="navigationItem" title="Платежи" id="2Hg-BO-ydV">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="eWW-2r-NZX"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="1bS-Kk-vp1" kind="show" identifier="toPaymentInfo" id="PZZ-6i-l5c"/>
                     </connections>
@@ -303,7 +309,7 @@
             </objects>
             <point key="canvasLocation" x="-2444" y="-822"/>
         </scene>
-        <!--Payment Info Table View Controller-->
+        <!--Информация о платеже-->
         <scene sceneID="u1Z-zF-ul4">
             <objects>
                 <tableViewController id="1bS-Kk-vp1" customClass="PaymentInfoTableViewController" sceneMemberID="viewController">
@@ -351,7 +357,7 @@
                             <outlet property="delegate" destination="1bS-Kk-vp1" id="ovz-7V-nxN"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ald-Cg-GYy"/>
+                    <navigationItem key="navigationItem" title="Информация о платеже" id="ald-Cg-GYy"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y7H-W0-0K9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
