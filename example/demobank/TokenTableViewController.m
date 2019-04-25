@@ -79,7 +79,7 @@
         [[tokenCard tokenView] setBackgroundColor:[UIColor rutokenMurenaColor]];
         [tokenCard setUserInteractionEnabled:YES];
     } else if ([token certificates]) {
-        tokenCard.certCountValue.text = [NSString stringWithFormat:@"%d", [[token certificates] count]];
+        tokenCard.certCountValue.text = [NSString stringWithFormat:@"%lu", (unsigned long)[[token certificates] count]];
         [[tokenCard tokenView] setBackgroundColor:[UIColor rutokenMurenaColor]];
         [tokenCard setUserInteractionEnabled:YES];
     } else {
