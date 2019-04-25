@@ -11,5 +11,6 @@
 @interface CertCard : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *commonName;
+@property (weak, nonatomic) IBOutlet UIView *certView;
 
 @end

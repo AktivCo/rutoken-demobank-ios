@@ -10,6 +10,8 @@
 
 #import "PinEnterViewController.h"
 
+#import "UIColor+RutokenColors.h"
+
 #import "CertCard.h"
 #import "Certificate.h"
 #import "TokenManager.h"
@@ -54,6 +56,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CertCard *certCard = [tableView dequeueReusableCellWithIdentifier:@"CertCard" forIndexPath:indexPath];
+    [[certCard certView] setBackgroundColor:[UIColor rutokenMurenaColor]];
     Certificate* cert = [[[self tokenManager] tokenForHandle:self.tokenHandle] certificates][[indexPath row]];
     
     certCard.commonName.text = [cert cn];

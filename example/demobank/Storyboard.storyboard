@@ -264,6 +264,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="certView" destination="huN-vP-NEk" id="r9z-OZ-sVD"/>
                                     <outlet property="commonName" destination="Mpc-Ii-Ni2" id="km4-zm-l0N"/>
                                 </connections>
                             </tableViewCell>
