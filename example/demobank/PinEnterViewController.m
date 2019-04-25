@@ -58,7 +58,11 @@
             case errSecItemNotFound:
                 break;
             default:
-                NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                if (@available(iOS 11.3, *)) {
+                    NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                } else {
+                    NSLog(@"%d", status);
+                }
         }
     }
     
@@ -116,10 +120,19 @@
                 OSStatus status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
                 if (status == errSecDuplicateItem){
                     status = SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)query);
-                    if (status != errSecSuccess)
-                        NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                    if (status != errSecSuccess) {
+                        if (@available(iOS 11.3, *)) {
+                            NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                        } else {
+                            NSLog(@"%d", status);
+                        }
+                    }
                 } else if (status != errSecSuccess) {
-                    NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                    if (@available(iOS 11.3, *)) {
+                        NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+                    } else {
+                        NSLog(@"%d", status);
+                    }
                 }
                 
                 [_loginButton setEnabled:YES];
