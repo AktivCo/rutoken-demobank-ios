@@ -31,13 +31,13 @@ typedef NS_ENUM(NSInteger, TokenColor) {
 
 -(id)initWithSlotId:(CK_SLOT_ID)slotId;
 
--(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
+-(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
--(void)readCertificatesWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
+-(void)readCertificatesWithSuccessCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
--(void)loginWithPin:(NSString*)pin successCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
+-(void)loginWithPin:(NSString*)pin successCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
--(void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback;
+-(void)logoutWithSuccessCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
 -(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSValue*))successCallback
         errorCallback:(void (^)(NSError*))errorCallback;

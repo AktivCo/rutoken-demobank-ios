@@ -236,7 +236,7 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
     });
 }
 
-- (void)readCertificatesWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError *))errorCallback {
+- (void)readCertificatesWithSuccessCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError *))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         @try{
             [self readCertificates];
@@ -249,7 +249,7 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
     });
 }
 
--(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback {
+-(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
 
         CK_RV rv = [self extendedFunctions]->C_EX_SetActivationPassword(_slotId, [password cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -269,7 +269,7 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
     });
 }
 
-- (void)loginWithPin:(NSString*)pin successCallback:(void (^)())successCallback
+- (void)loginWithPin:(NSString*)pin successCallback:(void (^)(void))successCallback
 errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         NSData* pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
@@ -286,7 +286,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
     });
 }
 
-- (void)logoutWithSuccessCallback:(void (^)())successCallback errorCallback:(void (^)(NSError*))errorCallback {
+- (void)logoutWithSuccessCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         CK_RV rv = [self functions]->C_Logout(_session);
         if (CKR_OK != rv) {
