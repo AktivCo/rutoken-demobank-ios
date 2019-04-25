@@ -252,17 +252,17 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
 -(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
 
-        CK_RV rv = [self extendedFunctions]->C_EX_SetActivationPassword(_slotId, [password cStringUsingEncoding:NSUTF8StringEncoding]);
+        CK_RV rv = [self extendedFunctions]->C_EX_SetActivationPassword(self->_slotId, [password cStringUsingEncoding:NSUTF8StringEncoding]);
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
-        rv = _functions->C_OpenSession(_slotId, CKF_SERIAL_SESSION, nil, nil, &_session);
+        rv = [self functions]->C_OpenSession(self->_slotId, CKF_SERIAL_SESSION, nil, nil, &self->_session);
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
-        _isLocked = NO;       
+        self->_isLocked = NO;
         dispatch_async(dispatch_get_main_queue(), ^() {
             successCallback();
         });
@@ -274,7 +274,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
         NSData* pinData = [pin dataUsingEncoding:NSUTF8StringEncoding];
 
-        CK_RV rv = [self functions]->C_Login(_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
+        CK_RV rv = [self functions]->C_Login(self->_session, CKU_USER, (unsigned char*)[pinData bytes], [pinData length]);
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -288,7 +288,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
 
 - (void)logoutWithSuccessCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
-        CK_RV rv = [self functions]->C_Logout(_session);
+        CK_RV rv = [self functions]->C_Logout(self->_session);
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -320,15 +320,15 @@ errorCallback:(void (^)(NSError*))errorCallback {
                 {CKA_ID, (void*)[[certificate id] bytes], [[certificate id] length]}
         };
 
-        rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+        rv = [self functions]->C_FindObjectsInit(self->_session, template, ARRAY_LENGTH(template));
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
-        rv = [self functions]->C_FindObjects(_session, &privateKey, 1, &count);
+        rv = [self functions]->C_FindObjects(self->_session, &privateKey, 1, &count);
 
-        rv2 = [self functions]->C_FindObjectsFinal(_session);
+        rv2 = [self functions]->C_FindObjectsFinal(self->_session);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -343,15 +343,15 @@ errorCallback:(void (^)(NSError*))errorCallback {
         // Now looking for public key by cert id using the same template
         keyClass = CKO_PUBLIC_KEY;
 
-        rv = [self functions]->C_FindObjectsInit(_session, template, ARRAY_LENGTH(template));
+        rv = [self functions]->C_FindObjectsInit(self->_session, template, ARRAY_LENGTH(template));
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
 
-        rv = [self functions]->C_FindObjects(_session, &publicKey, 1, &count);
+        rv = [self functions]->C_FindObjects(self->_session, &publicKey, 1, &count);
 
-        rv2 = [self functions]->C_FindObjectsFinal(_session);
+        rv2 = [self functions]->C_FindObjectsFinal(self->_session);
         if (CKR_OK != rv){
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
@@ -366,7 +366,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
         }
 
         // Creating an EVP_PKEY
-        wrappedSession = rt_eng_p11_session_new([self functions], _session, 0, NULL);
+        wrappedSession = rt_eng_p11_session_new([self functions], self->_session, 0, NULL);
         if (!wrappedSession.self) {
             [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
             return;

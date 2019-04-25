@@ -112,7 +112,7 @@
                 SecAccessControlRef access = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, kSecAccessControlUserPresence, nil);
                 
                 NSDictionary* query = @{ (id)kSecClass: (id)kSecClassGenericPassword,
-                                         (id)kSecValueData:[[_pinTextInput text] dataUsingEncoding:NSUTF8StringEncoding],
+                                         (id)kSecValueData:[[self->_pinTextInput text] dataUsingEncoding:NSUTF8StringEncoding],
                                          (id)kSecAttrAccount: [token serialNumber],
                                          (id)kSecAttrService: @"demobank.rutoken.ru",
                                          (id)kSecAttrAccessControl: (__bridge id)access,
@@ -135,10 +135,10 @@
                     }
                 }
                 
-                [_loginButton setEnabled:YES];
-                [_pinErrorLabel setHidden:YES];
-                [_pinErrorLabel setText:@""];
-                [_pinTextInput setText:@""];
+                [self->_loginButton setEnabled:YES];
+                [self->_pinErrorLabel setHidden:YES];
+                [self->_pinErrorLabel setText:@""];
+                [self->_pinTextInput setText:@""];
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
                 [self performSegueWithIdentifier:@"toPayments" sender:self];
@@ -148,10 +148,10 @@
                 self.hud.mode = MBProgressHUDModeCustomView;
                 [self.hud hide:YES afterDelay:1.5];
                 
-                [_pinTextInput setText:@""];
-                [_pinErrorLabel setHidden:NO];
-                [_pinErrorLabel setText:@"Что-то не так с сертификатом"];
-                [_loginButton setEnabled:YES];
+                [self->_pinTextInput setText:@""];
+                [self->_pinErrorLabel setHidden:NO];
+                [self->_pinErrorLabel setText:@"Что-то не так с сертификатом"];
+                [self->_loginButton setEnabled:YES];
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             }];
         } errorCallback:^(NSError * e) {
@@ -160,10 +160,10 @@
             self.hud.mode = MBProgressHUDModeCustomView;
             [self.hud hide:YES afterDelay:1.5];
             
-            [_pinTextInput setText:@""];
-            [_pinErrorLabel setHidden:NO];
-            [_pinErrorLabel setText:@"ПИН введен неверно"];
-            [_loginButton setEnabled:YES];
+            [self->_pinTextInput setText:@""];
+            [self->_pinErrorLabel setHidden:NO];
+            [self->_pinErrorLabel setText:@"ПИН введен неверно"];
+            [self->_loginButton setEnabled:YES];
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         }];
     }    

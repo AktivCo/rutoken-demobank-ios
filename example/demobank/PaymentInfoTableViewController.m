@@ -36,7 +36,7 @@
                 [self.hud show:YES];
              
                 TokenManager* tokenManager = [TokenManager sharedInstance];
-                Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
+                Token* token = [tokenManager tokenForHandle:self.activeTokenHandle];
                 [token logoutWithSuccessCallback:^(void){}
                                    errorCallback:^(NSError* e){}];
                 
