@@ -130,6 +130,7 @@
 		C315E2942265CC650051DF85 /* TokenCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenCard.h; sourceTree = "<group>"; };
 		C315E2952265CC650051DF85 /* TokenCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenCard.m; sourceTree = "<group>"; };
 		C378090F220DA5AA001D4D83 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		C3BBB92422719B1100F5BCF4 /* UIColor+RutokenColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+RutokenColors.h"; sourceTree = "<group>"; };
 		C3CD66832265F5880011A057 /* CertCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertCard.h; sourceTree = "<group>"; };
 		C3CD66842265F5880011A057 /* CertCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertCard.m; sourceTree = "<group>"; };
 		C3CD66862265F5A50011A057 /* CertTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertTableViewController.h; sourceTree = "<group>"; };
@@ -230,6 +231,7 @@
 				C315E28F2265B8820051DF85 /* TokenTableViewController.m */,
 				C315E2912265C0B30051DF85 /* NavigationController.h */,
 				C315E2922265C0B30051DF85 /* NavigationController.m */,
+				C3BBB92422719B1100F5BCF4 /* UIColor+RutokenColors.h */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
