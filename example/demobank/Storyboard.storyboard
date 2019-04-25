@@ -144,9 +144,10 @@
         <scene sceneID="JIv-h8-lB6">
             <objects>
                 <navigationController id="eWd-QY-YtI" customClass="NavigationController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jtL-IY-1hq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="jtL-IY-1hq">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.86699999999999999" green="0.13300000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="SBK-bU-Wv5" kind="relationship" relationship="rootViewController" id="br6-Gz-ihS"/>
