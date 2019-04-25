@@ -252,7 +252,7 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
 -(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
 
-        CK_RV rv = [self extendedFunctions]->C_EX_SetActivationPassword(self->_slotId, [password cStringUsingEncoding:NSUTF8StringEncoding]);
+        CK_RV rv = [self extendedFunctions]->C_EX_SetActivationPassword(self->_slotId, (unsigned char *)[password cStringUsingEncoding:NSUTF8StringEncoding]);
         if (CKR_OK != rv) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
