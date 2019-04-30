@@ -101,7 +101,8 @@
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 
         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-             textField.placeholder = @"Пароль активации";
+            textField.placeholder = @"Пароль активации";
+            textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
         }];
 
         UIAlertAction* activateAction = [UIAlertAction actionWithTitle:@"Активировать" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
