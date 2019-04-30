@@ -9,6 +9,9 @@
 
 #import "PaymentsDB.h"
 
+#include "Token.h"
+#include "TokenManager.h"
+
 @implementation PaymentsTableViewController
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -52,6 +55,16 @@
         [vc setActiveTokenHandle:_activeTokenHandle];
         [vc setPaymentNumber:sender];
     }
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        [[[TokenManager sharedInstance] tokenForHandle:_activeTokenHandle] logoutWithSuccessCallback:^(void){}
+                                                                                       errorCallback:^(NSError* e){ NSLog(@"%@", e.description); }];
+    }
+
+    [super viewWillDisappear:animated];
 }
 
 
