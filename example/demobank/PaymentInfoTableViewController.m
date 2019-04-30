@@ -29,17 +29,27 @@
 
     if(nil != _activeTokenHandle){
         if(sum >= 50000) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Подтверждение перевода" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Перевести" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Подтверждение перевода"
+                                                                           message:@"Введите ПИН-код для подтверждения перевода"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
+            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.placeholder = @"Введите PIN-код";
+                textField.secureTextEntry = YES;
+                NSString* storedPin = [[[TokenManager sharedInstance] tokenForHandle:self.activeTokenHandle] getStoredPin];
+                if(storedPin) textField.text = storedPin;
+            }];
+
+            UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Перевести" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
                 NSString *pin = [((UITextField *)[[alert textFields] objectAtIndex:0]) text];
                 self.hud.labelText = @"Проверяю PIN-код...";
                 [self.hud show:YES];
-             
+
                 TokenManager* tokenManager = [TokenManager sharedInstance];
                 Token* token = [tokenManager tokenForHandle:self.activeTokenHandle];
                 [token logoutWithSuccessCallback:^(void){}
                                    errorCallback:^(NSError* e){}];
-                
+
                 [token loginWithPin:pin successCallback:^(void){
                     [self  signWithData:paymentData];
                 } errorCallback:^(NSError * e) {
@@ -48,11 +58,12 @@
                     self.hud.mode = MBProgressHUDModeCustomView;
                     [self.hud hide:YES afterDelay:1.5];
                 }];
-            }]];
-            [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                textField.placeholder = @"Введите PIN-код";
-                textField.secureTextEntry = YES;
             }];
+            [alert addAction:confirmAction];
+
+            UIAlertAction* rejectAction = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleDefault handler:nil];
+            [alert addAction:rejectAction];
+
             [self presentViewController:alert animated:YES completion:nil];
         } else {
             [self signWithData:paymentData];

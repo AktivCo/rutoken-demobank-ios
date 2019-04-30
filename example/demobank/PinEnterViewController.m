@@ -43,27 +43,8 @@
         [_loginButton setHidden:YES];
         [_pinTextInput setHidden:YES];
     } else {
-        CFTypeRef item = NULL;
-        NSDictionary* query = @{ (id)kSecClass: (id)kSecClassGenericPassword,
-                                 (id)kSecAttrAccount: [token serialNumber],
-                                 (id)kSecAttrService: @"demobank.rutoken.ru",
-                                 (id)kSecReturnData: @YES,
-                                 (id)kSecUseOperationPrompt: @"Доступ к сохраненному ПИН-коду",
-                                 };
-        OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &item);
-        switch (status) {
-            case errSecSuccess:
-                [_pinTextInput setText:[NSString stringWithUTF8String:[(__bridge NSData *)item bytes]]];
-                break;
-            case errSecItemNotFound:
-                break;
-            default:
-                if (@available(iOS 11.3, *)) {
-                    NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
-                } else {
-                    NSLog(@"%d", status);
-                }
-        }
+        NSString* storedPin = [token getStoredPin];
+        if(storedPin) [_pinTextInput setText:storedPin];
     }
     
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -108,32 +89,8 @@
                 [self.hud hide:YES afterDelay:1.5];
 
                 CMS_ContentInfo_free([cms pointerValue]);
-                
-                SecAccessControlRef access = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, kSecAccessControlUserPresence, nil);
-                
-                NSDictionary* query = @{ (id)kSecClass: (id)kSecClassGenericPassword,
-                                         (id)kSecValueData:[[self->_pinTextInput text] dataUsingEncoding:NSUTF8StringEncoding],
-                                         (id)kSecAttrAccount: [token serialNumber],
-                                         (id)kSecAttrService: @"demobank.rutoken.ru",
-                                         (id)kSecAttrAccessControl: (__bridge id)access,
-                                         };
-                OSStatus status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
-                if (status == errSecDuplicateItem){
-                    status = SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)query);
-                    if (status != errSecSuccess) {
-                        if (@available(iOS 11.3, *)) {
-                            NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
-                        } else {
-                            NSLog(@"%d", status);
-                        }
-                    }
-                } else if (status != errSecSuccess) {
-                    if (@available(iOS 11.3, *)) {
-                        NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
-                    } else {
-                        NSLog(@"%d", status);
-                    }
-                }
+
+                [token savePin:[self->_pinTextInput text]];
                 
                 [self->_loginButton setEnabled:YES];
                 [self->_pinErrorLabel setHidden:YES];

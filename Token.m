@@ -262,6 +262,7 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
+        [self functions]->C_CloseSession(self->_session);
         self->_isLocked = NO;
         dispatch_async(dispatch_get_main_queue(), ^() {
             successCallback();
@@ -412,6 +413,59 @@ errorCallback:(void (^)(NSError*))errorCallback {
             return;
         }
     });
+}
+
+-(NSString *)getStoredPin {
+    CFTypeRef item = NULL;
+    NSDictionary* query = @{ (id)kSecClass: (id)kSecClassGenericPassword,
+                             (id)kSecAttrAccount: [self serialNumber],
+                             (id)kSecAttrService: @"demobank.rutoken.ru",
+                             (id)kSecReturnData: @YES,
+                             (id)kSecUseOperationPrompt: @"Доступ к сохраненному ПИН-коду",
+                             };
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &item);
+    switch (status) {
+        case errSecSuccess:
+            return [NSString stringWithUTF8String:[(__bridge NSData *)item bytes]];
+            break;
+        case errSecItemNotFound:
+            break;
+        default:
+            if (@available(iOS 11.3, *)) {
+                NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+            } else {
+                NSLog(@"%d", status);
+            }
+    }
+    return nil;
+}
+
+-(void)savePin:(NSString *)pin {
+    SecAccessControlRef access = SecAccessControlCreateWithFlags(nil, kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, kSecAccessControlUserPresence, nil);
+
+    NSDictionary* query = @{ (id)kSecClass: (id)kSecClassGenericPassword,
+                             (id)kSecValueData:[pin dataUsingEncoding:NSUTF8StringEncoding],
+                             (id)kSecAttrAccount: [self serialNumber],
+                             (id)kSecAttrService: @"demobank.rutoken.ru",
+                             (id)kSecAttrAccessControl: (__bridge id)access,
+                             };
+    OSStatus status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
+    if (status == errSecDuplicateItem){
+        status = SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)query);
+        if (status != errSecSuccess) {
+            if (@available(iOS 11.3, *)) {
+                NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+            } else {
+                NSLog(@"%d", status);
+            }
+        }
+    } else if (status != errSecSuccess) {
+        if (@available(iOS 11.3, *)) {
+            NSLog(@"%@", CFBridgingRelease(SecCopyErrorMessageString(status, NULL)));
+        } else {
+            NSLog(@"%d", status);
+        }
+    }
 }
 
 @end

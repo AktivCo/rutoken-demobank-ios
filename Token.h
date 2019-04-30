@@ -42,5 +42,8 @@ typedef NS_ENUM(NSInteger, TokenColor) {
 -(void)signData:(NSData*)data withCertificate:(Certificate*)certificate  successCallback:(void (^)(NSValue*))successCallback
         errorCallback:(void (^)(NSError*))errorCallback;
 
+-(NSString*)getStoredPin;
+-(void)savePin:(NSString*) pin;
+
 @end
 
