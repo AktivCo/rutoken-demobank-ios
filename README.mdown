@@ -21,7 +21,7 @@ Required libraries:
 ##How to build
 
 * copy frameworks to example/Frameworks
-* copy openssl library libcrypto.so and include folder to example/Frameworks/openssl
+* copy openssl library libcrypto.1.1.dylib and include folder to example/Frameworks/openssl
 * open example/demobank.xcodeproj
 * in General/Identity set correct Signing Identity
 

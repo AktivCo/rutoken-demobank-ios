@@ -21,7 +21,7 @@
 ##Как собрать
 
 * положить фреймворки в example/Frameworks
-* положить библиотеку libcrypto.so и папку include от openssl в example/Frameworks/openssl
+* положить библиотеку libcrypto.1.1.dylib и папку include от openssl в example/Frameworks/openssl
 * открыть example/demobank.xcodeproj
 * в разделе General/Identity установить правильный Signing Identity
 
