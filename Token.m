@@ -262,7 +262,6 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
             [self onError:[Pkcs11Error errorWithCode:rv] callback:errorCallback];
             return;
         }
-        [self functions]->C_CloseSession(self->_session);
         self->_isLocked = NO;
         dispatch_async(dispatch_get_main_queue(), ^() {
             successCallback();
