@@ -14,14 +14,11 @@ Required frameworks:
 * mobile/ios/pcsc/lib/RtPcsc.framework (Rutoken SDK)
 * mobile/ios/pkcs11/lib/rtpkcs11ecp.framework (Rutoken SDK)
 * openssl/rtengine/bin/ios-arm64/rtengine.framework (Rutoken SDK)
-
-Required libraries:
-* openssl/openssl-shared-1.1/ios-arm64/* (Rutoken SDK)
+* openssl/openssl-shared-1.1/ios-arm64/openssl.framework (Rutoken SDK)
 
 ##How to build
 
 * copy frameworks to example/Frameworks
-* copy openssl library libcrypto.1.1.dylib and include folder to example/Frameworks/openssl
 * open example/demobank.xcodeproj
 * in General/Identity set correct Signing Identity
 
