@@ -9,6 +9,8 @@
 
 @interface TokenManager : NSObject
 
+@property(nonatomic, readonly) Token* activeNFCToken;
+
 +(TokenManager*)sharedInstance;
 
 -(void)startMonitoring;

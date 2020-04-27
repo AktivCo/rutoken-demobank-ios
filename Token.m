@@ -169,13 +169,23 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
     _totalMemory = tokenInfo->ulTotalPublicMemory;
     _freeMemory = tokenInfo->ulFreePublicMemory;
 
-
     NSMutableData* extendedTokenInfoData = [NSMutableData dataWithLength:sizeof(CK_TOKEN_INFO_EXTENDED)];
     CK_TOKEN_INFO_EXTENDED_PTR extendedTokenInfo = [extendedTokenInfoData mutableBytes];
     extendedTokenInfo->ulSizeofThisStructure = sizeof(CK_TOKEN_INFO_EXTENDED);
 
     rv = [self extendedFunctions]->C_EX_GetTokenInfoExtended(slotId, extendedTokenInfo);
     if (CKR_OK != rv) @throw [Pkcs11Error errorWithCode:rv];
+    
+    switch (extendedTokenInfo->ulTokenType) {
+        case TOKEN_TYPE_RUTOKEN_ECPDUAL_BT:
+            _type = TokenTypeBT;
+            break;
+        case TOKEN_TYPE_RUTOKEN_SCDUAL_NFC:
+            _type = TokenTypeNFC;
+            break;
+        default:
+            @throw [NSError init];
+    }
 
     double batteryVoltage = extendedTokenInfo->ulBatteryVoltage;
     _charge = ((batteryVoltage - kVoltageMin) / (kVoltageMax - kVoltageMin)) * 100;

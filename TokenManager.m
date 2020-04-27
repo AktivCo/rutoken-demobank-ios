@@ -6,6 +6,7 @@
 #import "ApplicationError.h"
 
 #import "TokenInfoLoader.h"
+#import "Token.h"
 #import "Pkcs11Error.h"
 #import "Pkcs11EventHandler.h"
 
@@ -119,7 +120,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
     return [self.tokens count];
 }
 
--(Token*)tokenForHandle:(NSNumber*)tokenId{
+-(Token*)tokenForHandle:(NSNumber*)tokenId {
 	return [self.tokens objectForKey:tokenId];
 }
 
@@ -200,7 +201,15 @@ typedef NS_ENUM(NSInteger, InnerState) {
             case InnerStateReadyAfterLoaded:
             {
                 NSNumber* handleToRemove = [self.handles objectForKey:[NSNumber numberWithUnsignedLong:slotId]];
+                
                 if(handleToRemove) {
+                    Token* tokenToRemove = [self.tokens objectForKey:handleToRemove];
+                    if ([tokenToRemove type] == TokenTypeNFC) {
+                        _activeNFCToken = NULL;
+                        nextState = InnerStateReadyAfterRemoved;
+                        break;
+                    }
+                    
                     [self.tokens removeObjectForKey:handleToRemove];
                     [self.handles removeObjectForKey:[NSNumber numberWithUnsignedLong:slotId]];
                     
@@ -246,11 +255,33 @@ typedef NS_ENUM(NSInteger, InnerState) {
             case InnerStateWaitingAfterAdded:
             {
                 nextState = InnerStateReadyAfterLoaded;
-                [self.handles setObject:[NSNumber numberWithInteger:self.currentHandle] forKey:[NSNumber numberWithUnsignedLong:slotId]];
-                [self.tokens setObject:token forKey:[NSNumber numberWithInteger:self.currentHandle]];
+                NSInteger handle = -1;
+                if ([token type] == TokenTypeNFC) {
+                    for(NSNumber * key in self.tokens) {
+                        Token * t = [self.tokens objectForKey:key];
+                        if([t serialNumber] == [token serialNumber]) {
+                            handle = key.integerValue;
+                            [self.tokens removeObjectForKey:key];
+                            break;
+                        }
+                    }
+                    for(NSNumber * key in self.handles) {
+                        if ([[self.handles objectForKey:key] integerValue] == handle) {
+                            [self.handles removeObjectForKey:key];
+                            break;
+                        }
+                    }
+                    _activeNFCToken = token;
+                }
+                if (handle == -1) {
+                    handle = self.currentHandle;
+                    ++self.currentHandle;
+                }
+                
+                [self.handles setObject:[NSNumber numberWithInteger:handle] forKey:[NSNumber numberWithUnsignedLong:slotId]];
+                [self.tokens setObject:token forKey:[NSNumber numberWithInteger:handle]];
                 NSMutableDictionary* notificationInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-                [notificationInfo setObject:[NSNumber numberWithInteger:self.currentHandle] forKey:@"handle"];
-                self.currentHandle++;
+                [notificationInfo setObject:[NSNumber numberWithInteger:handle] forKey:@"handle"];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TokenWasAdded" object:self userInfo:notificationInfo];
             }

@@ -12,6 +12,11 @@ typedef NS_ENUM(NSInteger, TokenColor) {
     TokenColorWhite
 };
 
+typedef NS_ENUM(NSInteger, TokenType) {
+    TokenTypeNFC,
+    TokenTypeBT
+};
+
 @interface Token : NSObject {
     CK_SLOT_ID _slotId;
     CK_SESSION_HANDLE _session;
@@ -22,6 +27,8 @@ typedef NS_ENUM(NSInteger, TokenColor) {
 @property(nonatomic, readonly) NSString* model;
 @property(nonatomic, readonly) NSUInteger totalMemory;
 @property(nonatomic, readonly) NSUInteger freeMemory;
+@property(nonatomic, readonly) TokenType type;
+
 @property(nonatomic, readonly) TokenColor color;
 @property(nonatomic, readonly) double charge;
 @property(nonatomic, readonly) bool charging;
