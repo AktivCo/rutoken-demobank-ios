@@ -135,6 +135,7 @@
 		C3CD66842265F5880011A057 /* CertCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertCard.m; sourceTree = "<group>"; };
 		C3CD66862265F5A50011A057 /* CertTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CertTableViewController.h; sourceTree = "<group>"; };
 		C3CD66872265F5A50011A057 /* CertTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertTableViewController.m; sourceTree = "<group>"; };
+		D76F9702245ABEF7002A21A0 /* demobank.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = demobank.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +284,7 @@
 		55E89658199A02DA0082A015 /* demobank */ = {
 			isa = PBXGroup;
 			children = (
+				D76F9702245ABEF7002A21A0 /* demobank.entitlements */,
 				C378090F220DA5AA001D4D83 /* Storyboard.storyboard */,
 				55E8966D199A02DA0082A015 /* Images.xcassets */,
 				4E7E3759226DE5C900D24B74 /* DB */,
@@ -532,6 +534,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = demobank/demobank.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Андрей Трифонов (D3SF6LCYCD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TRCKC8GFT7;
@@ -563,6 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = demobank/demobank.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Андрей Трифонов (D3SF6LCYCD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TRCKC8GFT7;

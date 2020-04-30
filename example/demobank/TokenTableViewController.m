@@ -17,6 +17,8 @@
 #import "TokenManager.h"
 #import "Token.h"
 
+#import <RtPcsc/rtnfc.h>
+
 @interface TokenTableViewController ()
 
 @property (weak, nonatomic) TokenManager* tokenManager;
@@ -37,12 +39,21 @@
         if ([t certificates] == nil && ![t isLocked]) {
             [t readCertificatesWithSuccessCallback:^{
                 [self updateState];
+                if ([t type] == TokenTypeNFC && self.navigationController.topViewController == self) {
+                    endNFC();
+                }
             } errorCallback:^(NSError * e) {
                 NSLog(@"Error during certificate reading");
             }];
         }
     }
     [[self tableView] reloadData];
+}
+
+- (IBAction)addNfc:(id)sender {
+    startNFC(^(NSError* error) {
+        NSLog(@"%@",[error localizedDescription]);
+    });
 }
 
 #pragma mark - Table view data source
@@ -73,7 +84,15 @@
     
     tokenCard.tokenLabel.text = [token label];
     tokenCard.serialValue.text = [token serialNumber];
-    tokenCard.chargeValue.text = [NSString stringWithFormat:@"%d%%", (int)[token charge]];
+
+    if ([token type] == TokenTypeNFC) {
+        tokenCard.chargeLabel.text = @"";
+        tokenCard.chargeValue.text = @"";
+    } else {
+        tokenCard.chargeLabel.text = @"Заряд: ";
+        tokenCard.chargeValue.text = [NSString stringWithFormat:@"%d%%", (int)[token charge]];
+    }
+
     if ([token isLocked]) {
         tokenCard.certCountValue.text = @"🔒";
         [[tokenCard tokenView] setBackgroundColor:[UIColor rutokenMurenaColor]];

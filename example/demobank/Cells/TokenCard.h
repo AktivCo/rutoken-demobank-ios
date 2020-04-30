@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *tokenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *certCountValue;
 @property (weak, nonatomic) IBOutlet UILabel *serialValue;
+@property (weak, nonatomic) IBOutlet UILabel *chargeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *chargeValue;
 @property (weak, nonatomic) IBOutlet UIView *tokenView;
 
