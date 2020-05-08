@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, TokenType) {
 
 -(id)initWithSlotId:(CK_SLOT_ID)slotId;
 
+-(void)closeSession;
+
 -(void)activateSmWithPassword:(NSString*)password successCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback;
 
 -(void)readCertificatesWithSuccessCallback:(void (^)(void))successCallback errorCallback:(void (^)(NSError*))errorCallback;

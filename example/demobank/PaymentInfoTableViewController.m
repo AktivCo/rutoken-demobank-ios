@@ -9,7 +9,8 @@
 
 #include "Token.h"
 #include "TokenManager.h"
-#include "Certificate.h"
+
+#import <RtPcsc/rtnfc.h>
 
 #import "MBProgressHUD.h"
 
@@ -28,7 +29,9 @@
     NSData* paymentData = [self paymentToJson];
 
     if(nil != _activeTokenHandle){
-        if(sum >= 50000) {
+        TokenManager* tokenManager = [TokenManager sharedInstance];
+        Token* token = [tokenManager tokenForHandle:self.activeTokenHandle];
+        if(sum >= 50000 || [token type] == TokenTypeNFC) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Подтверждение перевода"
                                                                            message:@"Введите ПИН-код для подтверждения перевода"
                                                                     preferredStyle:UIAlertControllerStyleAlert];
@@ -43,21 +46,48 @@
             UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Перевести" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
                 NSString *pin = [((UITextField *)[[alert textFields] objectAtIndex:0]) text];
                 self.hud.labelText = @"Проверяю PIN-код...";
+                self.hud.mode = MBProgressHUDModeIndeterminate;
                 [self.hud show:YES];
-
-                TokenManager* tokenManager = [TokenManager sharedInstance];
-                Token* token = [tokenManager tokenForHandle:self.activeTokenHandle];
-                [token logoutWithSuccessCallback:^(void){}
-                                   errorCallback:^(NSError* e){}];
-
-                [token loginWithPin:pin successCallback:^(void){
-                    [self  signWithData:paymentData];
-                } errorCallback:^(NSError * e) {
-                    self.hud.labelText = @"Ошибка!";
-                    self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
-                    self.hud.mode = MBProgressHUDModeCustomView;
-                    [self.hud hide:YES afterDelay:1.5];
-                }];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+                    Token* activeToken = token;
+                    if ([token type] == TokenTypeNFC) {
+                        [tokenManager waitForActiveNFCToken:^(NSError* e){ NSLog(@"%@", e.description); }];
+                        Token *activeNFCToken = [tokenManager activeNFCToken];
+                        
+                        if ([[token serialNumber] isEqualToString:[activeNFCToken serialNumber]]) {
+                            activeToken = [tokenManager activeNFCToken];
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), ^() {
+                                self.hud.labelText = @"Поднесите выбранный ранее токен!";
+                                self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+                                self.hud.mode = MBProgressHUDModeCustomView;
+                                [self.hud hide:YES afterDelay:3.5];
+                                if ([activeNFCToken type] == TokenTypeNFC) {
+                                    [activeNFCToken closeSession];
+                                    stopNFC();
+                                }
+                            });
+                            return;
+                        }
+                    }
+                    if ([activeToken type] != TokenTypeNFC) {
+                        [activeToken logoutWithSuccessCallback:^(void){}
+                                                 errorCallback:^(NSError* e){}];
+                    }
+                    [activeToken loginWithPin:pin successCallback:^(void){
+                        [self signWithData:paymentData token:activeToken];
+                    } errorCallback:^(NSError * e) {
+                        self.hud.labelText = @"Ошибка подписи!";
+                        self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+                        self.hud.mode = MBProgressHUDModeCustomView;
+                        [self.hud hide:YES afterDelay:1.5];
+                        if ([activeToken type] == TokenTypeNFC) {
+                            [activeToken closeSession];
+                            stopNFC();
+                        }
+                    }];
+                });
             }];
             [alert addAction:confirmAction];
 
@@ -66,33 +96,39 @@
 
             [self presentViewController:alert animated:YES completion:nil];
         } else {
-            [self signWithData:paymentData];
+            [self signWithData:paymentData token:token];
         }
     }
         
 }
 
--(void)signWithData:(NSData*)paymentData {
+-(void)signWithData:(NSData*)paymentData token:(Token*)token {
     if(_activeTokenHandle){
-        TokenManager* tokenManager = [TokenManager sharedInstance];
-        Token* token = [tokenManager tokenForHandle:_activeTokenHandle];
-        Certificate* cert = [[token certificates] objectAtIndex:0];
-        
         self.hud.labelText = @"Подписываю...";
         [self.hud show:YES];
         
-        [token signData:paymentData withCertificate:cert successCallback:^(NSValue* cms){
+        [token signData:paymentData withCertificate:_choosenCert successCallback:^(NSValue* cms){
             self.hud.labelText = @"Успешно!";
             self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-checkmark.png"]];
             self.hud.mode = MBProgressHUDModeCustomView;
             [self.hud hide:YES afterDelay:1.5];
 
             CMS_ContentInfo_free([cms pointerValue]);
+
+            if ([token type] == TokenTypeNFC) {
+                [token closeSession];
+                stopNFC();
+            }
         }errorCallback:^(NSError* e){
             self.hud.labelText = @"Ошибка!";
             self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
             self.hud.mode = MBProgressHUDModeCustomView;
             [self.hud hide:YES afterDelay:1.5];
+
+            if ([token type] == TokenTypeNFC) {
+                [token closeSession];
+                stopNFC();
+            }
         }];
         
     }

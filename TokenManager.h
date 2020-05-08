@@ -20,4 +20,6 @@
 -(Token*)tokenForHandle:(NSNumber*)tokenId;
 -(NSInteger)tokenCount;
 
+-(void)waitForActiveNFCToken:(void (^)(NSError* err))errorCallback;
+
 @end

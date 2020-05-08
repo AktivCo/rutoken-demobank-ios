@@ -74,6 +74,7 @@
 {
     PinEnterViewController* vc = [segue destinationViewController];
     [vc setActiveTokenHandle:self.tokenHandle];
+    [vc setChoosenCert:sender];
 }
 
 @end

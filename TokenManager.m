@@ -11,6 +11,7 @@
 #import "Pkcs11EventHandler.h"
 
 #import <RtPcsc/winscard.h>
+#import <RtPcsc/rtnfc.h>
 
 #import <rtengine/engine.h>
 
@@ -25,6 +26,7 @@
 @property (nonatomic) NSMutableDictionary* tokens;
 @property (nonatomic) NSMutableDictionary* handles;
 @property (nonatomic) NSMutableDictionary* slotStates;
+@property (nonatomic) NSConditionLock* NFCCondition;
 
 typedef NS_ENUM(NSInteger, InnerState) {
 	InnerStateReadyAfterRemoved,
@@ -51,6 +53,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 
 - (id)init {
 	self = [super init];
+    _NFCCondition = [[NSConditionLock alloc] init];
 
     int r = rt_eng_init();
     if (r != 1) {
@@ -272,6 +275,8 @@ typedef NS_ENUM(NSInteger, InnerState) {
                         }
                     }
                     _activeNFCToken = token;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"NFC card was detected" object:self];
+
                 }
                 if (handle == -1) {
                     handle = self.currentHandle;
@@ -348,6 +353,30 @@ typedef NS_ENUM(NSInteger, InnerState) {
         NSLog(@"Token Manager iternal error occured, reason: %ld (%@)", (long)[e code], [e localizedDescription]);
         @throw [ApplicationError errorWithCode:UnrecoverableError];
     }
+}
+
+- (void)NFCWasDetected:(NSNotification *) notification
+{
+    if ([[notification name] isEqualToString:@"NFC card was detected"]){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NFC card was detected" object:nil];
+        
+        [_NFCCondition lockWhenCondition:NO];
+        [_NFCCondition unlockWithCondition:YES];
+    }
+}
+
+-(void)waitForActiveNFCToken:(void (^)(NSError* err))errorCallback {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(NFCWasDetected:)
+                                                 name:@"NFC card was detected"
+                                               object:nil];
+    startNFC(^(NSError* e){
+        errorCallback(e);
+        [self->_NFCCondition unlockWithCondition:YES];
+    });
+
+    [_NFCCondition lockWhenCondition:YES];
+    [_NFCCondition unlockWithCondition:NO];
 }
 
 @end

@@ -236,8 +236,14 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
     return self;
 }
 
-- (void)dealloc {
+- (void)closeSession {
     _functions->C_CloseSession(_session);
+}
+
+- (void)dealloc {
+    if ([self type] != TokenTypeNFC) {
+        [self closeSession];
+    }
 }
 
 - (void)onError:(NSError*)error callback:(void (^)(NSError*))callback {

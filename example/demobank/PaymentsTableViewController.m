@@ -54,6 +54,7 @@
         PaymentInfoTableViewController* vc = [segue destinationViewController];
         [vc setActiveTokenHandle:_activeTokenHandle];
         [vc setPaymentNumber:sender];
+        [vc setChoosenCert:_choosenCert];
     }
 }
 

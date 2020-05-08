@@ -2,6 +2,7 @@
 // All Rights Reserved.
 
 #import <UIKit/UIKit.h>
+#import "Certificate.h"
 
 @interface PinEnterViewController : UIViewController {
     
@@ -11,5 +12,6 @@
 }
 
 @property(nonatomic) NSNumber* activeTokenHandle;
+@property(nonatomic) Certificate* choosenCert;
 
 @end

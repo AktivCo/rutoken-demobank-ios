@@ -37,10 +37,14 @@
     for (NSNumber* handle in [self.tokenManager tokenHandles]) {
         Token* t = [self.tokenManager tokenForHandle:handle];
         if ([t certificates] == nil && ![t isLocked]) {
+            if ([t type] == TokenTypeNFC && self.navigationController.topViewController != self) {
+                continue;
+            }
             [t readCertificatesWithSuccessCallback:^{
                 [self updateState];
-                if ([t type] == TokenTypeNFC && self.navigationController.topViewController == self) {
-                    endNFC();
+                if ([t type] == TokenTypeNFC) {
+                    [t closeSession];
+                    stopNFC();
                 }
             } errorCallback:^(NSError * e) {
                 NSLog(@"Error during certificate reading");

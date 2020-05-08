@@ -11,6 +11,8 @@
 
 #import "MBProgressHUD.h"
 
+#import <RtPcsc/rtnfc.h>
+
 @interface PinEnterViewController ()
 
 @property (nonatomic)  MBProgressHUD * hud;
@@ -69,7 +71,6 @@
     TokenManager* tokenManager = [TokenManager sharedInstance];
     
     Token* token =[tokenManager tokenForHandle:_activeTokenHandle];
-    Certificate* cert = [[token certificates] objectAtIndex:0];
     
     NSString* authString = @"Auth Me";
     NSData* authData = [NSData dataWithBytes:[authString UTF8String] length:[authString length]];
@@ -77,12 +78,41 @@
     self.hud.labelText = @"Проверяю PIN-код токена...";
     self.hud.mode = MBProgressHUDModeIndeterminate;
     [self.hud show:YES];
+    NSString *pin = [_pinTextInput text];
     
-    if(nil != token && nil != cert){
-        [token loginWithPin:[_pinTextInput text] successCallback:^(void){
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+        Token* activeToken = token;
+        if ([token type] == TokenTypeNFC) {
+            [tokenManager waitForActiveNFCToken:^(NSError* e){ NSLog(@"%@", e.description); }];
+            Token *activeNFCToken = [tokenManager activeNFCToken];
+            
+            if ([[token serialNumber] isEqualToString:[activeNFCToken serialNumber]]) {
+                activeToken = [tokenManager activeNFCToken];
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^() {
+                    self.hud.labelText = @"Произошла ошибка";
+                    self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+                    self.hud.mode = MBProgressHUDModeCustomView;
+                    [self.hud hide:YES afterDelay:1.5];
+                    
+                    [self->_pinTextInput setText:@""];
+                    [self->_pinErrorLabel setHidden:NO];
+                    [self->_pinErrorLabel setText:@"Поднесите выбранный ранее токен"];
+                    [self->_loginButton setEnabled:YES];
+                    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                    if ([activeNFCToken type] == TokenTypeNFC) {
+                        [activeNFCToken closeSession];
+                        stopNFC();
+                    }
+                });
+                return;
+            }
+        }
+        
+        [activeToken loginWithPin:pin
+                  successCallback:^(void) {
             self.hud.labelText = @"Выполняю вход в ЛК...";
-            [token signData:authData withCertificate:cert successCallback:^(NSValue* cms) {
-                
+            [activeToken signData:authData withCertificate:self.choosenCert successCallback:^(NSValue* cms) {
                 self.hud.labelText = @"Вход выполнен";
                 self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-checkmark.png"]];
                 self.hud.mode = MBProgressHUDModeCustomView;
@@ -90,7 +120,7 @@
 
                 CMS_ContentInfo_free([cms pointerValue]);
 
-                [token savePin:[self->_pinTextInput text]];
+                [activeToken savePin:[self->_pinTextInput text]];
                 
                 [self->_loginButton setEnabled:YES];
                 [self->_pinErrorLabel setHidden:YES];
@@ -99,6 +129,10 @@
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
                 [self performSegueWithIdentifier:@"toPayments" sender:self];
+                if ([activeToken type] == TokenTypeNFC) {
+                    [activeToken closeSession];
+                    stopNFC();
+                }
             } errorCallback:^(NSError * e) {
                 self.hud.labelText = @"Произошла ошибка";
                 self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
@@ -110,6 +144,10 @@
                 [self->_pinErrorLabel setText:@"Что-то не так с сертификатом"];
                 [self->_loginButton setEnabled:YES];
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                if ([activeToken type] == TokenTypeNFC) {
+                    [activeToken closeSession];
+                    stopNFC();
+                }
             }];
         } errorCallback:^(NSError * e) {
             self.hud.labelText = @"Произошла ошибка";
@@ -122,8 +160,12 @@
             [self->_pinErrorLabel setText:@"ПИН введен неверно"];
             [self->_loginButton setEnabled:YES];
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+            if ([activeToken type] == TokenTypeNFC) {
+                [activeToken closeSession];
+                stopNFC();
+            }
         }];
-    }    
+    });
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -131,6 +173,7 @@
     if([[segue identifier] isEqualToString:@"toPayments"]){
         PaymentsTableViewController* vc = [segue destinationViewController];
         [vc setActiveTokenHandle:_activeTokenHandle];
+        [vc setChoosenCert:_choosenCert];
     }
 }
 
