@@ -537,6 +537,7 @@
 				CODE_SIGN_ENTITLEMENTS = demobank/demobank.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Андрей Трифонов (D3SF6LCYCD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TRCKC8GFT7;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -569,6 +570,7 @@
 				CODE_SIGN_ENTITLEMENTS = demobank/demobank.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Андрей Трифонов (D3SF6LCYCD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TRCKC8GFT7;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
