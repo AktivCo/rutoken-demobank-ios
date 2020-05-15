@@ -180,11 +180,11 @@ typedef NS_ENUM(CK_ULONG, CertificateCategory) {
         case TOKEN_TYPE_RUTOKEN_ECPDUAL_BT:
             _type = TokenTypeBT;
             break;
-        case TOKEN_TYPE_RUTOKEN_SCDUAL_NFC:
+        case TOKEN_TYPE_RUTOKEN_ECP_NFC:
             _type = TokenTypeNFC;
             break;
         default:
-            @throw [NSError init];
+            @throw [[NSError alloc] init];
     }
 
     double batteryVoltage = extendedTokenInfo->ulBatteryVoltage;
