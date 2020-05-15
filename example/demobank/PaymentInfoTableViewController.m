@@ -59,7 +59,7 @@
                             activeToken = [tokenManager activeNFCToken];
                         } else {
                             dispatch_async(dispatch_get_main_queue(), ^() {
-                                self.hud.labelText = @"Поднесите выбранный ранее токен!";
+                                self.hud.labelText = @"Неправильно выбран токен";
                                 self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
                                 self.hud.mode = MBProgressHUDModeCustomView;
                                 [self.hud hide:YES afterDelay:3.5];
