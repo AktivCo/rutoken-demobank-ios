@@ -38,16 +38,8 @@
     TokenManager* tokenManager = [TokenManager sharedInstance];
     
     Token* token =[tokenManager tokenForHandle:_activeTokenHandle];
-    NSArray* certs = [token certificates];
-    if(0 == [certs count]){
-        [_pinErrorLabel setHidden:NO];
-        [_pinErrorLabel setText:@"На токене нет сертификатов"];
-        [_loginButton setHidden:YES];
-        [_pinTextInput setHidden:YES];
-    } else {
-        NSString* storedPin = [token getStoredPin];
-        if(storedPin) [_pinTextInput setText:storedPin];
-    }
+    NSString* storedPin = [token getStoredPin];
+    if(storedPin) [_pinTextInput setText:storedPin];
     
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     self.hud.animationType = MBProgressHUDAnimationZoomIn;
@@ -129,6 +121,11 @@
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
                 [self performSegueWithIdentifier:@"toPayments" sender:self];
+                
+                NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+                [navigationArray removeObjectAtIndex:[navigationArray count] - 2];
+                self.navigationController.viewControllers = navigationArray;
+                
                 if ([activeToken type] == TokenTypeNFC) {
                     [activeToken closeSession];
                     stopNFC();

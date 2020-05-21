@@ -156,6 +156,7 @@
     if ([segue.identifier isEqualToString:@"toCertList"]) {
         CertTableViewController* vc = segue.destinationViewController;
         [vc setTokenHandle:sender];
+        [vc setCertificates: [[[self tokenManager] tokenForHandle:sender] certificates]];
     }
 }
 

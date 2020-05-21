@@ -67,7 +67,7 @@
 #pragma mark - Navigation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"toLogin" sender:[[[self tokenManager] tokenForHandle:self.tokenHandle] certificates][[indexPath row]]];
+    [self performSegueWithIdentifier:@"toLogin" sender:[self certificates][[indexPath row]]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

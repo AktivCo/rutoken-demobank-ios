@@ -11,6 +11,7 @@
 @interface CertTableViewController : UITableViewController
 
 @property (nonatomic, readwrite) NSNumber* tokenHandle;
+@property (nonatomic, readwrite) NSMutableArray* certificates;
 
 @end
 
