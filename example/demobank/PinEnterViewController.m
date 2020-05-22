@@ -77,7 +77,24 @@
         if ([token type] == TokenTypeNFC) {
             [tokenManager waitForActiveNFCToken:^(NSError* e){ NSLog(@"%@", e.description); }];
             Token *activeNFCToken = [tokenManager activeNFCToken];
-            
+
+            if (!activeNFCToken) {
+                dispatch_async(dispatch_get_main_queue(), ^() {
+                    self.hud.labelText = @"Произошла ошибка";
+                    self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+                    self.hud.mode = MBProgressHUDModeCustomView;
+                    [self.hud hide:YES afterDelay:1.5];
+
+                    [self->_pinTextInput setText:@""];
+                    [self->_pinErrorLabel setHidden:NO];
+                    [self->_pinErrorLabel setText:@"Не удалось обнаружить токен"];
+                    [self->_loginButton setEnabled:YES];
+                    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                });
+
+                return;
+            }
+
             if ([[token serialNumber] isEqualToString:[activeNFCToken serialNumber]]) {
                 activeToken = [tokenManager activeNFCToken];
             } else {

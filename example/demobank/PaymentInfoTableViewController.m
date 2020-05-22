@@ -54,7 +54,18 @@
                     if ([token type] == TokenTypeNFC) {
                         [tokenManager waitForActiveNFCToken:^(NSError* e){ NSLog(@"%@", e.description); }];
                         Token *activeNFCToken = [tokenManager activeNFCToken];
-                        
+
+                        if (!activeNFCToken) {
+                            dispatch_async(dispatch_get_main_queue(), ^() {
+                                self.hud.labelText = @"Не удалось обнаружить токен";
+                                self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-error.png"]];
+                                self.hud.mode = MBProgressHUDModeCustomView;
+                                [self.hud hide:YES afterDelay:3.5];
+                            });
+
+                            return;
+                        }
+
                         if ([[token serialNumber] isEqualToString:[activeNFCToken serialNumber]]) {
                             activeToken = [tokenManager activeNFCToken];
                         } else {
