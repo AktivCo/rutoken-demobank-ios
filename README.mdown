@@ -1,47 +1,48 @@
 [Russian/Русский](README_RUS.mdown) 
 
-##Description
+## Description
 
-Rutoken DemoBank is a demonstration application which show typical usage of electronic identifier [Rutoken ECP Bluetooth] (http://www.rutoken.ru/products/all/rutoken-ecp-bluetooth/) and also contains some useful classes for developers to significantly ease developing for complicated device, combining both typical Bluetooth accesory and SmartCard with reader logics.
+Rutoken DemoBank is a demo application which shows typical usage scenarios of wireless security tokens 
+[Rutoken ECP Series](https://www.rutoken.ru/products/all/rutoken-ecp/) family and also contains some useful classes for devices detection and signing docs.
 
-##Requirements
+## Requirements
 
-Rutoken DemoBank should be built using iOS SDK 8.1 and supports iOS 9.0 and newer.
+Rutoken DemoBank should be built using iOS SDK 13 or newer and support iOS (iPadOS) 13 and newer.
 
-External dependencies are located in [Rutoken SDK] (http://www.rutoken.ru/developers/sdk/) 
+External dependencies are located in [Rutoken SDK](http://www.rutoken.ru/developers/sdk/).
 
 Required frameworks:
-* mobile/ios/pcsc/lib/RtPcsc.framework (Rutoken SDK)
-* mobile/ios/pkcs11/lib/rtpkcs11ecp.framework (Rutoken SDK)
-* openssl/rtengine/bin/ios-arm64/rtengine.framework (Rutoken SDK)
-* openssl/openssl-shared-1.1/ios-arm64/openssl.framework (Rutoken SDK)
+* mobile/ios/pcsc/lib/RtPcsc.framework (Rutoken SDK);
+* mobile/ios/pkcs11/lib/rtpkcs11ecp.framework (Rutoken SDK);
+* openssl/rtengine/bin/ios-arm64/rtengine.framework (Rutoken SDK);
+* openssl/openssl-shared-1.1/ios-arm64/openssl.framework (Rutoken SDK).
 
-##How to build
+## How to build
 
-* copy frameworks to example/Frameworks
-* open example/demobank.xcodeproj
-* in General/Identity set correct Signing Identity
+* copy frameworks to example/Frameworks;
+* open example/demobank.xcodeproj;
+* in General/Identity set your Signing Identity.
 
-##Preliminary actions
+## Preliminary actions
 
-To create key pairs and certificate on Rutoken ECP Bluetooth, follow these steps:
+To create a key pair and a certificate on Rutoken ECP Series family devices follow these steps:
 
-* Download and install [Rutoken plugin](http://www.rutoken.ru/products/all/rutoken-plugin/) on your desktop computer.
-* Restart your browser to complete plugin installation
-* Go to a [Rutoken DemoBank](http://demobank.rutoken.ru) website
-* Connect Rutoken ECP Bluetooth to your desktop via USB cable
-* Make sure that only red LED is active (without blue). If not, hold the button on device until blue light disappears.
-* Make sure that Rutoken ECP is found by the website
-* Choose «User Registration” («Регистрация Пользователя» ) and enter the PIN when it'd be requested.
-* Make sure that website have found a certificate and a key pair on your device.
-* Disconnect the device from the desktop and connect it to the iOS device via Bluetooth
+* Download and install [Rutoken plugin](https://www.rutoken.ru/products/all/rutoken-plugin/) on your desktop computer;
+* Restart your browser to complete plugin installation;
+* Go to a [Rutoken register center](https://ra.rutoken.ru) website;
+* Connect Rutoken ECP Series family device to your desktop;
+    * For Rutoken ECP Bluetooth make sure that only red LED is active (without blue). 
+    If not, press and hold the button on device until blue light turns off;
+* Make sure that Rutoken ECP Series family device is found by the website;
+* Create a key pair and a certificate following the instructions on the website;
+* Make sure that website has found the certificate and the key pair on your device;
+* Disconnect the device from the desktop and use it with Apple device.
 
-##Restriction
+## Restriction
 
-* Rutoken DemoBank can only be run on physical iOS devices, not on emulators.
-* Currently only iPad and iPhone screens are supported.
+* Rutoken DemoBank can only be run on physical Apple devices, not on emulators.
 
-##License
+## License
 
-Project source code is  distributed under [Simplified BSD License] (LICENSE),
-example folder contains objects of copyright and distributed under commercial license of Aktiv-Soft JSC, [License Agreement] (https://download.rutoken.ru/License_Agreement.pdf) (only in Russian).
+Project source code is distributed under [Simplified BSD License] (LICENSE),
+example folder contains objects of copyright and distributed under commercial license of JSC “Aktiv-Soft”, [License Agreement] (https://download.rutoken.ru/License_Agreement.pdf) (only in Russian).
