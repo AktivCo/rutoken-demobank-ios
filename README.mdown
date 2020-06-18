@@ -38,6 +38,15 @@ To create a key pair and a certificate on Rutoken ECP Series family devices foll
 * Make sure that website has found the certificate and the key pair on your device;
 * Disconnect the device from the desktop and use it with Apple device.
 
+## Implementation Details
+
+To start working with NFC Rutoken devices, you should use the function `startNFC: (void (^) (NSError *)) ErrorCallback`,
+which launches an NFC reader. The function accepts a callback to which the error is transmitted if it occurs, for example:
+1. Completion of the search for NFC devices by timeout (60 seconds)
+2. By pressing the "Cancel" button on the NFC reader system window
+
+Upon completion of the necessary operations with Rutoken, you should call the function `stopNFC: void` to stop the search for NFC devices.
+
 ## Restriction
 
 * Rutoken DemoBank can only be run on physical Apple devices, not on emulators.
