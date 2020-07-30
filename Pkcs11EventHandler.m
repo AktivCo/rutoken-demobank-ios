@@ -1,4 +1,4 @@
-// Copyright (c) 2015, CJSC Aktiv-Soft. See the LICENSE file at the top-level directory of this distribution.
+// Copyright (c) 2020, Aktiv-Soft JSC. See the LICENSE file at the top-level directory of this distribution.
 // All Rights Reserved.
 #import "Pkcs11EventHandler.h"
 

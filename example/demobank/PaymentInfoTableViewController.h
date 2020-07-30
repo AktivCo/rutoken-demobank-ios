@@ -1,4 +1,4 @@
-// Copyright (c) 2015, CJSC Aktiv-Soft. See https://download.rutoken.ru/License_Agreement.pdf
+// Copyright (c) 2020, Aktiv-Soft JSC. See https://download.rutoken.ru/License_Agreement.pdf
 // All Rights Reserved.
 
 #import <UIKit/UIKit.h>
