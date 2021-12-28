@@ -17,6 +17,8 @@
 * openssl/rtengine/bin/ios-arm64/rtengine.framework (Rutoken SDK);
 * openssl/openssl-shared-1.1/ios-arm64/openssl.framework (Rutoken SDK).
 
+[Особенности встраивания NFC-устройств семейства Рутокен ЭЦП в собственные приложения.](https://dev.rutoken.ru/pages/viewpage.action?pageId=81527019)
+
 ## Как собрать
 
 * положить фреймворки в example/Frameworks;
