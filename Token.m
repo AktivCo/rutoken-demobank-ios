@@ -323,7 +323,7 @@ errorCallback:(void (^)(NSError*))errorCallback {
         CMS_ContentInfo* cms;
         EVP_PKEY* evpPKey;
 
-        rt_eng_p11_session wrappedSession;
+        rt_eng_p11_session* wrappedSession;
 
         CK_OBJECT_HANDLE privateKey, publicKey;
         CK_ULONG count;
@@ -382,14 +382,14 @@ errorCallback:(void (^)(NSError*))errorCallback {
         }
 
         // Creating an EVP_PKEY
-        wrappedSession = rt_eng_p11_session_new([self functions], self->_session, 0, NULL);
-        if (!wrappedSession.self) {
+        wrappedSession = rt_eng_p11_session_wrap([self functions], self->_session, 0, NULL);
+        if (!wrappedSession) {
             [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
             return;
         }
 
-        evpPKey = rt_eng_new_p11_ossl_evp_pkey(wrappedSession, privateKey, publicKey);
-        RT_ENG_CALL(wrappedSession, free);
+        evpPKey = rt_eng_p11_key_pair_wrap(wrappedSession, privateKey, publicKey);
+        rt_eng_p11_session_free(wrappedSession);
         if (!evpPKey) {
             [self onError:[ApplicationError errorWithCode:OpensslError] callback:errorCallback];
             return;

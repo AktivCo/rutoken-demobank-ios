@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
 	self = [super init];
     _NFCCondition = [[NSConditionLock alloc] init];
 
-    int r = rt_eng_init();
+    int r = rt_eng_load_engine();
     if (r != 1) {
         NSLog(@"RtEngine initialization failed!");
         @throw [ApplicationError errorWithCode:UnrecoverableError];
@@ -67,6 +67,7 @@ typedef NS_ENUM(NSInteger, InnerState) {
         @throw [ApplicationError errorWithCode:UnrecoverableError];
     }
 
+    ENGINE_init(_rtEngine);
     ENGINE_set_default(_rtEngine, ENGINE_METHOD_ALL - ENGINE_METHOD_RAND);
 
 	if (self) {
@@ -86,8 +87,9 @@ typedef NS_ENUM(NSInteger, InnerState) {
     ENGINE_unregister_pkey_meths(_rtEngine);
     ENGINE_unregister_digests(_rtEngine);
     ENGINE_unregister_ciphers(_rtEngine);
+    ENGINE_finish(rt_eng_get0_engine());
 
-    rt_eng_final();
+    rt_eng_unload_engine();
 }
 
 -(void)startMonitoring{
