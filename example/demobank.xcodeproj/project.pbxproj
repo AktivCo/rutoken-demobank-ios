@@ -318,6 +318,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55E89684199A02DA0082A015 /* Build configuration list for PBXNativeTarget "demobank" */;
 			buildPhases = (
+				4421039227E9B43700EE7D69 /* Copy External Frameworks */,
 				55E8964B199A02DA0082A015 /* Sources */,
 				55E8964C199A02DA0082A015 /* Frameworks */,
 				55E8964D199A02DA0082A015 /* Resources */,
@@ -385,6 +386,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4421039227E9B43700EE7D69 /* Copy External Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy External Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script only for inner development\nif [[ -d Frameworks ]]\nthen\n    exit 0   \nfi\n\nmkdir Frameworks\npython3 ../scripts/download_deps.py -p ios\n\nfind ../external -type d -name \"*.framework\" | xargs -I {} cp -R {} Frameworks/\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		55E8964B199A02DA0082A015 /* Sources */ = {

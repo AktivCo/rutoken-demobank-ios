@@ -3,4 +3,5 @@
 .DS_Store
 *.xccheckout
 /example/Build
-/example/external
+/external
+/example/Frameworks
